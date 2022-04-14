@@ -11,6 +11,7 @@ import java.io.File;
 import java.util.Observer;
 import java.util.Observable;
 import javafx.scene.layout.HBox;
+import com.gluonhq.charm.glisten.control.ProgressBar;
 
 
 public class PlayerBoardController {
@@ -21,6 +22,7 @@ public class PlayerBoardController {
     @FXML private ImageView activeCard4;
     @FXML private ImageView activeCard5;
     @FXML private ImageView[] activeCards;
+    @FXML private ProgressBar progressBar;
 
     private final String IMG_DIR_PATH = "/com/aetherwars/card/image/character/";
 
@@ -49,5 +51,10 @@ public class PlayerBoardController {
             }
         }
 
+//        this.progressBar.setProgress(50);
+        int health = 50;
+        int maxHealth = 80;
+        this.progressBar.setProgress((float) health / maxHealth);
+//        this.progressBar.se
     }
 }
