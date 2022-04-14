@@ -11,6 +11,9 @@
             fx:controller="com.aetherwars.controller.AppController"
             prefHeight="400.0" prefWidth="600.0">
 
-    <HBox fx:id="container" />
+    <VBox>
+        <HBox fx:id="upperContainer" />
+        <!-- TODO: add lower container       -->
+    </VBox>
 
 </AnchorPane>
