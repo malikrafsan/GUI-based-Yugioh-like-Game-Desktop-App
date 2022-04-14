@@ -5,38 +5,37 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-
 <AnchorPane prefHeight="286.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aetherwars.controller.PlayerBoardController">
    <children>
       <ProgressBar layoutX="14.0" layoutY="13.0" prefHeight="23.0" prefWidth="558.0" progress="0.0" />
       <BorderPane layoutX="23.0" layoutY="100.0" prefHeight="80.0" prefWidth="80.0" style="-fx-border-color: black; -fx-border-radius: 16;">
          <center>
-            <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-color: black;" BorderPane.alignment="CENTER" />
+            <ImageView fx:id="playerImageView" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-color: black;" BorderPane.alignment="CENTER" />
          </center>
       </BorderPane>
       <BorderPane layoutX="140.0" layoutY="59.0" prefHeight="80.0" prefWidth="80.0" style="-fx-border-color: black; -fx-border-radius: 16;">
          <center>
-            <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-color: black;" BorderPane.alignment="CENTER" />
+            <ImageView fx:id="activeCard1" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-color: black;" BorderPane.alignment="CENTER" />
          </center>
       </BorderPane>
       <BorderPane layoutX="140.0" layoutY="159.0" prefHeight="80.0" prefWidth="80.0" style="-fx-border-color: black; -fx-border-radius: 16;">
          <center>
-            <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-color: black;" BorderPane.alignment="CENTER" />
+            <ImageView fx:id="activeCard3" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-color: black;" BorderPane.alignment="CENTER" />
          </center>
       </BorderPane>
       <BorderPane layoutX="239.0" layoutY="59.0" prefHeight="80.0" prefWidth="80.0" style="-fx-border-color: black; -fx-border-radius: 16;">
          <center>
-            <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-color: black;" BorderPane.alignment="CENTER" />
+            <ImageView fx:id="activeCard2" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-color: black;" BorderPane.alignment="CENTER" />
          </center>
       </BorderPane>
       <BorderPane layoutX="239.0" layoutY="159.0" prefHeight="80.0" prefWidth="80.0" style="-fx-border-color: black; -fx-border-radius: 16;">
          <center>
-            <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-color: black;" BorderPane.alignment="CENTER" />
+            <ImageView fx:id="activeCard4" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-color: black;" BorderPane.alignment="CENTER" />
          </center>
       </BorderPane>
       <BorderPane layoutX="340.0" layoutY="102.0" prefHeight="80.0" prefWidth="80.0" style="-fx-border-color: black; -fx-border-radius: 16;">
          <center>
-            <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-color: black;" BorderPane.alignment="CENTER" />
+            <ImageView fx:id="activeCard5" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-color: black;" BorderPane.alignment="CENTER" />
          </center>
       </BorderPane>
    </children>
