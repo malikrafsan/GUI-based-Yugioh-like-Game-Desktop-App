@@ -1,6 +1,6 @@
 package com.aetherwars.model;
 
-abstract class Card {
+public abstract class Card {
   protected int id;
   protected String name;
   protected String description;

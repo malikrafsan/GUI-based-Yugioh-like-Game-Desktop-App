@@ -3,14 +3,15 @@ package com.aetherwars.controller;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.text.Text;
+import javafx.scene.layout.Pane;
 
-import java.util.Observer;
-import java.util.Observable;
 import javafx.scene.layout.HBox;
 
 
 public class AppController {
+    @FXML private HBox middleContainer;
+    @FXML private HBox lowerContainer;
+    @FXML private Pane statePane;
     @FXML private AnchorPane player1Board;
     @FXML private AnchorPane turnContainer;
     @FXML private AnchorPane player2Board;
@@ -28,5 +29,9 @@ public class AppController {
         FXMLLoader player2BoardLoader = new FXMLLoader(getClass().getResource("/view/Player2Board.fxml"));
         this.player2Board = player2BoardLoader.load();
         this.upperContainer.getChildren().add(this.player2Board);
+
+        FXMLLoader stateLoader = new FXMLLoader(getClass().getResource("/view/Phase.fxml"));
+        this.statePane = stateLoader.load();
+        this.middleContainer.getChildren().add(this.statePane);
     }
 }

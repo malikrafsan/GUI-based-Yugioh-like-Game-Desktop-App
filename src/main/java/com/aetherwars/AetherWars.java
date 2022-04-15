@@ -20,7 +20,7 @@ public class AetherWars extends Application {
 
   @Override
   public void start(Stage stage) throws Exception {
-    Parent root = FXMLLoader.load(getClass().getResource("/view/App.fxml"));
+    Parent root = FXMLLoader.load(getClass().getResource("/view/Board.fxml"));
     stage.setScene(new Scene(root));
     stage.show();
   }
