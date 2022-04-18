@@ -13,7 +13,7 @@ public class AppController {
     @FXML private HBox lowerContainer;
     @FXML private Pane statePane;
     @FXML private AnchorPane player1Board;
-    @FXML private AnchorPane turnContainer;
+    @FXML private Pane turnContainer;
     @FXML private AnchorPane player2Board;
     @FXML private HBox upperContainer;
 

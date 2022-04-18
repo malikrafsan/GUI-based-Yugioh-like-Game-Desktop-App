@@ -1,8 +1,11 @@
 package com.aetherwars.controller;
 
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.SplitPane;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
@@ -29,24 +32,20 @@ public class BoardController {
 
     @FXML
     private void initialize() throws Exception{
-
         FXMLLoader loaderCardInfo = new FXMLLoader(getClass().getResource("/view/CardInfo.fxml"));
         Pane cardInfo = loaderCardInfo.load();
         this.cardInfoController = loaderCardInfo.getController();
         this.cardInfoContainer.getChildren().add(cardInfo);
-
 
         FXMLLoader loaderCardContainer = new FXMLLoader(getClass().getResource("/view/HandCardsContainer.fxml"));
         Pane handCardsContainer = loaderCardContainer.load();
         this.handCardsContainerController = loaderCardContainer.getController();
         this.handCardsPane.getChildren().add(handCardsContainer);
 
-
         FXMLLoader loaderPhaseContainer = new FXMLLoader(getClass().getResource("/view/Phase.fxml"));
         Pane phaseContainer = loaderPhaseContainer.load();
         this.phaseController = loaderPhaseContainer.getController();
         this.phasePane.getChildren().add(phaseContainer);
-
 
         FXMLLoader player1BoardLoader = new FXMLLoader(getClass().getResource("/view/Player1Board.fxml"));
         this.player1Board = player1BoardLoader.load();
