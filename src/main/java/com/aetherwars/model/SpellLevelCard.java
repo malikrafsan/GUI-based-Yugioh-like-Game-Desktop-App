@@ -1,6 +1,6 @@
 package com.aetherwars.model;
 
-class SpellLevelCard extends SpellCard {
+public class SpellLevelCard extends SpellCard {
     private int levelUp;
 
     public SpellLevelCard() {

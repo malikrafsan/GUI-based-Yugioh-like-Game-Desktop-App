@@ -1,6 +1,6 @@
 package com.aetherwars.model;
 
-class CharacterCard extends Card {
+public class CharacterCard extends Card {
     protected CharType type;
     protected int attack;
     protected int health;

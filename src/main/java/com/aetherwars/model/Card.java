@@ -23,5 +23,9 @@ public abstract class Card {
     this.mana = mana;
   }
 
+  public String getName(){
+    return this.name;
+  }
+
   abstract public String toString();
 }

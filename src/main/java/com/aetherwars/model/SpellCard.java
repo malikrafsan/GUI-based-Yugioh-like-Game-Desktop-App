@@ -1,6 +1,6 @@
 package com.aetherwars.model;
 
-abstract class SpellCard extends Card {
+public abstract class SpellCard extends Card {
     protected SpellType type;
 
     public SpellCard() {

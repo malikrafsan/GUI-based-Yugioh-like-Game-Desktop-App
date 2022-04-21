@@ -1,6 +1,6 @@
 package com.aetherwars.model;
 
-class SpellMorphCard extends SpellCard {
+public class SpellMorphCard extends SpellCard {
     private int targetid;
 
     public SpellMorphCard() {
