@@ -25,6 +25,14 @@ public class CharacterCard extends Card {
         this.healthUp = healthUp;
     }
 
+    public int getAttackUp() {
+        return (this.attackUp);
+    }
+
+    public int getHealthUp() {
+        return (this.healthUp);
+    }
+
     @Override
     public String toString() {
         return "Character Card" +

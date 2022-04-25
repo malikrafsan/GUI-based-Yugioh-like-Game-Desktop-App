@@ -1,6 +1,5 @@
 package com.aetherwars.model;
-import java.util.Observable;
 
-public enum Phase extends Observable{
+public enum Phase{
     DRAW, PLANNING, ATTACK, END
 };
