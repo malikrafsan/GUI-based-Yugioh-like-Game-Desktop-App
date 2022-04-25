@@ -23,28 +23,28 @@ public class Player extends Observable{
         no++;
     }
 
-    public newTurn() {
+    public void newTurn() {
         if (this.mana < 10) {
             this.mana = this.mana + 1;
         }
     }
 
-    public onClick() {
+    public void onClick() {
         this.clicked = true;
         this.notifyObservers();
     }
 
-    public offClick() {
+    public void offClick() {
         this.clicked = false;
         this.notifyObservers();
     }
 
-    public onHover() {
+    public void onHover() {
         this.hovered = true;
         this.notifyObservers();
     }
 
-    public offHover() {
+    public void offHover() {
         this.hovered = false;
         this.notifyObservers();
     }

@@ -72,7 +72,7 @@ public class ActiveChar extends Observable{
         this.exp = this.exp - this.expUp;
         this.expUp = this.expUp + 2;
         this.addAttack();
-        this.addHealth()
+        this.addHealth();
         
         if (this.level == 10) {
             this.exp = 0;

@@ -17,7 +17,7 @@ public class GameState extends Observable{
         this.turn = PLAYER1
     }
 
-    public nextPhase() {
+    public void nextPhase() {
         switch (this.phase) {
             case DRAW:
                 this.phase = PLANNING;
@@ -35,7 +35,7 @@ public class GameState extends Observable{
         }
     }
 
-    public nextTurn() {
+    public void nextTurn() {
         switch (this.turn) {
             case PLAYER1:
                 this.turn = PLAYER2;
