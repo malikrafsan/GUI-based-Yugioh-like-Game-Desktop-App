@@ -34,11 +34,11 @@ public class ActiveChar extends Observable{
     }
 
     public void addAttack() {
-        this.attackPlus = this.attackPlus + this.getAttackUp();
+        this.attackPlus = this.attackPlus + this.card.getAttackUp();
     }
 
     public void addHealth() {
-        this.healthPlus = this.healthPlus + this.getHealthUp();
+        this.healthPlus = this.healthPlus + this.card.getHealthUp();
     }
 
     public void onClick() {

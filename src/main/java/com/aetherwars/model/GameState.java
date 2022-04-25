@@ -13,8 +13,8 @@ public class GameState extends Observable{
         this.player1 = new Player();
         this.player2 = new Player();
         this.round = 1;
-        this.Phase = DRAW;
-        this.turn = PLAYER1
+        this.phase = DRAW;
+        this.turn = PLAYER1;
     }
 
     public void nextPhase() {
