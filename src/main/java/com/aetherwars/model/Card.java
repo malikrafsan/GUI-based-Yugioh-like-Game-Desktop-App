@@ -27,5 +27,11 @@ public abstract class Card {
     return this.name;
   }
 
+  public int getMana() {
+    return this.mana;
+  }
+
+  abstract public String preview();
+
   abstract public String toString();
 }

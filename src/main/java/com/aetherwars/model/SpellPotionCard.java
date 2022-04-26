@@ -20,6 +20,11 @@ public class SpellPotionCard extends SpellCard {
     }
 
     @Override
+    public String preview() {
+        return "ATK " + this.attack + "/HP " + this.hp + "(" + this.duration + ")";
+    }
+
+    @Override
     public String toString() {
         return  "Spell Potion" +
                 "\nName:" + this.name +

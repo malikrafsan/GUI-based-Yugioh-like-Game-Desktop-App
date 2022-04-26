@@ -23,6 +23,10 @@ class HandCard extends Observable {
     }
 
     public Card getCard(int idx) {
+        return this.handCard[idx];
+    }
+
+    public Card takeCard(int idx) {
         Card res = this.handCard[idx];
         this.handCard[idx] = null;
         this.size--;

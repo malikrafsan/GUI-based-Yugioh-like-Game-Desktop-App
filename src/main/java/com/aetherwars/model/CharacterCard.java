@@ -34,6 +34,11 @@ public class CharacterCard extends Card {
     }
 
     @Override
+    public String preview() {
+        return "ATK " + this.attack + "/HP " + this.health;
+    }
+
+    @Override
     public String toString() {
         return "Character Card" +
                 "\nName:" + name +

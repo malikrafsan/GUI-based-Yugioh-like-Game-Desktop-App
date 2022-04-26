@@ -14,6 +14,15 @@ public class SpellLevelCard extends SpellCard {
     }
 
     @Override
+    public String preview() {
+        if (this.levelUp >= 0) {
+            return "LVL +" + this.levelUp;
+        } else {
+            return "LVL -" + this.levelUp;
+        }
+    }
+
+    @Override
     public String toString() {
         return  "Spell Level" +
                 "\nName:" + this.name +

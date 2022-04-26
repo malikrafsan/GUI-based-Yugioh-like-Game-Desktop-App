@@ -14,6 +14,11 @@ public class SpellSwapCard extends SpellCard {
     }
 
     @Override
+    public String preview() {
+        return "ATK <-> HP";
+    }
+
+    @Override
     public String toString() {
         return  "Spell Swap" +
                 "\nName:" + this.name +

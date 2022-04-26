@@ -13,5 +13,6 @@ public abstract class SpellCard extends Card {
         this.type = type;
     }
 
+    abstract public String preview();
     abstract public String toString();
 }

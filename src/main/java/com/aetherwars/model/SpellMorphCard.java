@@ -14,6 +14,11 @@ public class SpellMorphCard extends SpellCard {
     }
 
     @Override
+    public String preview() {
+        return "MORPH";
+    }
+
+    @Override
     public String toString() {
         return  "Spell Morph" +
                 "\nName:" + this.name +
