@@ -1,6 +1,10 @@
 package com.aetherwars.model;
 
-public abstract class Card {
+import javafx.util.Pair;
+
+import java.util.List;
+
+public abstract class Card implements Hoverable {
   protected int id;
   protected String name;
   protected String description;
@@ -34,4 +38,6 @@ public abstract class Card {
   abstract public String preview();
 
   abstract public String toString();
+
+  abstract public List<Pair<String,String>> displayInfo();
 }

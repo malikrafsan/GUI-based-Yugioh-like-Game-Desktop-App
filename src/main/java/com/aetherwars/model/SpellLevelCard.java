@@ -1,5 +1,10 @@
 package com.aetherwars.model;
 
+import javafx.util.Pair;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class SpellLevelCard extends SpellCard {
     private int levelUp;
 
@@ -18,17 +23,31 @@ public class SpellLevelCard extends SpellCard {
         if (this.levelUp >= 0) {
             return "LVL +" + this.levelUp;
         } else {
-            return "LVL -" + this.levelUp;
+            return "LVL " + this.levelUp;
         }
     }
 
     @Override
     public String toString() {
-        return  "Spell Level" +
+        return "Spell Level" +
                 "\nName:" + this.name +
                 "\nDescription:" + this.description +
                 "\nImage:" + this.image_path +
                 "\nMana:" + this.mana +
                 "\nLevel:" + this.levelUp;
+    }
+
+    @Override
+    public List<Pair<String,String>> displayInfo() {
+        List<Pair<String,String>> res = new ArrayList<>();
+        res.add(new Pair<>("Name", this.name));
+        res.add(new Pair<>("Description", this.description));
+        res.add(new Pair<>("Mana", Integer.toString(this.mana)));
+        if (this.levelUp >= 0){
+            res.add(new Pair<>("Level Up", "+" + this.levelUp));
+        } else {
+            res.add(new Pair<>("Level Up", Integer.toString(this.levelUp)));
+        }
+        return res;
     }
 }

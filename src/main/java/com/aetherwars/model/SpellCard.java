@@ -1,5 +1,9 @@
 package com.aetherwars.model;
 
+import javafx.util.Pair;
+
+import java.util.List;
+
 public abstract class SpellCard extends Card {
     protected SpellType type;
 
@@ -15,4 +19,5 @@ public abstract class SpellCard extends Card {
 
     abstract public String preview();
     abstract public String toString();
+    abstract public List<Pair<String,String>> displayInfo();
 }

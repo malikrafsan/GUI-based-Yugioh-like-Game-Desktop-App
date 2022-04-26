@@ -1,5 +1,10 @@
 package com.aetherwars.model;
 
+import javafx.util.Pair;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class SpellMorphCard extends SpellCard {
     private int targetid;
 
@@ -26,5 +31,14 @@ public class SpellMorphCard extends SpellCard {
                 "\nImage:" + this.image_path +
                 "\nMana:" + this.mana +
                 "\nTarget:" + this.targetid;
+    }
+
+    @Override
+    public List<Pair<String,String>> displayInfo() {
+        List<Pair<String, String>> res = new ArrayList<>();
+        res.add(new Pair<>("Name", this.name));
+        res.add(new Pair<>("Description", this.description));
+        res.add(new Pair<>("Mana", Integer.toString(this.mana)));
+        return res;
     }
 }

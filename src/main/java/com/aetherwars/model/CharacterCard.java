@@ -1,5 +1,10 @@
 package com.aetherwars.model;
 
+import javafx.util.Pair;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class CharacterCard extends Card {
     protected CharType type;
     protected int attack;
@@ -49,5 +54,18 @@ public class CharacterCard extends Card {
                 "\nHealth:" + health +
                 "\nAttackUp:" + attackUp +
                 "\nHealthUp:" + healthUp;
+    }
+
+    @Override
+    public List<Pair<String,String>> displayInfo() {
+        List<Pair<String,String>> res = new ArrayList<>();
+        res.add(new Pair<>("Name", this.name));
+        res.add(new Pair<>("Type", this.type.toString()));
+        res.add(new Pair<>("Description", this.description));
+        res.add(new Pair<>("Attack", Integer.toString(this.attack)));
+        res.add(new Pair<>("Health", Integer.toString(this.health)));
+        res.add(new Pair<>("AttackUp", Integer.toString(this.attackUp)));
+        res.add(new Pair<>("HealthUp", Integer.toString(this.healthUp)));
+        return res;
     }
 }

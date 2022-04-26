@@ -1,8 +1,12 @@
 package com.aetherwars.model;
 import com.aetherwars.interfaces.IActiveCharGetter;
+import javafx.util.Pair;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 
-public class ActiveChar extends Observable implements IActiveCharGetter{
+public class ActiveChar extends Observable implements IActiveCharGetter, Hoverable{
     private CharacterCard card;
     private int attackPlus;
     private int healthPlus;
@@ -98,5 +102,30 @@ public class ActiveChar extends Observable implements IActiveCharGetter{
     }
     public String getImagePath() {
         return (this.card.getImagePath());
+    }
+
+
+    @Override
+    public List<Pair<String,String>> displayInfo() {
+        List<Pair<String,String>> res = new ArrayList<>();
+        List<Pair<String,String>> temp = this.card.displayInfo();
+        for (Pair<String,String> p: temp) {
+            if (p.getKey().equals("Attack")) {
+                if (this.attackPlus != 0) {
+                    res.add(new Pair<>("Attack", p.getValue() + " (+" + this.attackPlus + ")"));
+                } else {
+                    res.add(p);
+                }
+            } else if (p.getKey().equals("Health")) {
+                if (this.attackPlus != 0) {
+                    res.add(new Pair<>("Health", p.getValue() + " (+" + this.healthPlus + ")"));
+                } else {
+                    res.add(p);
+                }
+            } else {
+                res.add(p);
+            }
+        }
+        return res;
     }
 }

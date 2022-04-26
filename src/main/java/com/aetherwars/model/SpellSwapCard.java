@@ -1,5 +1,10 @@
 package com.aetherwars.model;
 
+import javafx.util.Pair;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class SpellSwapCard extends SpellCard {
     private int duration;
 
@@ -26,5 +31,15 @@ public class SpellSwapCard extends SpellCard {
                 "\nImage:" + this.image_path +
                 "\nMana:" + this.mana +
                 "\nDuration:" + this.duration;
+    }
+
+    @Override
+    public List<Pair<String,String>> displayInfo() {
+        List<Pair<String, String>> res = new ArrayList<>();
+        res.add(new Pair<>("Name", this.name));
+        res.add(new Pair<>("Description", this.description));
+        res.add(new Pair<>("Mana", Integer.toString(this.mana)));
+        res.add(new Pair<>("Duration", Integer.toString(this.duration)));
+        return res;
     }
 }
