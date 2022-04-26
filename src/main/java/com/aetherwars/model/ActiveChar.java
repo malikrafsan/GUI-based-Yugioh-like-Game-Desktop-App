@@ -1,7 +1,8 @@
 package com.aetherwars.model;
+import com.aetherwars.interfaces.IActiveCharGetter;
 import java.util.Observable;
 
-public class ActiveChar extends Observable{
+public class ActiveChar extends Observable implements IActiveCharGetter{
     private CharacterCard card;
     private int attackPlus;
     private int healthPlus;
@@ -78,5 +79,24 @@ public class ActiveChar extends Observable{
             this.exp = 0;
             this.expUp = 0;
         }
+    }
+
+    public int getAttack() {
+        return (this.card.getAttack() + this.attackPlus);
+    }
+    public int getHealth() {
+        return (this.card.getHealth() + this.healthPlus);
+    }
+    public int getExp() {
+        return (this.exp);
+    }
+    public int getExpUp() {
+        return (this.expUp);
+    }
+    public int getLevel() {
+        return (this.level);
+    }
+    public String getImagePath() {
+        return (this.card.getImagePath());
     }
 }

@@ -1,6 +1,7 @@
 package com.aetherwars.model;
 import java.util.Observable;
 
+
 public class Player extends Observable{
     private String name;
     private int health;

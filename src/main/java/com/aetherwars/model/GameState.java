@@ -1,10 +1,12 @@
 package com.aetherwars.model;
+import com.aetherwars.interfaces.IRoundGetter;
+
 import java.util.Observable;
 
 import static com.aetherwars.model.Phase.*;
 import static com.aetherwars.model.Turn.*;
 
-public class GameState extends Observable{
+public class GameState extends Observable implements IRoundGetter{
     private Player player1;
     private Player player2;
     private int round;
@@ -18,6 +20,10 @@ public class GameState extends Observable{
         this.round = 1;
         this.phase = DRAW;
         this.turn = PLAYER1;
+    }
+
+    public int getRound() {
+        return (this.round);
     }
 
     public void nextPhase() {

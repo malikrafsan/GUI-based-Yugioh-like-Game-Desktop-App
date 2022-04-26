@@ -25,13 +25,15 @@ public class CharacterCard extends Card {
         this.healthUp = healthUp;
     }
 
-    public int getAttackUp() {
-        return (this.attackUp);
-    }
+    public int getAttack() { return (this.attack);}
 
-    public int getHealthUp() {
-        return (this.healthUp);
-    }
+    public int getHealth() { return (this.health);}
+
+    public int getAttackUp() { return (this.attackUp);}
+
+    public int getHealthUp() { return (this.healthUp);}
+
+    public String getImagePath() { return (this.image_path);}
 
     @Override
     public String preview() {
