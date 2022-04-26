@@ -1,6 +1,9 @@
 package com.aetherwars.model;
 import java.util.Observable;
 
+import static com.aetherwars.model.Phase.*;
+import static com.aetherwars.model.Turn.*;
+
 public class GameState extends Observable{
     private Player player1;
     private Player player2;
