@@ -1,42 +1,89 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.gluonhq.charm.glisten.control.ProgressBar?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
 
-<AnchorPane id="1" fx:id="playerBoardContainer" prefHeight="286.0" prefWidth="490.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aetherwars.controller.PlayerBoardController">
+<AnchorPane id="1" fx:id="playerBoardContainer" prefHeight="286.0" prefWidth="490.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aetherwars.controller.PlayerBoardController">
    <children>
       <ProgressBar fx:id="progressBar" layoutY="14.0" prefHeight="20.0" prefWidth="455.0" progress="0.0" />
-      <BorderPane layoutY="100.0" prefHeight="80.0" prefWidth="80.0" style="-fx-border-color: black; -fx-border-radius: 16;">
+      <BorderPane layoutX="14.0" layoutY="99.0" prefHeight="100.0" prefWidth="100.0" style="-fx-border-color: black; -fx-border-radius: 16;">
          <center>
-            <ImageView fx:id="playerImageView" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-color: black;" BorderPane.alignment="CENTER" />
+            <ImageView fx:id="playerImageView" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-color: black;" BorderPane.alignment="CENTER" />
          </center>
       </BorderPane>
-      <BorderPane layoutX="117.0" layoutY="59.0" prefHeight="80.0" prefWidth="80.0" style="-fx-border-color: black; -fx-border-radius: 16;">
-         <center>
-            <ImageView fx:id="activeCard1" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-color: black;" BorderPane.alignment="CENTER" />
-         </center>
-      </BorderPane>
-      <BorderPane layoutX="117.0" layoutY="159.0" prefHeight="80.0" prefWidth="80.0" style="-fx-border-color: black; -fx-border-radius: 16;">
-         <center>
-            <ImageView fx:id="activeCard3" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-color: black;" BorderPane.alignment="CENTER" />
-         </center>
-      </BorderPane>
-      <BorderPane layoutX="216.0" layoutY="59.0" prefHeight="80.0" prefWidth="80.0" style="-fx-border-color: black; -fx-border-radius: 16;">
-         <center>
-            <ImageView fx:id="activeCard2" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-color: black;" BorderPane.alignment="CENTER" />
-         </center>
-      </BorderPane>
-      <BorderPane layoutX="216.0" layoutY="159.0" prefHeight="80.0" prefWidth="80.0" style="-fx-border-color: black; -fx-border-radius: 16;">
-         <center>
-            <ImageView fx:id="activeCard4" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-color: black;" BorderPane.alignment="CENTER" />
-         </center>
-      </BorderPane>
-      <BorderPane layoutX="317.0" layoutY="102.0" prefHeight="80.0" prefWidth="80.0" style="-fx-border-color: black; -fx-border-radius: 16;">
-         <center>
-            <ImageView fx:id="activeCard5" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-color: black;" BorderPane.alignment="CENTER" />
-         </center>
-      </BorderPane>
+      <Pane layoutX="134.0" layoutY="42.0" prefHeight="100.0" prefWidth="100.0" style="-fx-border-color: black; -fx-border-radius: 16;">
+         <children>
+            <BorderPane prefHeight="80.0" prefWidth="80.0" translateX="10.0">
+               <center>
+                  <ImageView fx:id="activeCard1" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-color: black;" BorderPane.alignment="CENTER" />
+               </center>
+            </BorderPane>
+            <ImageView fx:id="dfnIcon1" fitHeight="20.0" fitWidth="20.0" layoutX="76.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="dfnLbl1" layoutX="82.0" layoutY="25.0" prefHeight="18.0" prefWidth="0.0" />
+            <Label fx:id="atkLbl1" layoutX="6.0" layoutY="25.0" />
+            <ImageView fx:id="atkIcon1" fitHeight="20.0" fitWidth="20.0" layoutX="5.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="expLvlLbl1" alignment="CENTER" layoutX="14.0" layoutY="79.0" prefHeight="18.0" prefWidth="71.0" textAlignment="CENTER" />
+         </children>
+      </Pane>
+      <Pane layoutX="134.0" layoutY="158.0" prefHeight="100.0" prefWidth="100.0" style="-fx-border-color: black; -fx-border-radius: 16;">
+         <children>
+            <BorderPane prefHeight="80.0" prefWidth="80.0" translateX="10.0">
+               <center>
+                  <ImageView fx:id="activeCard2" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-color: black;" BorderPane.alignment="CENTER" />
+               </center>
+            </BorderPane>
+            <ImageView fx:id="dfnIcon2" fitHeight="20.0" fitWidth="20.0" layoutX="76.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="dfnLbl2" layoutX="82.0" layoutY="25.0" prefHeight="18.0" prefWidth="0.0" />
+            <Label fx:id="atkLbl2" layoutX="6.0" layoutY="25.0" />
+            <ImageView fx:id="atkIcon2" fitHeight="20.0" fitWidth="20.0" layoutX="5.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="expLvlLbl2" alignment="CENTER" layoutX="5.0" layoutY="79.0" prefHeight="18.0" prefWidth="92.0" textAlignment="CENTER" />
+         </children>
+      </Pane>
+      <Pane layoutX="252.0" layoutY="42.0" prefHeight="100.0" prefWidth="100.0" style="-fx-border-color: black; -fx-border-radius: 16;">
+         <children>
+            <BorderPane prefHeight="80.0" prefWidth="80.0" translateX="10.0">
+               <center>
+                  <ImageView fx:id="activeCard3" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-color: black;" BorderPane.alignment="CENTER" />
+               </center>
+            </BorderPane>
+            <ImageView fx:id="dfnIcon3" fitHeight="20.0" fitWidth="20.0" layoutX="76.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="dfnLbl3" layoutX="82.0" layoutY="25.0" prefHeight="18.0" prefWidth="0.0" />
+            <Label fx:id="atkLbl3" layoutX="6.0" layoutY="25.0" />
+            <ImageView fx:id="atkIcon3" fitHeight="20.0" fitWidth="20.0" layoutX="5.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="expLvlLbl3" alignment="CENTER" layoutX="14.0" layoutY="79.0" prefHeight="18.0" prefWidth="71.0" textAlignment="CENTER" />
+         </children>
+      </Pane>
+      <Pane layoutX="252.0" layoutY="158.0" prefHeight="100.0" prefWidth="100.0" style="-fx-border-color: black; -fx-border-radius: 16;">
+         <children>
+            <BorderPane prefHeight="80.0" prefWidth="80.0" translateX="10.0">
+               <center>
+                  <ImageView fx:id="activeCard4" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-color: black;" BorderPane.alignment="CENTER" />
+               </center>
+            </BorderPane>
+            <ImageView fx:id="dfnIcon4" fitHeight="20.0" fitWidth="20.0" layoutX="76.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="dfnLbl4" layoutX="82.0" layoutY="25.0" prefHeight="18.0" prefWidth="0.0" />
+            <Label fx:id="atkLbl4" layoutX="6.0" layoutY="25.0" />
+            <ImageView fx:id="atkIcon4" fitHeight="20.0" fitWidth="20.0" layoutX="5.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="expLvlLbl4" alignment="CENTER" layoutX="14.0" layoutY="79.0" prefHeight="18.0" prefWidth="71.0" textAlignment="CENTER" />
+         </children>
+      </Pane>
+      <Pane layoutX="369.0" layoutY="100.0" prefHeight="100.0" prefWidth="100.0" style="-fx-border-color: black; -fx-border-radius: 16;">
+         <children>
+            <BorderPane prefHeight="80.0" prefWidth="80.0" translateX="10.0">
+               <center>
+                  <ImageView fx:id="activeCard5" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-color: black;" BorderPane.alignment="CENTER" />
+               </center>
+            </BorderPane>
+            <ImageView fx:id="dfnIcon5" fitHeight="20.0" fitWidth="20.0" layoutX="76.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="dfnLbl5" layoutX="82.0" layoutY="25.0" prefHeight="18.0" prefWidth="0.0" />
+            <Label fx:id="atkLbl5" layoutX="6.0" layoutY="25.0" />
+            <ImageView fx:id="atkIcon5" fitHeight="20.0" fitWidth="20.0" layoutX="5.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
+            <Label fx:id="expLvlLbl5" alignment="CENTER" layoutX="14.0" layoutY="79.0" prefHeight="18.0" prefWidth="71.0" textAlignment="CENTER" />
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

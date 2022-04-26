@@ -2,102 +2,265 @@ package com.aetherwars.controller;
 
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.text.Text;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.control.Label;
 
+import java.util.*;
 import java.io.File;
-import java.util.Observer;
-import java.util.Observable;
-import javafx.scene.layout.HBox;
+
 import com.gluonhq.charm.glisten.control.ProgressBar;
 
+import com.aetherwars.interfaces.*;
 
 public class PlayerBoardController {
-    @FXML private AnchorPane playerBoardContainer;
-    @FXML private ImageView playerImageView;
-    @FXML private ImageView activeCard1;
-    @FXML private ImageView activeCard2;
-    @FXML private ImageView activeCard3;
-    @FXML private ImageView activeCard4;
-    @FXML private ImageView activeCard5;
-    @FXML private ImageView[] activeCards;
-    @FXML private ProgressBar progressBar;
+    @FXML
+    private AnchorPane playerBoardContainer;
+    @FXML
+    private ImageView playerImageView;
+    @FXML
+    private ImageView activeCard1;
+    @FXML
+    private ImageView activeCard2;
+    @FXML
+    private ImageView activeCard3;
+    @FXML
+    private ImageView activeCard4;
+    @FXML
+    private ImageView activeCard5;
+    @FXML
+    private ImageView[] activeCards;
+    @FXML
+    private ProgressBar progressBar;
+
+    @FXML
+    private Label atkLbl1;
+    @FXML
+    private ImageView atkIcon1;
+    @FXML
+    private Label dfnLbl1;
+    @FXML
+    private ImageView dfnIcon1;
+    @FXML
+    private Label expLvlLbl1;
+    @FXML
+    private Label atkLbl2;
+    @FXML
+    private ImageView atkIcon2;
+    @FXML
+    private Label dfnLbl2;
+    @FXML
+    private ImageView dfnIcon2;
+    @FXML
+    private Label expLvlLbl2;
+    @FXML
+    private Label atkLbl3;
+    @FXML
+    private ImageView atkIcon3;
+    @FXML
+    private Label dfnLbl3;
+    @FXML
+    private ImageView dfnIcon3;
+    @FXML
+    private Label expLvlLbl3;
+    @FXML
+    private Label atkLbl4;
+    @FXML
+    private ImageView atkIcon4;
+    @FXML
+    private Label dfnLbl4;
+    @FXML
+    private ImageView dfnIcon4;
+    @FXML
+    private Label expLvlLbl4;
+    @FXML
+    private Label atkLbl5;
+    @FXML
+    private ImageView atkIcon5;
+    @FXML
+    private Label dfnLbl5;
+    @FXML
+    private ImageView dfnIcon5;
+    @FXML
+    private Label expLvlLbl5;
+    @FXML
+    private ImageView[] atkIcons;
+    @FXML
+    private ImageView[] dfnIcons;
+    @FXML
+    private Label[] atkLbls;
+    @FXML
+    private Label[] dfnLbls;
+    @FXML
+    private Label[] expLvlLbls;
 
     private int ID_BOARD;
-    private final String IMG_DIR_PATH = "/com/aetherwars/card/image/character/";
+    private final String IMG_DIR_PATH = "/com/aetherwars/card/image/";
 
-    @FXML private void initialize() {
+    @FXML
+    private void initialize() {
         this.ID_BOARD = Integer.parseInt(this.playerBoardContainer.getId());
         System.out.println("ID_BOARD: " + this.ID_BOARD);
 
-        this.activeCards = new ImageView[] {activeCard1, activeCard2, activeCard3, activeCard4, activeCard5};
-        String playerImgPath = "Villager.png";
-        String[] cardImgPaths = new String[] {"Zombie.png", null, "Skeleton.png", null, "Ghast.png"};
+        this.activeCards = new ImageView[]{activeCard1, activeCard2, activeCard3, activeCard4, activeCard5};
+        String playerImgPath = "character/Villager.png";
+//        String[] cardImgPaths = new String[]{"character/Zombie.png", null, "character/Skeleton.png", null, "character/Ghast.png"};
+
+        int boardID = this.ID_BOARD;
+        this.playerImageView.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                System.out.println("PLAYER " + boardID + " ICON MOUSE ENTER EVENT DETECTED");
+            }
+        });
+        this.playerImageView.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                System.out.println("PLAYER " + boardID + " ICON MOUSE EXIT EVENT DETECTED");
+            }
+        });
+        PlayerBoardController p = this;
+        this.playerImageView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                System.out.println("PLAYER " + boardID + " ICON MOUSE CLICK EVENT DETECTED");
+                p.updateActiveChars(p.mockActiveCharsData());
+                p.updateProgressBar(new Random().nextInt(80), 80);
+            }
+        });
 
         try {
             File file = new File(getClass().getResource(this.IMG_DIR_PATH + playerImgPath).toURI());
             Image playerImg = new Image(file.toURI().toString());
             this.playerImageView.setImage(playerImg);
-            int boardID = this.ID_BOARD;
-            this.playerImageView.setOnMouseEntered(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    System.out.println("PLAYER " + boardID + " ICON MOUSE ENTER EVENT DETECTED");
-                }
-            });
-            this.playerImageView.setOnMouseExited(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    System.out.println("PLAYER ICON MOUSE EXIT EVENT DETECTED");
-                }
-            });
         } catch (Exception e) {
             System.out.println(e);
         }
 
-        for (int i=0;i<cardImgPaths.length;i++) {
-            try {
-                if (cardImgPaths[i] != null) {
-                    File file = new File(getClass().getResource(this.IMG_DIR_PATH + cardImgPaths[i]).toURI());
-                    Image activeCardImg = new Image(file.toURI().toString());
-                    this.activeCards[i].setImage(activeCardImg);
-                    int finalI = i;
-                    int boardId = this.ID_BOARD;
+        this.atkLbls = new Label[]{atkLbl1, atkLbl2, atkLbl3, atkLbl4, atkLbl5};
+        this.dfnLbls = new Label[]{dfnLbl1, dfnLbl2, dfnLbl3, dfnLbl4, dfnLbl5};
+        this.atkIcons = new ImageView[]{atkIcon1, atkIcon2, atkIcon3, atkIcon4, atkIcon5};
+        this.dfnIcons = new ImageView[] {dfnIcon1, dfnIcon2, dfnIcon3, dfnIcon4, dfnIcon5};
+        this.expLvlLbls = new Label[] {expLvlLbl1, expLvlLbl2, expLvlLbl3, expLvlLbl4, expLvlLbl5};
 
-                    this.activeCards[i].setOnMouseClicked(new EventHandler<MouseEvent>() {
-                        @Override
-                        public void handle(MouseEvent event) {
-                            System.out.println("CARD " + (finalI + 1) + " FROM PLAYER " + boardId + " IS CLICKED");
-                        }
-                    });
+        for (int i = 0; i < this.activeCards.length; i++) {
+            int finalI = i;
+            int boardId = this.ID_BOARD;
+            Pane pane = (Pane) this.activeCards[i].getParent().getParent();
 
-                    this.activeCards[i].setOnMouseEntered(new EventHandler<MouseEvent>() {
-                        @Override
-                        public void handle(MouseEvent event) {
-                            System.out.println("CARD " + (finalI + 1) + " FROM PLAYER " + boardId + " IS HOVERED");
-                        }
-                    });
-
-                    this.activeCards[i].setOnMouseExited(new EventHandler<MouseEvent>() {
-                        @Override
-                        public void handle(MouseEvent event) {
-                            System.out.println("CARD " + (finalI + 1) + " NO LONGER HOVERED");
-                        }
-                    });
+            this.activeCards[i].setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    System.out.println("CARD " + (finalI + 1) + " FROM PLAYER " + boardId + " IS CLICKED");
                 }
-            } catch (Exception e) {
-                System.out.println(e);
+            });
+
+            this.activeCards[i].setOnMouseEntered(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    Background bg = new Background(new BackgroundFill(Color.MEDIUMVIOLETRED, null, null));
+                    pane.setBackground(bg);
+                    System.out.println("CARD " + (finalI + 1) + " FROM PLAYER " + boardId + " IS HOVERED");
+                }
+            });
+
+            this.activeCards[i].setOnMouseExited(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    Background bg = new Background(new BackgroundFill(null, null, null));
+                    pane.setBackground(bg);
+                    System.out.println("CARD " + (finalI + 1) + " NO LONGER HOVERED");
+                }
+            });
+        }
+
+        this.updateActiveChars(this.mockActiveCharsData());
+
+        int health = 50;
+        int maxHealth = 80;
+        this.updateProgressBar(health, maxHealth);
+    }
+
+    private void updateProgressBar(int health, int maxHealth) {
+        this.progressBar.setProgress((float) health / maxHealth);
+    }
+
+    private void updateActiveChars(List<MockActiveChar> lst) {
+        try {
+            File fileAtkIcon = new File(getClass().getResource(this.IMG_DIR_PATH + "/active_char/sword.png").toURI());
+            Image atkImg = new Image(fileAtkIcon.toURI().toString());
+            File fileDfnIcon = new File(getClass().getResource(this.IMG_DIR_PATH + "/active_char/shield.png").toURI());
+            Image dfnImg = new Image(fileDfnIcon.toURI().toString());
+
+            for (int i=0;i<5;i++) {
+                MockActiveChar m = lst.get(i);
+
+                if (m == null) {
+                    System.out.println("NULL");
+                    this.atkIcons[i].setImage(null);
+                    this.dfnIcons[i].setImage(null);
+                    this.atkLbls[i].setText("");
+                    this.dfnLbls[i].setText("");
+                    this.activeCards[i].setImage(null);
+                    this.expLvlLbls[i].setText("");
+                } else {
+                    File file = new File(getClass().getResource(this.IMG_DIR_PATH + m.getImagePath()).toURI());
+                    Image activeCardImg = new Image(file.toURI().toString());
+                    this.atkIcons[i].setImage(atkImg);
+                    this.dfnIcons[i].setImage(dfnImg);
+                    this.atkLbls[i].setText(Integer.toString(m.getAttack()));
+                    this.dfnLbls[i].setText(Integer.toString(m.getHealth()));
+                    this.activeCards[i].setImage(activeCardImg);
+                    this.expLvlLbls[i].setText(Integer.toString(m.getExp()) + "/" + Integer.toString(m.getExpUp()) + " [" + Integer.toString(m.getLevel()) + "]");
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    private List<MockActiveChar> mockActiveCharsData() {
+        String[] imagePaths = new String[]{"character/Zombie.png", "character/Skeleton.png", "character/Slime.png", "character/Warden.png", "character/Wither Skeleton.png"};
+
+        List<MockActiveChar> lst = new ArrayList<MockActiveChar>(5);
+
+        Random rand = new Random();
+        for (int i=0;i<5;i++) {
+            if (rand.nextDouble() > 0.5) {
+                lst.add(new MockActiveChar(rand.nextInt(10),rand.nextInt(10),rand.nextInt(10),rand.nextInt(10),rand.nextInt(10), imagePaths[rand.nextInt(imagePaths.length)]));
+            } else {
+                lst.add(null);
             }
         }
 
-//        this.progressBar.setProgress(50);
-        int health = 50;
-        int maxHealth = 80;
-        this.progressBar.setProgress((float) health / maxHealth);
-//        this.progressBar.se
+        return lst;
     }
+}
+
+class MockActiveChar implements IActiveCharGetter {
+    private int attack;
+    private int health;
+    private int exp;
+    private int expUp;
+    private int level;
+    private String imagePath;
+
+    public MockActiveChar(int attack, int health, int exp, int expUp, int level, String imagePath) {
+        this.attack = attack;
+        this.health = health;
+        this.exp = exp;
+        this.expUp = expUp;
+        this.level = level;
+        this.imagePath = imagePath;
+    }
+
+    public int getAttack() { return this.attack;}
+    public int getHealth() {return this.health;}
+    public int getExp() {return this.exp; }
+    public int getExpUp() { return this.expUp; }
+    public int getLevel() { return this.level; }
+    public String getImagePath() { return this.imagePath; }
 }
