@@ -1,17 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.TilePane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.aetherwars.controller.AppController"
-            prefHeight="400.0" prefWidth="600.0">
-
-    <VBox>
-        <HBox fx:id="upperContainer" />
-        <!-- TODO: add lower container       -->
-        <HBox fx:id="middleContainer" />
-        <HBox fx:id="lowerContainer" />
-    </VBox>
-
-</AnchorPane>
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="587.0" prefWidth="1173.0" xmlns="http://javafx.com/javafx/8.0.51" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aetherwars.controller.AppController">
+   <children>
+      <Pane fx:id="boardContainer" prefHeight="587.0" prefWidth="1173.0" />
+      <TilePane fx:id="selectCardContainer" alignment="CENTER" layoutX="188.0" layoutY="85.0" prefHeight="438.0" prefWidth="800.0" />
+   </children>
+</Pane>

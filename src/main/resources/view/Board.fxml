@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.layout.VBox?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="587.0" prefWidth="1173.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aetherwars.controller.BoardController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="587.0" prefWidth="1173.0" xmlns="http://javafx.com/javafx/8.0.51" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aetherwars.controller.BoardController">
    <children>
       <Pane fx:id="player2Pane" layoutX="654.0" prefHeight="260.0" prefWidth="490.0" />
       <Pane fx:id="phasePane" layoutX="28.0" layoutY="272.0" prefHeight="29.0" prefWidth="1122.0" />
@@ -11,5 +14,19 @@
       <Pane fx:id="cardInfoContainer" layoutX="507.0" layoutY="295.0" prefHeight="246.0" prefWidth="544.0" />
       <Pane fx:id="player1Pane" cacheShape="false" centerShape="false" layoutX="28.0" prefHeight="260.0" prefWidth="490.0" scaleShape="false" />
       <TilePane fx:id="turnPane" alignment="CENTER" layoutX="537.0" layoutY="14.0" pickOnBounds="false" prefHeight="80.0" prefWidth="100.0" />
+      <Button layoutX="555.0" layoutY="172.0" mnemonicParsing="false" text="Add Exp" />
+      <Button layoutX="559.0" layoutY="215.0" mnemonicParsing="false" text="Delete" />
+      <VBox alignment="CENTER" layoutX="1087.0" layoutY="373.0" prefHeight="39.0" prefWidth="63.0" style="-fx-background-color: #eeeeee; -fx-border-color: #000;">
+         <children>
+            <Label text="Deck" />
+            <Label fx:id="deckValueLabel" text="xx/xx" />
+         </children>
+      </VBox>
+      <VBox alignment="CENTER" layoutX="1087.0" layoutY="424.0" prefHeight="39.0" prefWidth="63.0" style="-fx-background-color: #eeeeee; -fx-border-color: #000;">
+         <children>
+            <Label text="Mana" />
+            <Label fx:id="manaValueLabel" text="xx/xx" />
+         </children>
+      </VBox>
    </children>
 </Pane>

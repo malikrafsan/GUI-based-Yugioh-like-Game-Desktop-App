@@ -10,16 +10,17 @@ public class PhaseController {
     @FXML private Label labelAttack;
     @FXML private Label labelEnd;
     private Label[] labels = new Label[4];
+    private AppController appController;
 
-    private final String inactiveState = "-fx-background-color: rgb(240,236,236); -fx-border-color: black;";
-    private final String activeState = "-fx-background-color: orange; -fx-border-color: black;";
-    enum State {
+    private final String inactivePhase = "-fx-background-color: rgb(240,236,236); -fx-border-color: black;";
+    private final String activePhase = "-fx-background-color: orange; -fx-border-color: black;";
+    enum Phase {
         DRAW,
         PLAN,
         ATTACK,
         END
     }
-    private State currentState;
+    private Phase currentPhase;
 
 
     @FXML
@@ -28,45 +29,50 @@ public class PhaseController {
         labels[1] = labelPlan;
         labels[2] = labelAttack;
         labels[3] = labelEnd;
-        currentState = State.DRAW;
+        currentPhase = Phase.DRAW;
         setActiveLabel(labelDraw);
     }
 
     private void setActiveLabel(Label labelToSet){
         for (Label label:labels){
             if (label == labelToSet){
-                label.styleProperty().setValue(activeState);
+                label.styleProperty().setValue(activePhase);
             }
             else {
-                label.styleProperty().setValue(inactiveState);
+                label.styleProperty().setValue(inactivePhase);
             }
         }
     }
 
-    private void setNextState() {
-        switch (currentState) {
+    public void setNextPhase() {
+        switch (currentPhase) {
             case DRAW:
                 setActiveLabel(labelPlan);
-                currentState = State.PLAN;
+                currentPhase = Phase.PLAN;
                 break;
             case PLAN:
                 setActiveLabel(labelAttack);
-                currentState = State.ATTACK;
+                currentPhase = Phase.ATTACK;
                 break;
             case ATTACK:
                 setActiveLabel(labelEnd);
-                currentState = State.END;
+                currentPhase = Phase.END;
                 break;
             case END:
                 setActiveLabel(labelDraw);
-                currentState = State.DRAW;
+                currentPhase = Phase.DRAW;
+                appController.drawPhase();
                 break;
         }
+    }
+
+    public void setAppController(AppController appController){
+        this.appController = appController;
     }
 
     @FXML
     private void nextState(ActionEvent e){
-        setNextState();
+        setNextPhase();
     }
 
 }

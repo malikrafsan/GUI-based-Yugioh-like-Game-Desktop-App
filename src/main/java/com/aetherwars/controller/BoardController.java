@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -12,23 +13,25 @@ import javafx.scene.layout.TilePane;
 
 public class BoardController {
 
+    public Label manaValueLabel;
+    @FXML private Label deckValueLabel;
     @FXML private TilePane turnPane;
     @FXML private Pane player1Pane;
     @FXML private Pane player2Pane;
     @FXML
-    private Pane phasePane;
+    protected Pane phasePane;
     @FXML
-    private Pane handCardsPane;
+    protected Pane handCardsPane;
     @FXML
-    private Pane cardInfoContainer;
+    protected Pane cardInfoContainer;
 
-    private CardInfoController cardInfoController;
-    private HandCardsContainerController handCardsContainerController;
-    private PhaseController phaseController;
+    protected CardInfoController cardInfoController;
+    protected HandCardsContainerController handCardsContainerController;
+    protected PhaseController phaseController;
 
-    @FXML private AnchorPane player1Board;
-    @FXML private Pane turnContainer;
-    @FXML private AnchorPane player2Board;
+    @FXML protected AnchorPane player1Board;
+    @FXML protected Pane turnContainer;
+    @FXML protected AnchorPane player2Board;
 
     @FXML
     private void initialize() throws Exception{
@@ -58,5 +61,8 @@ public class BoardController {
         FXMLLoader player2BoardLoader = new FXMLLoader(getClass().getResource("/view/Player2Board.fxml"));
         this.player2Board = player2BoardLoader.load();
         this.player2Pane.getChildren().add(this.player2Board);
+
+        this.deckValueLabel.setText("40/40");
+        this.manaValueLabel.setText("2/2");
     }
 }
