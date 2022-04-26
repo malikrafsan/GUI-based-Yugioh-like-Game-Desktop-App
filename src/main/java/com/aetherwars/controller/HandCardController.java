@@ -6,13 +6,13 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.io.File;
+import java.io.InputStream;
 
 public class HandCardController {
     @FXML private ImageView cardImageView;
     @FXML private Label labelMana;
     @FXML private Label labelAttr;
 
-    private final String IMG_DIR_PATH = "/com/aetherwars/card/image/";
 
 
     public void setLabelMana(Integer value){
@@ -25,8 +25,9 @@ public class HandCardController {
 
     public void setCardImageView(String imagePath){
         try {
-            File file = new File(getClass().getResource(this.IMG_DIR_PATH + imagePath).toURI());
-            Image cardImage  = new Image(file.toURI().toString());
+            System.out.println("Opening " + imagePath);
+            InputStream inputStream = getClass().getResourceAsStream(imagePath);
+            Image cardImage  = new Image(inputStream);
             this.cardImageView.setImage(cardImage);
         }
         catch (Exception e){

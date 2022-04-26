@@ -35,6 +35,8 @@ public abstract class Card implements Hoverable {
     return this.mana;
   }
 
+  public String getImagePath() { return this.image_path; }
+
   abstract public String preview();
 
   abstract public String toString();

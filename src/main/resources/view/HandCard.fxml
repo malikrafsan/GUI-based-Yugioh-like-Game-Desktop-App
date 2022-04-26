@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.TilePane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<Pane prefHeight="174.0" prefWidth="97.0" style="-fx-border-color: grey; -fx-background-color: rgb(240,236,236);" xmlns="http://javafx.com/javafx/8.0.51" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aetherwars.controller.HandCardController">
+<Pane prefHeight="174.0" prefWidth="97.0" style="-fx-border-color: grey; -fx-background-color: rgb(240,236,236);" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aetherwars.controller.HandCardController">
    <children>
-      <TilePane alignment="TOP_CENTER" layoutY="12.0" prefHeight="90.0" prefWidth="97.0">
+      <TilePane alignment="CENTER" layoutY="12.0" prefHeight="90.0" prefWidth="97.0">
          <children>
             <ImageView fx:id="cardImageView" fitHeight="94.0" fitWidth="55.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../com/aetherwars/card/image/character/Drowned.png" />
+                  <Image url="@../com/aetherwars/card/image/character/Obsidian.png" />
                </image>
             </ImageView>
          </children>
