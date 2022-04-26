@@ -127,6 +127,8 @@ public class PlayerBoardController {
             @Override
             public void handle(MouseEvent event) {
                 System.out.println("PLAYER " + boardID + " ICON MOUSE CLICK EVENT DETECTED");
+
+                // TODO: DELETE LATER
                 p.updateActiveChars(p.mockActiveCharsData());
                 p.updateProgressBar(new Random().nextInt(80), 80);
             }
