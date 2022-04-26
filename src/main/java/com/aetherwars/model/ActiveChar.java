@@ -38,11 +38,19 @@ public class ActiveChar extends Observable implements IActiveCharGetter, Hoverab
         this.level = 1;
     }
 
-    public void addAttack() {
+    public void addAttack(int attack) {
+        this.attackPlus = this.attackPlus + attack;
+    }
+
+    public void addHealth(int health) {
+        this.healthPlus = this.healthPlus + health;
+    }
+
+    public void addAttackLvl() {
         this.attackPlus = this.attackPlus + this.card.getAttackUp();
     }
 
-    public void addHealth() {
+    public void addHealthLvl() {
         this.healthPlus = this.healthPlus + this.card.getHealthUp();
     }
 
@@ -73,15 +81,17 @@ public class ActiveChar extends Observable implements IActiveCharGetter, Hoverab
     }
 
     public void levelUp() {
-        this.level = this.level + 1;
-        this.exp = this.exp - this.expUp;
-        this.expUp = this.expUp + 2;
-        this.addAttack();
-        this.addHealth();
-        
-        if (this.level == 10) {
-            this.exp = 0;
-            this.expUp = 0;
+        if (this.level < 10) {
+            this.level = this.level + 1;
+            this.exp = this.exp - this.expUp;
+            this.expUp = this.expUp + 2;
+            this.addAttackLvl();
+            this.addHealthLvl();
+            
+            if (this.level == 10) {
+                this.exp = 0;
+                this.expUp = 0;
+            }
         }
     }
 
