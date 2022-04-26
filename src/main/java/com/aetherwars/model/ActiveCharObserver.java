@@ -21,6 +21,10 @@ public class ActiveCharObserver extends Observable {
         this.notifyObservers();
     }
 
+    public ActiveChar getActChar(int idx_board) {
+        return this.chars[idx_board];
+    }
+
     public void onClick(int index) {
         this.chars[index].onClick();
         this.notifyObservers();

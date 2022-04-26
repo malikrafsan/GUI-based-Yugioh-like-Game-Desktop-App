@@ -30,6 +30,22 @@ public class Player extends Observable{
         }
     }
 
+    public HandCard getHand() {
+        return this.handCard;
+    }
+
+    public ActiveCharObserver getActiveChars() {
+        return this.activeChars;
+    }
+
+    public int getMana() {
+        return this.mana;
+    }
+
+    public void useMana(int x) {
+        this.mana = this.mana - x;
+    }
+
     public void onClick() {
         this.clicked = true;
         this.notifyObservers();

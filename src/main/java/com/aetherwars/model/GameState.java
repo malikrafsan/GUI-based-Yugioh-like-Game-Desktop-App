@@ -58,4 +58,15 @@ public class GameState extends Observable implements IRoundGetter{
         }
     }
 
+    public Player getPlayer1() {
+        return this.player1;
+    }
+
+    public Player getPlayer2() {
+        return player2;
+    }
+
+    public Turn getTurn() {
+        return turn;
+    }
 }

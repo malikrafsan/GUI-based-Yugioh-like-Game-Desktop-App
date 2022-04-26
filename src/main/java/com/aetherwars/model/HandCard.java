@@ -1,7 +1,7 @@
 package com.aetherwars.model;
 import java.util.Observable;
 
-class HandCard extends Observable {
+public class HandCard extends Observable {
     private Card[] handCard;
     private int capacity;
     private int size;
