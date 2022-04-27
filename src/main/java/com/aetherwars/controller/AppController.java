@@ -1,6 +1,7 @@
 package com.aetherwars.controller;
 
 import com.aetherwars.model.Card;
+import com.aetherwars.model.Phase;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.effect.GaussianBlur;
@@ -27,40 +28,40 @@ public class AppController {
         this.selectCardController = selectCardLoader.getController();
         this.selectCardContainer.getChildren().add(this.selectCardPane);
 
-        this.selectCardController.setAppController(this);
-        this.boardController.phaseController.setAppController(this);
-        this.boardController.handCardsContainerController.setAppController(this);
-        drawPhase();
+//        this.selectCardController.setAppController(this);
+//        this.boardController.phaseController.setAppController(this);
+//        this.boardController.handCardsContainerController.setAppController(this);
+//        drawPhase();
     }
 
-    public void drawPhase(){
-        this.boardPane.setEffect(new GaussianBlur());
-        this.boardPane.setDisable(true);
-        this.selectCardPane.setVisible(true);
-        this.selectCardPane.setDisable(false);
-        this.selectCardPane.setMouseTransparent(false);
-        this.selectCardContainer.setMouseTransparent(false);
-    }
+//    public void drawPhase() {
+//        this.boardPane.setEffect(new GaussianBlur());
+//        this.boardPane.setDisable(true);
+//        this.selectCardPane.setVisible(true);
+//        this.selectCardPane.setDisable(false);
+//        this.selectCardPane.setMouseTransparent(false);
+//        this.selectCardContainer.setMouseTransparent(false);
+//    }
 
-    public void nonDrawPhase(){
-        this.boardPane.setDisable(false);
-        this.selectCardPane.setDisable(true);
-        this.selectCardPane.setVisible(false);
-        this.boardPane.setEffect(null);
-        this.selectCardPane.setMouseTransparent(true);
-        this.selectCardContainer.setMouseTransparent(true);
-    }
+//    public void nonDrawPhase(){
+//        this.boardPane.setDisable(false);
+//        this.selectCardPane.setDisable(true);
+//        this.selectCardPane.setVisible(false);
+//        this.boardPane.setEffect(null);
+//        this.selectCardPane.setMouseTransparent(true);
+//        this.selectCardContainer.setMouseTransparent(true);
+//    }
 
-    public void nextPhase(){
-        this.nonDrawPhase();
-        this.boardController.phaseController.setNextPhase();
-    }
-
-    public void setCardInfo(Card card){
-        this.boardController.cardInfoController.setCardInfo(card);
-    }
-
-    public void unsetCardInfo(){
-        this.boardController.cardInfoController.unsetCardInfo();
-    }
+//    public void setPhase(Phase phase){
+//        this.nonDrawPhase();
+//        this.boardController.phaseController.setPhase(phase);
+//    }
+//
+//    public void setCardInfo(Card card){
+//        this.boardController.cardInfoController.setCardInfo(card);
+//    }
+//
+//    public void unsetCardInfo(){
+//        this.boardController.cardInfoController.unsetCardInfo();
+//    }
 }

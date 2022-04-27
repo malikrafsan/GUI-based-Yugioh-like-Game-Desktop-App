@@ -32,6 +32,6 @@
             </Label>
          </children>
       </HBox>
-      <Button layoutX="1061.0" mnemonicParsing="false" onAction="#nextState" prefHeight="25.0" prefWidth="71.0" style="-fx-background-color: black; -fx-text-fill: white;" text="&gt;&gt;" />
+      <Button layoutX="1061.0" mnemonicParsing="false" onAction="#nextPhase" prefHeight="25.0" prefWidth="71.0" style="-fx-background-color: black; -fx-text-fill: white;" text="&gt;&gt;" />
    </children>
 </Pane>

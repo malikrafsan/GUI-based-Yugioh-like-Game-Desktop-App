@@ -1,18 +1,19 @@
 package com.aetherwars.controller;
 
-import javafx.event.EventHandler;
+import com.aetherwars.interfaces.Hoverable;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import com.aetherwars.model.*;
-import javafx.scene.input.MouseEvent;
 import javafx.util.Pair;
 
 import java.io.InputStream;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
-public class CardInfoController {
+public class CardInfoController implements Observer {
     public Label card_name;
     public Label card_desc;
     public ImageView card_img;
@@ -23,13 +24,13 @@ public class CardInfoController {
     public Label attr5Label;
     private Label attrLabel[];
 
-    public void setCardInfo(Card card){
-        List<Pair<String,String>> cardInfo = card.displayInfo();
+    public void setCardInfo(Hoverable hoverable){
+        List<Pair<String,String>> cardInfo = hoverable.displayInfo();
 
-        this.card_name.setText(card.getName());
-        this.card_desc.setText(card.getDesc());
+        this.card_name.setText(hoverable.getName());
+        this.card_desc.setText(hoverable.getDesc());
 
-        Integer attrCount = cardInfo.size();
+        int attrCount = cardInfo.size();
         for (int i = 0; i < attrCount; i++){
             attrLabel[i].setText(cardInfo.get(i).getKey() + " : " + cardInfo.get(i).getValue());
         }
@@ -37,7 +38,7 @@ public class CardInfoController {
             attrLabel[i].setText("");
         }
         try {
-            InputStream inputStream = getClass().getResourceAsStream(card.getImagePath());
+            InputStream inputStream = getClass().getResourceAsStream(hoverable.getImagePath());
             Image cardImage  = new Image(inputStream);
             this.card_img.setImage(cardImage);
         }
@@ -60,10 +61,21 @@ public class CardInfoController {
         }
     }
 
+    public void update(Observable obs, Object obj){
+        if (obs instanceof GameState){
+            GameState gs = (GameState) obs;
+            Hoverable h = gs.getHoverObject();
+            if (h != null){
+                setCardInfo(h);
+            }
+            else {
+                unsetCardInfo();
+            }
+        }
+    }
+
 
     @FXML public void initialize(){
         this.attrLabel = new Label[]{attr1Label, attr2Label, attr3Label, attr4Label, attr5Label};
     }
-
-
 }

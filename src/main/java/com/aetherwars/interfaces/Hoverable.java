@@ -5,5 +5,8 @@ import java.util.List;
 import javafx.util.Pair;
 
 public interface Hoverable {
-    public List<Pair<String, String>> displayInfo();
+    List<Pair<String, String>> displayInfo();
+    String getName();
+    String getDesc();
+    String getImagePath();
 }

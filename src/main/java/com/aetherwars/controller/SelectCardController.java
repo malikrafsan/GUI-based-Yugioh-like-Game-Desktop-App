@@ -1,5 +1,6 @@
 package com.aetherwars.controller;
 
+import com.aetherwars.interfaces.IPhaseGetter;
 import com.aetherwars.model.*;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -14,18 +15,23 @@ import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
 import com.aetherwars.interfaces.*;
 import com.aetherwars.event.PickCardEvent;
 
-public class SelectCardController implements ISubscriber {
+import static com.aetherwars.model.Phase.DRAW;
 
+public class SelectCardController implements Observer, ISubscriber {
+    @FXML private Pane pane;
     @FXML private HBox cardContainer;
     @FXML private Label playerLabel;
     private Pane[] cardsToSelect = new Pane[3];
     private HandCardController[] cardController = new HandCardController[3];
     private AppController appController;
     private Integer currentSelectCardCount;
+    private MockGameState mockGameState; // TODO: DELETE LATER
 
     @FXML
     public void initialize(){
@@ -56,7 +62,9 @@ public class SelectCardController implements ISubscriber {
                     @Override
                     public void handle(MouseEvent mouseEvent) {
                         System.out.println("CARD " + finalI + " IS CLICKED");
-                        appController.nextPhase();
+
+//                        appController.setPhase(Phase.PLANNING);
+                        // TODO : use game manager
                     }
                 });
             }
@@ -66,6 +74,8 @@ public class SelectCardController implements ISubscriber {
         }
         testUpdateHandCards();
         setPlayer(1);
+        this.mockGameState = new MockGameState();
+        this.mockGameState.addObserver(this);
     }
 
     public void setAppController(AppController appController){
@@ -107,5 +117,42 @@ public class SelectCardController implements ISubscriber {
             PickCardEvent pickCardEvent = (PickCardEvent) event;
             updateSelectCards(pickCardEvent.getData());
         }
+    }
+    public void update(Observable obs, Object obj) {
+        if (obs instanceof  GameState) {
+            GameState gs = (GameState) obs;
+            if (gs.getPhase() == DRAW) {
+                drawPhaseSelectCard();
+            } else {
+                nonDrawPhaseSelectCard();
+            }
+        }
+    }
+
+    private void drawPhaseSelectCard() {
+        this.pane.setVisible(true);
+        this.pane.setDisable(false);
+        this.pane.setMouseTransparent(false);
+        this.pane.getParent().setMouseTransparent(false);
+    }
+
+    private void nonDrawPhaseSelectCard() {
+        this.pane.setDisable(true);
+        this.pane.setVisible(false);
+//        this.boardPane.setEffect(null);
+        this.pane.setMouseTransparent(true);
+        this.pane.getParent().setMouseTransparent(true);
+    }
+}
+
+class MockGameState extends Observable implements IPhaseGetter {
+    private Phase phase;
+
+    public Phase getPhase() { return this.phase; }
+
+    public void setPhase(Phase newPhase) {
+        this.phase = newPhase;
+        setChanged();
+        notifyObservers();
     }
 }

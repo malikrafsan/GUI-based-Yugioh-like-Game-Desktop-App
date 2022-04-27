@@ -30,6 +30,16 @@ public class GameState extends Observable implements IRoundGetter{
         notifyObservers();
     }
 
+    public void setHoverObject(Hoverable hoverable){
+        this.hoveredObject = hoverable;
+        setChanged();
+        notifyObservers();
+    }
+
+    public Hoverable getHoverObject(){
+        return hoveredObject;
+    }
+
     public int getRound() {
         return (this.round);
     }
@@ -50,6 +60,8 @@ public class GameState extends Observable implements IRoundGetter{
                 this.nextTurn();
                 break;  
         }
+        setChanged();
+        notifyObservers();
     }
 
     public void nextTurn() {

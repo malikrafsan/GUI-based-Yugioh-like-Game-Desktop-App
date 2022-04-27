@@ -13,6 +13,7 @@ import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 
 public class HandCardsContainerController {
 
@@ -24,6 +25,8 @@ public class HandCardsContainerController {
     private Integer currentActiveCardCount;
     private AppController appController;
 
+    private final Background hoverBackground = new Background(new BackgroundFill(Color.LIGHTCORAL, null, null));
+    private final Background normalBackground = new Background(new BackgroundFill(null, null, null));
 
     @FXML
     private void initialize(){
@@ -49,8 +52,7 @@ public class HandCardsContainerController {
             this.handCards[i].setOnMouseEntered(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
-                    Background bg = new Background(new BackgroundFill(Color.MEDIUMVIOLETRED, null, null));
-                    handCards[finalI].setBackground(bg);
+                    handCards[finalI].setBackground(hoverBackground);
                     System.out.println("HAND CARD " + finalI + " IS HOVERED");
                     handleHoverCard(finalI);
 
@@ -59,23 +61,27 @@ public class HandCardsContainerController {
             this.handCards[i].setOnMouseExited(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
-                    Background bg = new Background(new BackgroundFill(null, null, null));
-                    handCards[finalI].setBackground(bg);
+                    handCards[finalI].setBackground(normalBackground);
                     System.out.println("HAND CARD " + finalI + " NO LONGER LONGER HOVERED");
-                    appController.unsetCardInfo();
+                }
+            });
+            this.handCards[i].setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+
                 }
             });
         }
     }
 
+    // TODO: implements in game manager
     public void handleHoverCard(int idx){
-        appController.setCardInfo(this.cards.get(idx));
+//        appController.setCardInfo(this.cards.get(idx));
     }
 
 
     public void disableMouseHover(){
         for (int i = 0; i < this.currentActiveCardCount; i++){
-            int finalI = i;
             this.handCards[i].setOnMouseEntered(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {}
@@ -112,7 +118,23 @@ public class HandCardsContainerController {
         }
     }
 
-    public void setAppController(AppController appController){
-        this.appController = appController;
+//    public void setAppController(AppController appController){
+//        this.appController = appController;
+//    }
+
+    public void setClickEffect(int idx){
+
+    }
+
+
+    public void update(Observable obs, Object obj) {
+
+//        if (obs instanceof ClickObject) {
+//            this.clearClickEffect();
+//            ClickObject c = (ClickObject) obs;
+//            if (c.getType().equal("HANDCARD") && c.getPlayerNo() == this.playerNo) {
+//                this.setClickEffect(c.getIdx());
+//            }
+//        }
     }
 }

@@ -1,8 +1,12 @@
 package com.aetherwars.controller;
 
+import com.aetherwars.model.GameState;
+import com.aetherwars.model.Phase;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+
+import java.util.Observable;
 
 public class PhaseController {
     @FXML private Label labelDraw;
@@ -14,13 +18,8 @@ public class PhaseController {
 
     private final String inactivePhase = "-fx-background-color: rgb(240,236,236); -fx-border-color: black;";
     private final String activePhase = "-fx-background-color: orange; -fx-border-color: black;";
-    enum Phase {
-        DRAW,
-        PLAN,
-        ATTACK,
-        END
-    }
-    private Phase currentPhase;
+
+//    private Phase currentPhase;
 
 
     @FXML
@@ -29,7 +28,7 @@ public class PhaseController {
         labels[1] = labelPlan;
         labels[2] = labelAttack;
         labels[3] = labelEnd;
-        currentPhase = Phase.DRAW;
+        //currentPhase = Phase.DRAW;
         setActiveLabel(labelDraw);
     }
 
@@ -44,35 +43,74 @@ public class PhaseController {
         }
     }
 
-    public void setNextPhase() {
-        switch (currentPhase) {
+//    public void setNextPhase() {
+//        switch (currentPhase) {
+//            case DRAW:
+//                setActiveLabel(labelPlan);
+//                currentPhase = Phase.PLANNING;
+//                break;
+//            case PLANNING:
+//                setActiveLabel(labelAttack);
+//                currentPhase = Phase.ATTACK;
+//                break;
+//            case ATTACK:
+//                setActiveLabel(labelEnd);
+//                currentPhase = Phase.END;
+//                break;
+//            case END:
+//                setActiveLabel(labelDraw);
+//                currentPhase = Phase.DRAW;
+//
+//                //testing
+//                appController.drawPhase();
+//
+//                break;
+//        }
+//    }
+
+    public void setPhase(Phase phase) {
+        switch (phase) {
             case DRAW:
-                setActiveLabel(labelPlan);
-                currentPhase = Phase.PLAN;
+                setActiveLabel(labelDraw);
+//                currentPhase = Phase.PLANNING;
                 break;
-            case PLAN:
-                setActiveLabel(labelAttack);
-                currentPhase = Phase.ATTACK;
+            case PLANNING:
+                setActiveLabel(labelPlan);
+//                currentPhase = Phase.ATTACK;
                 break;
             case ATTACK:
-                setActiveLabel(labelEnd);
-                currentPhase = Phase.END;
+                setActiveLabel(labelAttack);
+//                currentPhase = Phase.END;
                 break;
             case END:
-                setActiveLabel(labelDraw);
-                currentPhase = Phase.DRAW;
-                appController.drawPhase();
+                setActiveLabel(labelEnd);
+//                currentPhase = Phase.DRAW;
+
+                //testing
+//                appController.drawPhase();
+                // TODO : use game manager
                 break;
         }
     }
 
-    public void setAppController(AppController appController){
-        this.appController = appController;
-    }
+
+
+//    public void setAppController(AppController appController){
+//        this.appController = appController;
+//    }
 
     @FXML
-    private void nextState(ActionEvent e){
-        setNextPhase();
+    private void nextPhase(ActionEvent e){
+        // TODO: call game manager
+        setPhase(Phase.ATTACK);
     }
 
+    public void update(Observable obs, Object obj) {
+        if (obs instanceof GameState) {
+            GameState gs = (GameState) obs;
+            Phase ps = gs.getPhase();
+
+            this.setPhase(ps);
+        }
+    }
 }
