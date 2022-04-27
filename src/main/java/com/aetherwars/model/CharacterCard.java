@@ -63,9 +63,7 @@ public class CharacterCard extends Card {
     @Override
     public List<Pair<String,String>> displayInfo() {
         List<Pair<String,String>> res = new ArrayList<>();
-        res.add(new Pair<>("Name", this.name));
         res.add(new Pair<>("Type", this.type.toString()));
-        res.add(new Pair<>("Description", this.description));
         res.add(new Pair<>("Attack", Integer.toString(this.attack)));
         res.add(new Pair<>("Health", Integer.toString(this.health)));
         res.add(new Pair<>("AttackUp", Integer.toString(this.attackUp)));

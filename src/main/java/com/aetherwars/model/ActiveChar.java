@@ -38,6 +38,14 @@ public class ActiveChar extends Observable implements IActiveCharGetter, Hoverab
         this.level = 1;
     }
 
+    public String getName() {
+        return (this.card).getName();
+    }
+
+    public String getDesc() {
+        return (this.card).getDesc();
+    }
+
     public void addAttack(int attack) {
         this.attackPlus = this.attackPlus + attack;
     }

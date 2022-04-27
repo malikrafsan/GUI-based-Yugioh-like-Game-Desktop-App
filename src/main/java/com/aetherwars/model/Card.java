@@ -31,6 +31,10 @@ public abstract class Card implements Hoverable {
     return this.name;
   }
 
+  public String getDesc() {
+    return this.description;
+  }
+
   public int getMana() {
     return this.mana;
   }

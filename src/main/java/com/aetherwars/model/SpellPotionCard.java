@@ -44,8 +44,6 @@ public class SpellPotionCard extends SpellCard {
     @Override
     public List<Pair<String,String>> displayInfo() {
         List<Pair<String, String>> res = new ArrayList<>();
-        res.add(new Pair<>("Name", this.name));
-        res.add(new Pair<>("Description", this.description));
         res.add(new Pair<>("Mana", Integer.toString(this.mana)));
         res.add(new Pair<>("Attack", Integer.toString(this.attack)));
         res.add(new Pair<>("Health", Integer.toString(this.hp)));
