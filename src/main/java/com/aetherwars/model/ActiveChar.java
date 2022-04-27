@@ -114,6 +114,9 @@ public class ActiveChar extends Observable implements IActiveCharGetter, Hoverab
         return (this.card.getImagePath());
     }
 
+    public CharType getType() {
+        return (this.card.getType());
+    }
 
     @Override
     public List<Pair<String,String>> displayInfo() {

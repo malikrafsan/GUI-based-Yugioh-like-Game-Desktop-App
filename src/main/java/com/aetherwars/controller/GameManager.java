@@ -11,6 +11,7 @@ public class GameManager {
     private GameState gs;
     private List<Object> lastClicked;
     private PlayerManager[] pm;
+    private BattleManager bm;
 
     private GameManager() {
         this.gs = new GameState();
@@ -18,6 +19,7 @@ public class GameManager {
         pm[0] = new PlayerManager(gs.getPlayer1());
         pm[1] = new PlayerManager(gs.getPlayer2());
         lastClicked = new ArrayList<Object>(3);
+        bm = new BattleManager();
     }
 
     public static GameManager getInstance() {
@@ -35,10 +37,10 @@ public class GameManager {
 //    }
 
     public void clickActChar(int idx, int id) {
+        int idxSelf = gs.getTurn().ordinal();
+        int idxEnemy = 1-idxSelf;
         if(((String)lastClicked.get(0)).equals("HANDCARD")) {
             int idxHand = (Integer)lastClicked.get(1);
-            int idxSelf = gs.getTurn().ordinal();
-            int idxEnemy = 1-idxSelf;
             if(id-1==idxSelf) {
                 pm[idxSelf].handToBoard(idxHand, id);
             } else {
@@ -47,6 +49,20 @@ public class GameManager {
                     SpellCard spell = pm[idxSelf].takeSpellAt(idxHand); // or take spell
                     pm[idxEnemy].receiveSpell(spell, idx);
                     pm[idxSelf].useMana(spell.getMana());
+                }
+            }
+        } else if(((String)lastClicked.get(0)).equals("ACTIVECHAR") && (Integer)lastClicked.get(2)-1==idxSelf && id-1==idxEnemy) {
+            ActiveCharObserver acsSelf = pm[idxSelf].getActiveChars();
+            ActiveCharObserver acsEnemy = pm[idxEnemy].getActiveChars();
+            ActiveChar acSelf = acsSelf.getActChar(idx);
+            ActiveChar acEnemy = acsEnemy.getActChar(idx);
+            if(gs.getPhase().equals(Phase.ATTACK)) {
+                bm.setSelf(acSelf);
+                bm.setEnemy(acEnemy);
+                if(bm.canBattle()) {
+                    bm.battle();
+                    acsSelf.update();
+                    acsEnemy.update();
                 }
             }
         }

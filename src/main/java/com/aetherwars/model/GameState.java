@@ -69,4 +69,8 @@ public class GameState extends Observable implements IRoundGetter{
     public Turn getTurn() {
         return turn;
     }
+
+    public Phase getPhase() {
+        return phase;
+    }
 }

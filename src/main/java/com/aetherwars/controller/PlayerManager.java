@@ -64,4 +64,8 @@ public class PlayerManager {
     public void useMana(int x) {
         p.useMana(x);
     }
+
+    public ActiveCharObserver getActiveChars() {
+        return p.getActiveChars();
+    }
 }

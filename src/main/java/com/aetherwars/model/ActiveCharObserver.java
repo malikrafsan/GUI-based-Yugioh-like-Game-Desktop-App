@@ -49,4 +49,12 @@ public class ActiveCharObserver extends Observable {
         this.chars[index].addExp(exp);
         this.notifyObservers();
     }
+
+    public void update() {
+        for(int i=0; i<5; i++) {
+            if(this.chars[i] != null && this.chars[i].getHealth() <= 0) {
+                delChar(i);
+            }
+        }
+    }
 }

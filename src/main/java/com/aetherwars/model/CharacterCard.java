@@ -40,6 +40,10 @@ public class CharacterCard extends Card {
 
     public String getImagePath() { return (this.image_path);}
 
+    public CharType getType() {
+        return type;
+    }
+
     @Override
     public String preview() {
         return "ATK " + this.attack + "/HP " + this.health;
