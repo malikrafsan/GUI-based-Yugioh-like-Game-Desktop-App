@@ -5,5 +5,5 @@ import java.util.List;
 import javafx.util.Pair;
 
 public interface Hoverable {
-    List<Pair<String, String>> displayInfo();
+    public List<Pair<String, String>> displayInfo();
 }

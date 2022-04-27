@@ -14,7 +14,7 @@ public class GameState extends Observable implements IRoundGetter{
     private Phase phase;
     private Turn turn;
     private Hoverable hoveredObject;
-    
+    private ClickObject clickObject;
 
     public GameState() {
         this.player1 = new Player();
@@ -22,6 +22,7 @@ public class GameState extends Observable implements IRoundGetter{
         this.round = 1;
         this.phase = DRAW;
         this.turn = PLAYER1;
+        this.clickObject = new ClickObject();
     }
 
     public int getRound() {
@@ -78,5 +79,11 @@ public class GameState extends Observable implements IRoundGetter{
 
     public void setHoveredObject(Hoverable hoveredObject) {
         this.hoveredObject = hoveredObject;
+    }
+
+    public ClickObject getClickObject() { return clickObject; }
+
+    public void setClickObject(int player, String name, int index) {
+        clickObject.setClickObject(player, name, index);
     }
 }
