@@ -68,4 +68,24 @@ public class PlayerManager {
     public ActiveCharObserver getActiveChars() {
         return p.getActiveChars();
     }
+
+    public boolean canBeDirectAttacked() {
+        return p.getActiveChars().empty();
+    }
+
+    public void clickActChar(int idx_board) {
+        p.getActiveChars().onClick(idx_board);
+    }
+
+    public void hoverHand(int idx_hand) {
+        gm.hover(p.getHand().getCard(idx_hand));
+    }
+
+    public void hoverBoard(int idx_board) {
+        gm.hover(p.getActiveChars().getActChar(idx_board));
+    }
+
+//    public void minusHealth(Double x) {
+//        p.minusHealth(x);
+//    }
 }

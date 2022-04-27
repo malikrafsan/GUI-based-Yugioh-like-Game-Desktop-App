@@ -67,4 +67,13 @@ public class ActiveCharObserver extends Observable, IActiveCharObserverGetter{
         this.setChanged();
         this.notifyObservers();
     }
+
+    public boolean empty() {
+        for(int i=0; i<5; i++) {
+            if(this.chars[i] != null) {
+                return false;
+            }
+        }
+        return true;
+    }
 }

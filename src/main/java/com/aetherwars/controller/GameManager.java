@@ -1,5 +1,6 @@
 package com.aetherwars.controller;
 
+import com.aetherwars.interfaces.Hoverable;
 import com.aetherwars.model.*;
 
 import java.util.ArrayList;
@@ -39,6 +40,7 @@ public class GameManager {
     public void clickActChar(int idx, int id) {
         int idxSelf = gs.getTurn().ordinal();
         int idxEnemy = 1-idxSelf;
+        pm[id-1].clickActChar(idx);
         if(((String)lastClicked.get(0)).equals("HANDCARD")) {
             int idxHand = (Integer)lastClicked.get(1);
             if(id-1==idxSelf) {
@@ -87,8 +89,9 @@ public class GameManager {
         if(lastClicked.get(0).equals("ACTIVECHAR") && (Integer)lastClicked.get(2)-1==idxSelf && id-1==idxEnemy) {
             // bila board lawan kosong, direct attack
             int idx_board = (Integer)lastClicked.get(1);
-//            if(pm[idxEnemy].canBeDirectAttacked() && pm[idxSelf].canAttackWith(idx_board)) {
-//                int atk = pm[idxSelf].getAtack(idx_board);
+            ActiveChar acSelf = pm[idxSelf].getActiveChars().getActChar(idx_board);
+//            if(gs.getPhase().equals(Phase.ATTACK) && acSelf!=null && acSelf.canAttack() && pm[idxEnemy].canBeDirectAttacked()) {
+//                int atk = acSelf.getAttack();
 //                pm[idxEnemy].minusHealth(atk);
 //                // if lawan mati, win
 //            }
@@ -99,17 +102,28 @@ public class GameManager {
         lastClicked.set(2,-1);
     }
 
-//    public void hover(Hoverable h) {
-//        // set hovered.
-//    }
-//
-//    public void unhover(Hoverable h) {
-//        // set hovered.
-//    }
-
-    public void nextPhase() {
-        ;
+    public void hover(Hoverable h) {
+        gs.setHoveredObject(h);
     }
 
+    public void unhover() {
+        gs.setHoveredObject(null);
+    }
+
+    public void hoverHand(int idx_hand) {
+        int idxSelf = gs.getTurn().ordinal();
+        pm[idxSelf].hoverHand(idx_hand);
+    }
+
+    public void hoverBoard(int idx_board, int id) {
+        pm[id-1].hoverBoard(idx_board);
+    }
+
+    // delete kartu
+    // add exp from mana
+
+    public void nextPhase() {
+        gs.nextPhase();
+    }
 
 }
