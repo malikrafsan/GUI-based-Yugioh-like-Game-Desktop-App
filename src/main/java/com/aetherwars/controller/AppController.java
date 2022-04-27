@@ -1,5 +1,6 @@
 package com.aetherwars.controller;
 
+import com.aetherwars.model.Card;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.effect.GaussianBlur;
@@ -28,6 +29,7 @@ public class AppController {
 
         this.selectCardController.setAppController(this);
         this.boardController.phaseController.setAppController(this);
+        this.boardController.handCardsContainerController.setAppController(this);
         drawPhase();
     }
 
@@ -52,5 +54,13 @@ public class AppController {
     public void nextPhase(){
         this.nonDrawPhase();
         this.boardController.phaseController.setNextPhase();
+    }
+
+    public void setCardInfo(Card card){
+        this.boardController.cardInfoController.setCardInfo(card);
+    }
+
+    public void unsetCardInfo(){
+        this.boardController.cardInfoController.unsetCardInfo();
     }
 }

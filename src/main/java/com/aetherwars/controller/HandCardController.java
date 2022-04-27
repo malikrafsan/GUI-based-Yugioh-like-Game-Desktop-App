@@ -25,7 +25,6 @@ public class HandCardController {
 
     public void setCardImageView(String imagePath){
         try {
-            System.out.println("Opening " + imagePath);
             InputStream inputStream = getClass().getResourceAsStream(imagePath);
             Image cardImage  = new Image(inputStream);
             this.cardImageView.setImage(cardImage);

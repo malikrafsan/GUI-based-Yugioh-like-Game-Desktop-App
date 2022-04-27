@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.TilePane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<Pane prefHeight="256.0" prefWidth="552.0" xmlns="http://javafx.com/javafx/8.0.51" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aetherwars.controller.CardInfoController">
+<Pane prefHeight="256.0" prefWidth="552.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aetherwars.controller.CardInfoController">
    <children>
       <HBox layoutX="171.0" layoutY="37.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="182.0" prefWidth="381.0" style="-fx-background-color: rgb(240,236,236);">
          <children>
@@ -19,21 +16,16 @@
                         <Font name="System Bold" size="23.0" />
                      </font>
                   </Label>
-                  <Label layoutX="22.0" layoutY="57.0" prefHeight="20.0" prefWidth="41.0" text="ATK :" wrapText="true" />
-                  <Label layoutX="22.0" layoutY="77.0" prefHeight="20.0" prefWidth="41.0" text="HP :" wrapText="true" />
-                  <Label layoutX="22.0" layoutY="97.0" prefHeight="20.0" prefWidth="41.0" text="Level :" wrapText="true" />
-                  <Label layoutX="22.0" layoutY="117.0" prefHeight="20.0" prefWidth="41.0" text="EXP : " wrapText="true" />
-                  <Label layoutX="22.0" layoutY="137.0" prefHeight="20.0" prefWidth="41.0" text="Type :" wrapText="true" />
-                  <Label fx:id="card_atk_value" layoutX="63.0" layoutY="59.0" prefHeight="17.0" prefWidth="54.0" text="???" />
-                  <Label fx:id="card_hp_value" layoutX="55.0" layoutY="79.0" prefHeight="17.0" prefWidth="54.0" text="???" />
-                  <Label fx:id="card_level_value" layoutX="65.0" layoutY="99.0" prefHeight="17.0" prefWidth="54.0" text="???" />
-                  <Label fx:id="card_exp_value" layoutX="61.0" layoutY="119.0" prefHeight="17.0" prefWidth="54.0" text="?? / ??" />
-                  <Label fx:id="card_type_value" layoutX="69.0" layoutY="139.0" prefHeight="17.0" prefWidth="113.0" text="??????????" />
+                  <Label fx:id="attr1Label" layoutX="22.0" layoutY="60.0" prefHeight="17.0" prefWidth="140.0" text="???" />
+                  <Label fx:id="attr2Label" layoutX="22.0" layoutY="78.0" prefHeight="17.0" prefWidth="140.0" text="???" />
+                  <Label fx:id="attr3Label" layoutX="22.0" layoutY="96.0" prefHeight="17.0" prefWidth="140.0" text="???" />
+                  <Label fx:id="attr4Label" layoutX="22.0" layoutY="114.0" prefHeight="17.0" prefWidth="140.0" text="???" />
+                  <Label fx:id="attr5Label" layoutX="22.0" layoutY="132.0" prefHeight="17.0" prefWidth="140.0" text="???" />
                </children>
             </Pane>
             <Pane prefHeight="287.0" prefWidth="196.0" style="-fx-border-color: grey;">
                <children>
-                  <Label fx:id="card_desc" layoutX="19.0" layoutY="15.0" prefHeight="152.0" prefWidth="158.0" text="&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque id ipsum nulla. Maecenas fringilla risus mattis, convallis odio quis, elementum tortor.&quot;" wrapText="true">
+                  <Label fx:id="card_desc" layoutX="19.0" layoutY="15.0" prefHeight="152.0" prefWidth="158.0" text="&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque id ipsum nulla.&quot;" wrapText="true">
                      <font>
                         <Font size="13.0" />
                      </font>
