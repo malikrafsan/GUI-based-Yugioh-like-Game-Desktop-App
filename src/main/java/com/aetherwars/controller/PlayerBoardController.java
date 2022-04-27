@@ -1,5 +1,6 @@
 package com.aetherwars.controller;
 
+import com.aetherwars.model.ActiveCharObserver;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
@@ -16,7 +17,7 @@ import com.gluonhq.charm.glisten.control.ProgressBar;
 
 import com.aetherwars.interfaces.*;
 
-public class PlayerBoardController {
+public class PlayerBoardController implements Observer {
     @FXML
     private AnchorPane playerBoardContainer;
     @FXML
@@ -190,7 +191,7 @@ public class PlayerBoardController {
         this.progressBar.setProgress((float) health / maxHealth);
     }
 
-    private void updateActiveChars(List<MockActiveChar> lst) {
+    private void updateActiveChars(IActiveCharGetter[] lst) {
         try {
             File fileAtkIcon = new File(getClass().getResource(this.IMG_DIR_PATH + "/active_char/sword.png").toURI());
             Image atkImg = new Image(fileAtkIcon.toURI().toString());
@@ -198,7 +199,7 @@ public class PlayerBoardController {
             Image dfnImg = new Image(fileDfnIcon.toURI().toString());
 
             for (int i=0;i<5;i++) {
-                MockActiveChar m = lst.get(i);
+                IActiveCharGetter m = lst[i];
 
                 if (m == null) {
                     System.out.println("NULL");
@@ -224,21 +225,27 @@ public class PlayerBoardController {
         }
     }
 
-    private List<MockActiveChar> mockActiveCharsData() {
+    private MockActiveChar[] mockActiveCharsData() {
         String[] imagePaths = new String[]{"character/Zombie.png", "character/Skeleton.png", "character/Slime.png", "character/Warden.png", "character/Wither Skeleton.png"};
 
-        List<MockActiveChar> lst = new ArrayList<MockActiveChar>(5);
+        MockActiveChar[] lst = new MockActiveChar[5];
 
         Random rand = new Random();
         for (int i=0;i<5;i++) {
             if (rand.nextDouble() > 0.5) {
-                lst.add(new MockActiveChar(rand.nextInt(10),rand.nextInt(10),rand.nextInt(10),rand.nextInt(10),rand.nextInt(10), imagePaths[rand.nextInt(imagePaths.length)]));
+                lst[i] = new MockActiveChar(rand.nextInt(10),rand.nextInt(10),rand.nextInt(10),rand.nextInt(10),rand.nextInt(10), imagePaths[rand.nextInt(imagePaths.length)]);
             } else {
-                lst.add(null);
+                lst[i] = null;
             }
         }
 
         return lst;
+    }
+
+    public void update(Observable obs, Object obj) {
+        if (obs instanceof IActiveCharObserverGetter) {
+            this.updateActiveChars(((IActiveCharObserverGetter) obs).getChars());
+        }
     }
 }
 
