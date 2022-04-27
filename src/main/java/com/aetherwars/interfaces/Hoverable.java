@@ -1,9 +1,9 @@
-package com.aetherwars.model;
+package com.aetherwars.interfaces;
 
 import java.util.List;
 
 import javafx.util.Pair;
 
-interface Hoverable {
+public interface Hoverable {
     List<Pair<String, String>> displayInfo();
 }

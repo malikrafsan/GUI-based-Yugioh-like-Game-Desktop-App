@@ -1,5 +1,6 @@
 package com.aetherwars.model;
 
+import com.aetherwars.interfaces.Hoverable;
 import javafx.util.Pair;
 
 import java.util.List;

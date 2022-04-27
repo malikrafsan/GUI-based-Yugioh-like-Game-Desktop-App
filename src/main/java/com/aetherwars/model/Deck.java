@@ -64,4 +64,9 @@ class Deck extends Observable {
             System.out.println(card.getName());
         }
     }
+
+    public void sync() {
+        this.setChanged();
+        this.notifyObservers();
+    }
 }

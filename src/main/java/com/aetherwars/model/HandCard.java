@@ -45,4 +45,9 @@ public class HandCard extends Observable {
             }
         }
     }
+
+    public void sync() {
+        this.setChanged();
+        this.notifyObservers();
+    }
 }

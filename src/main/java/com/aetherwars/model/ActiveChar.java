@@ -1,12 +1,12 @@
 package com.aetherwars.model;
+import com.aetherwars.interfaces.Hoverable;
 import com.aetherwars.interfaces.IActiveCharGetter;
 import javafx.util.Pair;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
 
-public class ActiveChar extends Observable implements IActiveCharGetter, Hoverable{
+public class ActiveChar implements IActiveCharGetter, Hoverable {
     private CharacterCard card;
     private int attackPlus;
     private int healthPlus;
