@@ -15,7 +15,10 @@ import javafx.scene.paint.Color;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SelectCardController {
+import com.aetherwars.interfaces.*;
+import com.aetherwars.event.PickCardEvent;
+
+public class SelectCardController implements ISubscriber {
 
     @FXML private HBox cardContainer;
     @FXML private Label playerLabel;
@@ -85,13 +88,13 @@ public class SelectCardController {
     }
 
 
-    public void updateSelectCards(List<Card> listCards){
-        for (int i = 0; i < this.currentSelectCardCount; i++){
+    public void updateSelectCards(List<Card> listCards) {
+        for (int i = 0; i < this.currentSelectCardCount; i++) {
             this.cardContainer.getChildren().remove(0);
         }
 
         this.currentSelectCardCount = Math.min(listCards.size(), 3);
-        for (int i = 0; i < this.currentSelectCardCount; i++){
+        for (int i = 0; i < this.currentSelectCardCount; i++) {
             this.cardContainer.getChildren().add(this.cardsToSelect[i]);
             this.cardController[i].setLabelMana(listCards.get(i).getMana());
             this.cardController[i].setLabelAttr(listCards.get(i).preview());
@@ -99,4 +102,10 @@ public class SelectCardController {
         }
     }
 
+    public void onEvent(IEvent event) {
+        if (event instanceof PickCardEvent) {
+            PickCardEvent pickCardEvent = (PickCardEvent) event;
+            updateSelectCards(pickCardEvent.getData());
+        }
+    }
 }

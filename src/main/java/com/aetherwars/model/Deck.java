@@ -1,18 +1,34 @@
 package com.aetherwars.model;
+import com.aetherwars.controller.GameManager;
+import com.aetherwars.event.PickCardEvent;
+import com.aetherwars.interfaces.IEvent;
+import com.aetherwars.interfaces.IPublisher;
+
+import java.beans.EventHandler;
 import java.util.Collections;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Observable;
 
-public class Deck extends Observable {
-    List<Card> deck;
-    int capacity;
-    int size;
+public class Deck extends Observable implements IPublisher {
+    private List<Card> deck;
+    private int capacity;
+    private int size;
+    private EventBroker eb;
     
     public Deck() {
         this.deck = new ArrayList<Card>();
         this.capacity = 60;
         this.size = 0;
+        this.eb = GameManager.getInstance().getEventBroker();
+    }
+
+    public void pickCard() {
+        this.publish("PICKCARD", new PickCardEvent(this.getThreeCard()));
+    }
+
+    public void publish(String topic, IEvent event) {
+        this.eb.sendEvent(topic, event);
     }
 
     public int getCapacity() {

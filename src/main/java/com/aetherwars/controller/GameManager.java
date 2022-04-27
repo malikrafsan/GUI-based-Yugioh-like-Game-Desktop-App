@@ -10,14 +10,18 @@ public class GameManager {
     private GameState gs;
     private PlayerManager[] pm;
     private BattleManager bm;
+    private EventBroker eb;
 
     private GameManager() {
+        this.eb = new EventBroker();
         this.gs = new GameState();
         pm = new PlayerManager[2];
         pm[0] = new PlayerManager(gs.getPlayer1());
         pm[1] = new PlayerManager(gs.getPlayer2());
         bm = new BattleManager();
     }
+
+    public EventBroker getEventBroker() { return this.eb; }
 
     public static GameManager getInstance() {
         if(instance==null) {
