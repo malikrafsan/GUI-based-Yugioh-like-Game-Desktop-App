@@ -2,7 +2,7 @@ package com.aetherwars.model;
 import com.aetherwars.interfaces.IActiveCharObserverGetter;
 import java.util.Observable;
 
-public class ActiveCharObserver extends Observable, IActiveCharObserverGetter{
+public class ActiveCharObserver extends Observable implements IActiveCharObserverGetter{
     private ActiveChar[] chars;
 
     public ActiveCharObserver() {
@@ -59,7 +59,7 @@ public class ActiveCharObserver extends Observable, IActiveCharObserverGetter{
         }
     }
 
-    public IActiveCharGetter[] getChars() {
+    public ActiveChar[] getChars() {
         return (this.chars);
     }
 
