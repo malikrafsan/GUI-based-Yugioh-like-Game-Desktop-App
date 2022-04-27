@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Observable;
 
-class Deck extends Observable {
+public class Deck extends Observable {
     List<Card> deck;
     int capacity;
     int size;

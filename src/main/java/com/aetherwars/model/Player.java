@@ -31,6 +31,10 @@ public class Player extends Observable{
         }
     }
 
+    public Deck getDeck() {
+        return this.deck;
+    }
+
     public HandCard getHand() {
         return this.handCard;
     }

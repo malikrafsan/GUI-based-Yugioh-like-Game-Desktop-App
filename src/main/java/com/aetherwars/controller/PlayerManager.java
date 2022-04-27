@@ -73,10 +73,6 @@ public class PlayerManager {
         return p.getActiveChars().empty();
     }
 
-    public void clickActChar(int idx_board) {
-        p.getActiveChars().onClick(idx_board);
-    }
-
     public void hoverHand(int idx_hand) {
         gm.hover(p.getHand().getCard(idx_hand));
     }
