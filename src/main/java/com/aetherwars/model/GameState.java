@@ -25,6 +25,11 @@ public class GameState extends Observable implements IRoundGetter{
         this.clickObject = new ClickObject();
     }
 
+    public void sync() {
+        setChanged();
+        notifyObservers();
+    }
+
     public int getRound() {
         return (this.round);
     }

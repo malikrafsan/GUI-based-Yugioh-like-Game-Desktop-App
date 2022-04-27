@@ -24,6 +24,11 @@ public class Player extends Observable{
         no++;
     }
 
+    public void sync() {
+        setChanged();
+        notifyObservers();
+    }
+
     public void newRound() {
         if (this.mana < 10) {
             this.mana = this.mana + 1;

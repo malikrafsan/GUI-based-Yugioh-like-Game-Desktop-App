@@ -3,8 +3,6 @@ package com.aetherwars.controller;
 import com.aetherwars.interfaces.Hoverable;
 import com.aetherwars.model.*;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Observer;
 
 public class GameManager {
@@ -63,6 +61,13 @@ public class GameManager {
         }
     }
 
+    public void syncAll() {
+        gs.sync();
+        gs.getClickObject().sync();
+        pm[0].syncAll();
+        pm[1].syncAll();
+    }
+
     public void click(int player, String name, int index) {
         ClickObject prevClicked = gs.getClickObject();
         gs.setClickObject(player,name,index);
@@ -80,15 +85,17 @@ public class GameManager {
         int idxSelf = gs.getTurn().ordinal();
         int idxEnemy = 1-idxSelf;
         if((prevClicked.getName()).equals("HANDCARD")) {
-            int idxHand = prevClicked.getIndex();
-            if(curActCharClicked.getPlayer()-1==idxSelf) {
-                pm[idxSelf].handToBoard(idxHand, curActCharClicked.getIndex());
-            } else {
-                // kasih spell ke lawan
-                if(pm[idxEnemy].canReceiveSpellAt(curActCharClicked.getIndex()) && pm[idxSelf].canGiveSpellAt(idxHand)) {
-                    SpellCard spell = pm[idxSelf].takeSpellAt(idxHand); // or take spell
-                    pm[idxEnemy].receiveSpell(spell, curActCharClicked.getIndex());
-                    pm[idxSelf].useMana(spell.getMana());
+            if(gs.getPhase().equals(Phase.PLANNING)) {
+                int idxHand = prevClicked.getIndex();
+                if(curActCharClicked.getPlayer()-1==idxSelf) {
+                    pm[idxSelf].handToBoard(idxHand, curActCharClicked.getIndex());
+                } else {
+                    // kasih spell ke lawan
+                    if(pm[idxEnemy].canReceiveSpellAt(curActCharClicked.getIndex()) && pm[idxSelf].canGiveSpellAt(idxHand)) {
+                        SpellCard spell = pm[idxSelf].takeSpellAt(idxHand); // or take spell
+                        pm[idxEnemy].receiveSpell(spell, curActCharClicked.getIndex());
+                        pm[idxSelf].useMana(spell.getMana());
+                    }
                 }
             }
         } else if(prevClicked.getName().equals("ACTIVECHAR") && prevClicked.getPlayer()-1==idxSelf && curActCharClicked.getPlayer()-1==idxEnemy) {
@@ -130,6 +137,7 @@ public class GameManager {
     }
 
     public void unhover() {
+//        gs.getHoveredObject().offHover();
         gs.setHoveredObject(null);
     }
 
