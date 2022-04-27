@@ -1,7 +1,8 @@
 package com.aetherwars.model;
+import com.aetherwars.interfaces.IActiveCharObserverGetter;
 import java.util.Observable;
 
-public class ActiveCharObserver extends Observable {
+public class ActiveCharObserver extends Observable, IActiveCharObserverGetter{
     private ActiveChar[] chars;
 
     public ActiveCharObserver() {
@@ -56,6 +57,10 @@ public class ActiveCharObserver extends Observable {
                 delChar(i);
             }
         }
+    }
+
+    public IActiveCharGetter[] getChars() {
+        return (this.chars);
     }
 
     public void sync() {
