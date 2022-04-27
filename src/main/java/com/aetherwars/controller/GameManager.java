@@ -15,9 +15,10 @@ public class GameManager {
     private GameManager() {
         this.eb = new EventBroker();
         this.gs = new GameState();
+        CardManager cm = new CardManager();
         pm = new PlayerManager[2];
-        pm[0] = new PlayerManager(gs.getPlayer1());
-        pm[1] = new PlayerManager(gs.getPlayer2());
+        pm[0] = new PlayerManager(gs.getPlayer1(), cm);
+        pm[1] = new PlayerManager(gs.getPlayer2(), cm);
         bm = new BattleManager();
     }
 

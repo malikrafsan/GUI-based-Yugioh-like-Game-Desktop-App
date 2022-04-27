@@ -4,11 +4,14 @@ import com.aetherwars.model.*;
 
 public class PlayerManager {
     private GameManager gm;
+    private CardManager cm;
     private Player p;
 
-    public PlayerManager(Player p) {
+    public PlayerManager(Player p, CardManager cm) {
         this.p = p;
         this.gm = gm.getInstance();
+        this.cm = cm;
+        cm.setupDeck(p.getDeck());
     }
 
     public void syncAll() {
