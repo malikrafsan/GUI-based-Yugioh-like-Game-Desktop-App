@@ -11,7 +11,14 @@ public class PlayerManager {
         this.gm = gm.getInstance();
     }
 
-    // bila idx_board kosong && mana cukup, melakukan summon
+    public void syncAll() {
+        p.sync();
+        p.getDeck().sync();
+        p.getHand().sync();
+        p.getActiveChars().sync();
+    }
+
+    // idx_board kosong && mana cukup, melakukan summon
     public void summon(int idx_hand, int idx_board) {
         Card c = p.getHand().takeCard(idx_hand);
         p.getActiveChars().addChar((CharacterCard) c , idx_board);
@@ -68,4 +75,24 @@ public class PlayerManager {
     public ActiveCharObserver getActiveChars() {
         return p.getActiveChars();
     }
+
+    public boolean canBeDirectAttacked() {
+        return p.getActiveChars().empty();
+    }
+
+    public void hoverHand(int idx_hand) {
+        Card c = p.getHand().getCard(idx_hand);
+        // panggil hover kali
+        gm.hover(p.getHand().getCard(idx_hand));
+    }
+
+    public void hoverBoard(int idx_board) {
+        ActiveChar ac = p.getActiveChars().getActChar(idx_board);
+        ac.onHover();
+        gm.hover(p.getActiveChars().getActChar(idx_board));
+    }
+
+//    public void minusHealth(Double x) {
+//        p.minusHealth(x);
+//    }
 }

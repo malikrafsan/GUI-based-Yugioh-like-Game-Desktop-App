@@ -1,7 +1,8 @@
 package com.aetherwars.model;
+import com.aetherwars.interfaces.IActiveCharObserverGetter;
 import java.util.Observable;
 
-public class ActiveCharObserver extends Observable {
+public class ActiveCharObserver extends Observable implements IActiveCharObserverGetter{
     private ActiveChar[] chars;
 
     public ActiveCharObserver() {
@@ -58,8 +59,25 @@ public class ActiveCharObserver extends Observable {
         }
     }
 
+    public ActiveChar[] getChars() {
+        return (this.chars);
+    }
+
+    public void newRound() {
+
+    }
+
     public void sync() {
         this.setChanged();
         this.notifyObservers();
+    }
+
+    public boolean empty() {
+        for(int i=0; i<5; i++) {
+            if(this.chars[i] != null) {
+                return false;
+            }
+        }
+        return true;
     }
 }

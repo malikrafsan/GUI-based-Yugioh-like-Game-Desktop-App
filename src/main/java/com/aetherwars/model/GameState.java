@@ -1,4 +1,5 @@
 package com.aetherwars.model;
+import com.aetherwars.interfaces.Hoverable;
 import com.aetherwars.interfaces.IRoundGetter;
 
 import java.util.Observable;
@@ -12,7 +13,8 @@ public class GameState extends Observable implements IRoundGetter{
     private int round;
     private Phase phase;
     private Turn turn;
-    
+    private Hoverable hoveredObject;
+    private ClickObject clickObject;
 
     public GameState() {
         this.player1 = new Player();
@@ -20,6 +22,12 @@ public class GameState extends Observable implements IRoundGetter{
         this.round = 1;
         this.phase = DRAW;
         this.turn = PLAYER1;
+        this.clickObject = new ClickObject();
+    }
+
+    public void sync() {
+        setChanged();
+        notifyObservers();
     }
 
     public int getRound() {
@@ -48,12 +56,12 @@ public class GameState extends Observable implements IRoundGetter{
         switch (this.turn) {
             case PLAYER1:
                 this.turn = PLAYER2;
-                this.player2.newTurn();
+                this.player2.newRound();
                 break;
             case PLAYER2:
                 this.turn = PLAYER1;
                 this.round = this.round + 1;
-                this.player1.newTurn();
+                this.player1.newRound();
                 break;
         }
     }
@@ -72,5 +80,15 @@ public class GameState extends Observable implements IRoundGetter{
 
     public Phase getPhase() {
         return phase;
+    }
+
+    public void setHoveredObject(Hoverable hoveredObject) {
+        this.hoveredObject = hoveredObject;
+    }
+
+    public ClickObject getClickObject() { return clickObject; }
+
+    public void setClickObject(int player, String name, int index) {
+        clickObject.setClickObject(player, name, index);
     }
 }

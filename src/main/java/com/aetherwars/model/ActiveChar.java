@@ -8,20 +8,27 @@ import java.util.List;
 
 public class ActiveChar implements IActiveCharGetter, Hoverable {
     private CharacterCard card;
-    private int attackPlus;
-    private int healthPlus;
+    private List<ActiveSpellsPotion> spellsPotionList;
+    private double attack;
+    private double health;
+    private double attackPlus;
+    private double healthPlus;
     private boolean clicked;
     private boolean hovered;
+    private boolean isCanBattle;
     private int exp;
     private int expUp;
     private int level;
 
     public ActiveChar() {
         this.card = new CharacterCard();
+        this.attack = 1;
+        this.health = 1;
         this.attackPlus = 0;
         this.healthPlus = 0;
         this.clicked = false;
         this.hovered = false;
+        this.isCanBattle = true;
         this.exp = 0;
         this.expUp = 1;
         this.level = 1;
@@ -29,10 +36,13 @@ public class ActiveChar implements IActiveCharGetter, Hoverable {
 
     public ActiveChar(CharacterCard card) {
         this.card = card;
+        this.attack = this.card.getAttack();
+        this.health = this.card.getHealth();
         this.attackPlus = 0;
         this.healthPlus = 0;
         this.clicked = false;
         this.hovered = false;
+        this.isCanBattle = true;
         this.exp = 0;
         this.expUp = 1;
         this.level = 1;
@@ -46,20 +56,12 @@ public class ActiveChar implements IActiveCharGetter, Hoverable {
         return (this.card).getDesc();
     }
 
-    public void addAttack(int attack) {
-        this.attackPlus = this.attackPlus + attack;
-    }
-
-    public void addHealth(int health) {
-        this.healthPlus = this.healthPlus + health;
-    }
-
     public void addAttackLvl() {
-        this.attackPlus = this.attackPlus + this.card.getAttackUp();
+        this.attack = this.attack + this.card.getAttackUp();
     }
 
     public void addHealthLvl() {
-        this.healthPlus = this.healthPlus + this.card.getHealthUp();
+        this.health = this.health + this.card.getHealthUp();
     }
 
     public void onClick() {
@@ -103,21 +105,26 @@ public class ActiveChar implements IActiveCharGetter, Hoverable {
         }
     }
 
-    public int getAttack() {
-        return (this.card.getAttack() + this.attackPlus);
+    public boolean canBattle() { return (this.isCanBattle); }
+
+    public double getAttack() {
+        return (this.attack);
     }
-    public int getHealth() {
-        return (this.card.getHealth() + this.healthPlus);
+
+    public double getHealth() {
+        return (this.health);
     }
+
     public int getExp() {
         return (this.exp);
     }
+
     public int getExpUp() {
         return (this.expUp);
     }
-    public int getLevel() {
-        return (this.level);
-    }
+
+    public int getLevel() { return (this.level); }
+
     public String getImagePath() {
         return (this.card.getImagePath());
     }

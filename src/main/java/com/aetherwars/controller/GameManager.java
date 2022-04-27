@@ -1,15 +1,13 @@
 package com.aetherwars.controller;
 
+import com.aetherwars.interfaces.Hoverable;
 import com.aetherwars.model.*;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Observer;
 
 public class GameManager {
     private static GameManager instance;
     private GameState gs;
-    private List<Object> lastClicked;
     private PlayerManager[] pm;
     private BattleManager bm;
 
@@ -18,7 +16,6 @@ public class GameManager {
         pm = new PlayerManager[2];
         pm[0] = new PlayerManager(gs.getPlayer1());
         pm[1] = new PlayerManager(gs.getPlayer2());
-        lastClicked = new ArrayList<Object>(3);
         bm = new BattleManager();
     }
 
@@ -29,33 +26,83 @@ public class GameManager {
         return instance;
     }
 
-//    public void addObserver(String str, Observer obs) {
-//        switch (str) {
-//            case "COUNT":
-//                this.model.getCount().addObserver(obs);
-//        }
-//    }
+    public void addObserver(String str, Observer obs) {
+        switch (str) {
+            case "GAMESTATE":
+                this.gs.addObserver(obs);
+                break;
+            case "PLAYER1":
+                this.gs.getPlayer1().addObserver(obs);
+                break;
+            case "PLAYER2":
+                this.gs.getPlayer2().addObserver(obs);
+                break;
+            case "CLICKOBJECT":
+                this.gs.getClickObject().addObserver(obs);
+                break;
+            case "DECK1":
+                this.gs.getPlayer1().getDeck().addObserver(obs);
+                break;
+            case "DECK2":
+                this.gs.getPlayer2().getDeck().addObserver(obs);
+                break;
+            case "HANDCARD1":
+                this.gs.getPlayer1().getHand().addObserver(obs);
+                break;
+            case "HANDCARD2":
+                this.gs.getPlayer2().getHand().addObserver(obs);
+                break;
+            case "ACTIVECHARS1":
+                this.gs.getPlayer1().getActiveChars().addObserver(obs);
+                break;
+            case "ACTIVECHARS2":
+                this.gs.getPlayer2().getActiveChars().addObserver(obs);
+                break;
+        }
+    }
 
-    public void clickActChar(int idx, int id) {
+    public void syncAll() {
+        gs.sync();
+        gs.getClickObject().sync();
+        pm[0].syncAll();
+        pm[1].syncAll();
+    }
+
+    public void click(int player, String name, int index) {
+        ClickObject prevClicked = gs.getClickObject();
+        gs.setClickObject(player,name,index);
+
+        if(gs.getClickObject().getName().equals("ACTIVECHAR")) {
+            clickedActChar(prevClicked);
+        } else if(gs.getClickObject().getName().equals("PLAYER")) {
+            clickedPlayer(prevClicked);
+        }
+    }
+
+    public void clickedActChar(ClickObject prevClicked) {
+        ClickObject curActCharClicked = gs.getClickObject();
+
         int idxSelf = gs.getTurn().ordinal();
         int idxEnemy = 1-idxSelf;
-        if(((String)lastClicked.get(0)).equals("HANDCARD")) {
-            int idxHand = (Integer)lastClicked.get(1);
-            if(id-1==idxSelf) {
-                pm[idxSelf].handToBoard(idxHand, id);
-            } else {
-                // kasih spell ke lawan
-                if(pm[idxEnemy].canReceiveSpellAt(idx) && pm[idxSelf].canGiveSpellAt(idxHand)) {
-                    SpellCard spell = pm[idxSelf].takeSpellAt(idxHand); // or take spell
-                    pm[idxEnemy].receiveSpell(spell, idx);
-                    pm[idxSelf].useMana(spell.getMana());
+        if((prevClicked.getName()).equals("HANDCARD")) {
+            if(gs.getPhase().equals(Phase.PLANNING)) {
+                int idxHand = prevClicked.getIndex();
+                if(curActCharClicked.getPlayer()-1==idxSelf) {
+                    pm[idxSelf].handToBoard(idxHand, curActCharClicked.getIndex());
+                } else {
+                    // kasih spell ke lawan
+                    if(pm[idxEnemy].canReceiveSpellAt(curActCharClicked.getIndex()) && pm[idxSelf].canGiveSpellAt(idxHand)) {
+                        SpellCard spell = pm[idxSelf].takeSpellAt(idxHand); // or take spell
+                        pm[idxEnemy].receiveSpell(spell, curActCharClicked.getIndex());
+                        pm[idxSelf].useMana(spell.getMana());
+                    }
                 }
             }
-        } else if(((String)lastClicked.get(0)).equals("ACTIVECHAR") && (Integer)lastClicked.get(2)-1==idxSelf && id-1==idxEnemy) {
+        } else if(prevClicked.getName().equals("ACTIVECHAR") && prevClicked.getPlayer()-1==idxSelf && curActCharClicked.getPlayer()-1==idxEnemy) {
             ActiveCharObserver acsSelf = pm[idxSelf].getActiveChars();
             ActiveCharObserver acsEnemy = pm[idxEnemy].getActiveChars();
-            ActiveChar acSelf = acsSelf.getActChar(idx);
-            ActiveChar acEnemy = acsEnemy.getActChar(idx);
+            ActiveChar acSelf = acsSelf.getActChar(prevClicked.getIndex());
+            ActiveChar acEnemy = acsEnemy.getActChar(curActCharClicked.getIndex());
             if(gs.getPhase().equals(Phase.ATTACK)) {
                 bm.setSelf(acSelf);
                 bm.setEnemy(acEnemy);
@@ -66,50 +113,48 @@ public class GameManager {
                 }
             }
         }
-
-        String what = "ACTIVECHAR";
-        lastClicked.set(0, what);
-        lastClicked.set(1, idx);
-        lastClicked.set(2, id);
     }
 
-    public void clickHand(int idx) {
-        String what = "HANDCARD";
-        lastClicked.set(0, what);
-        lastClicked.set(1,idx);
-        lastClicked.set(2,-1);
-    }
-
-    public void clickPlayer(int id) {
+    public void clickedPlayer(ClickObject prevClicked) {
+        ClickObject curPlayerClicked = gs.getClickObject();
+        int id = curPlayerClicked.getPlayer()-1;
         // && id==3-curPlayer, belum cek board nya ada attacker ga.
         int idxSelf = gs.getTurn().ordinal();
         int idxEnemy = 1- idxSelf;
-        if(lastClicked.get(0).equals("ACTIVECHAR") && (Integer)lastClicked.get(2)-1==idxSelf && id-1==idxEnemy) {
-            // bila board lawan kosong, direct attack
-            int idx_board = (Integer)lastClicked.get(1);
-//            if(pm[idxEnemy].canBeDirectAttacked() && pm[idxSelf].canAttackWith(idx_board)) {
-//                int atk = pm[idxSelf].getAtack(idx_board);
+//        if(lastClicked.get(0).equals("ACTIVECHAR") && (Integer)lastClicked.get(2)-1==idxSelf && id-1==idxEnemy) {
+//            // bila board lawan kosong, direct attack
+//            int idx_board = (Integer)lastClicked.get(1);
+//            ActiveChar acSelf = pm[idxSelf].getActiveChars().getActChar(idx_board);
+//            if(gs.getPhase().equals(Phase.ATTACK) && acSelf!=null && acSelf.canAttack() && pm[idxEnemy].canBeDirectAttacked()) {
+//                int atk = acSelf.getAttack();
 //                pm[idxEnemy].minusHealth(atk);
 //                // if lawan mati, win
 //            }
-        }
-        String what = "PLAYER";
-        lastClicked.set(0, what);
-        lastClicked.set(1, id);
-        lastClicked.set(2,-1);
     }
 
-//    public void hover(Hoverable h) {
-//        // set hovered.
-//    }
-//
-//    public void unhover(Hoverable h) {
-//        // set hovered.
-//    }
+    public void hover(Hoverable h) {
+        gs.setHoveredObject(h);
+    }
+
+    public void unhover() {
+//        gs.getHoveredObject().offHover();
+        gs.setHoveredObject(null);
+    }
+
+    public void hoverHand(int idx_hand) {
+        int idxSelf = gs.getTurn().ordinal();
+        pm[idxSelf].hoverHand(idx_hand);
+    }
+
+    public void hoverBoard(int idx_board, int id) {
+        pm[id-1].hoverBoard(idx_board);
+    }
+
+    // delete kartu
+    // add exp from mana
 
     public void nextPhase() {
-        ;
+        gs.nextPhase();
     }
-
 
 }
