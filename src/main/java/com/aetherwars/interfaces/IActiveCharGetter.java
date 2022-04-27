@@ -1,8 +1,8 @@
 package com.aetherwars.interfaces;
 
 public interface IActiveCharGetter {    
-    public int getAttack();
-    public int getHealth();
+    public double getAttack();
+    public double getHealth();
     public int getExp();
     public int getExpUp();
     public int getLevel();

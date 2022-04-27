@@ -63,6 +63,10 @@ public class ActiveCharObserver extends Observable implements IActiveCharObserve
         return (this.chars);
     }
 
+    public void newRound() {
+
+    }
+
     public void sync() {
         this.setChanged();
         this.notifyObservers();

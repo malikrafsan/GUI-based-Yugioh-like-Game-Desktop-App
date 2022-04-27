@@ -24,6 +24,18 @@ public class SpellPotionCard extends SpellCard {
         this.duration = duration;
     }
 
+    public int getAttack() {
+        return (this.attack);
+    }
+
+    public int getHp() {
+        return (this.hp);
+    }
+
+    public int getDuration() {
+        return (this.duration);
+    }
+
     @Override
     public String preview() {
         return "ATK " + this.attack + "/HP " + this.hp + "(" + this.duration + ")";

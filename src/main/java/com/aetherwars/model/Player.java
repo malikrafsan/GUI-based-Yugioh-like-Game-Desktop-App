@@ -24,9 +24,10 @@ public class Player extends Observable{
         no++;
     }
 
-    public void newTurn() {
+    public void newRound() {
         if (this.mana < 10) {
             this.mana = this.mana + 1;
+            this.activeChars.newRound();
         }
     }
 

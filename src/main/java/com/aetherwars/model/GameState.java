@@ -50,12 +50,12 @@ public class GameState extends Observable implements IRoundGetter{
         switch (this.turn) {
             case PLAYER1:
                 this.turn = PLAYER2;
-                this.player2.newTurn();
+                this.player2.newRound();
                 break;
             case PLAYER2:
                 this.turn = PLAYER1;
                 this.round = this.round + 1;
-                this.player1.newTurn();
+                this.player1.newRound();
                 break;
         }
     }

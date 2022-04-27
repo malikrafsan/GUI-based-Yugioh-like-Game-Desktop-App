@@ -214,8 +214,8 @@ public class PlayerBoardController implements Observer {
                     Image activeCardImg = new Image(file.toURI().toString());
                     this.atkIcons[i].setImage(atkImg);
                     this.dfnIcons[i].setImage(dfnImg);
-                    this.atkLbls[i].setText(Integer.toString(m.getAttack()));
-                    this.dfnLbls[i].setText(Integer.toString(m.getHealth()));
+                    this.atkLbls[i].setText(Double.toString(m.getAttack()));
+                    this.dfnLbls[i].setText(Double.toString(m.getHealth()));
                     this.activeCards[i].setImage(activeCardImg);
                     this.expLvlLbls[i].setText(Integer.toString(m.getExp()) + "/" + Integer.toString(m.getExpUp()) + " [" + Integer.toString(m.getLevel()) + "]");
                 }
@@ -266,8 +266,8 @@ class MockActiveChar implements IActiveCharGetter {
         this.imagePath = imagePath;
     }
 
-    public int getAttack() { return this.attack;}
-    public int getHealth() {return this.health;}
+    public double getAttack() { return this.attack;}
+    public double getHealth() {return this.health;}
     public int getExp() {return this.exp; }
     public int getExpUp() { return this.expUp; }
     public int getLevel() { return this.level; }

@@ -17,6 +17,10 @@ public abstract class SpellCard extends Card {
         this.type = type;
     }
 
+    public SpellType getType() {
+        return (this.type);
+    }
+
     abstract public String preview();
     abstract public String toString();
     abstract public List<Pair<String,String>> displayInfo();
