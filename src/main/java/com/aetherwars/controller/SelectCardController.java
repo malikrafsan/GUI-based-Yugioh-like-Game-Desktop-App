@@ -13,15 +13,12 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
+import java.util.*;
 
 import com.aetherwars.interfaces.*;
 import com.aetherwars.event.PickCardEvent;
 
-import static com.aetherwars.model.Phase.DRAW;
+import static com.aetherwars.model.Phase.*;
 
 public class SelectCardController implements Observer, ISubscriber {
     @FXML private Pane pane;
@@ -35,7 +32,10 @@ public class SelectCardController implements Observer, ISubscriber {
 
     @FXML
     public void initialize(){
+        this.mockGameState = new MockGameState();
+        this.mockGameState.addObserver(this);
         try {
+            MockGameState mgs = this.mockGameState;
             for (int i=0; i<3; i++){
                 FXMLLoader loaderHandCard = new FXMLLoader(getClass().getResource("/view/HandCard.fxml"));
                 this.cardsToSelect[i] = loaderHandCard.load();
@@ -65,6 +65,10 @@ public class SelectCardController implements Observer, ISubscriber {
 
 //                        appController.setPhase(Phase.PLANNING);
                         // TODO : use game manager
+
+                        // TODO: DELETE LATER
+                        Phase[] lst = new Phase[]{DRAW, PLANNING, ATTACK, END};
+                        mgs.setPhase(lst[new Random().nextInt(lst.length)]);
                     }
                 });
             }
@@ -74,8 +78,6 @@ public class SelectCardController implements Observer, ISubscriber {
         }
         testUpdateHandCards();
         setPlayer(1);
-        this.mockGameState = new MockGameState();
-        this.mockGameState.addObserver(this);
     }
 
     public void setAppController(AppController appController){
@@ -119,11 +121,14 @@ public class SelectCardController implements Observer, ISubscriber {
         }
     }
     public void update(Observable obs, Object obj) {
-        if (obs instanceof  GameState) {
-            GameState gs = (GameState) obs;
+        if (obs instanceof IPhaseGetter) {
+            IPhaseGetter gs = (IPhaseGetter) obs;
+            System.out.println("PHASE: " + gs.getPhase());
             if (gs.getPhase() == DRAW) {
+                System.out.println("HERE");
                 drawPhaseSelectCard();
             } else {
+                System.out.println("THERE");
                 nonDrawPhaseSelectCard();
             }
         }
@@ -152,6 +157,7 @@ class MockGameState extends Observable implements IPhaseGetter {
 
     public void setPhase(Phase newPhase) {
         this.phase = newPhase;
+        System.out.println("CHANGING TO " + newPhase);
         setChanged();
         notifyObservers();
     }
