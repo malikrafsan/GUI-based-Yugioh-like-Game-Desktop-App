@@ -23,7 +23,7 @@
                </center>
             </BorderPane>
             <ImageView fx:id="dfnIcon1" fitHeight="20.0" fitWidth="20.0" layoutX="76.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
-            <Label fx:id="dfnLbl1" layoutX="82.0" layoutY="25.0" prefHeight="18.0" prefWidth="0.0" />
+            <Label fx:id="dfnLbl1" layoutX="77.0" layoutY="25.0" textAlignment="CENTER" />
             <Label fx:id="atkLbl1" layoutX="6.0" layoutY="25.0" />
             <ImageView fx:id="atkIcon1" fitHeight="20.0" fitWidth="20.0" layoutX="5.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
             <Label fx:id="expLvlLbl1" alignment="CENTER" layoutX="14.0" layoutY="79.0" prefHeight="18.0" prefWidth="71.0" textAlignment="CENTER" />
@@ -37,7 +37,7 @@
                </center>
             </BorderPane>
             <ImageView fx:id="dfnIcon2" fitHeight="20.0" fitWidth="20.0" layoutX="76.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
-            <Label fx:id="dfnLbl2" layoutX="82.0" layoutY="25.0" prefHeight="18.0" prefWidth="0.0" />
+            <Label fx:id="dfnLbl2" layoutX="77.0" layoutY="25.0" textAlignment="CENTER" />
             <Label fx:id="atkLbl2" layoutX="6.0" layoutY="25.0" />
             <ImageView fx:id="atkIcon2" fitHeight="20.0" fitWidth="20.0" layoutX="5.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
             <Label fx:id="expLvlLbl2" alignment="CENTER" layoutX="5.0" layoutY="79.0" prefHeight="18.0" prefWidth="92.0" textAlignment="CENTER" />
@@ -51,7 +51,7 @@
                </center>
             </BorderPane>
             <ImageView fx:id="dfnIcon3" fitHeight="20.0" fitWidth="20.0" layoutX="76.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
-            <Label fx:id="dfnLbl3" layoutX="82.0" layoutY="25.0" prefHeight="18.0" prefWidth="0.0" />
+            <Label fx:id="dfnLbl3" layoutX="77.0" layoutY="25.0" textAlignment="CENTER" />
             <Label fx:id="atkLbl3" layoutX="6.0" layoutY="25.0" />
             <ImageView fx:id="atkIcon3" fitHeight="20.0" fitWidth="20.0" layoutX="5.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
             <Label fx:id="expLvlLbl3" alignment="CENTER" layoutX="14.0" layoutY="79.0" prefHeight="18.0" prefWidth="71.0" textAlignment="CENTER" />
@@ -65,7 +65,7 @@
                </center>
             </BorderPane>
             <ImageView fx:id="dfnIcon4" fitHeight="20.0" fitWidth="20.0" layoutX="76.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
-            <Label fx:id="dfnLbl4" layoutX="82.0" layoutY="25.0" prefHeight="18.0" prefWidth="0.0" />
+            <Label fx:id="dfnLbl4" layoutX="77.0" layoutY="25.0" textAlignment="CENTER" />
             <Label fx:id="atkLbl4" layoutX="6.0" layoutY="25.0" />
             <ImageView fx:id="atkIcon4" fitHeight="20.0" fitWidth="20.0" layoutX="5.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
             <Label fx:id="expLvlLbl4" alignment="CENTER" layoutX="14.0" layoutY="79.0" prefHeight="18.0" prefWidth="71.0" textAlignment="CENTER" />
@@ -79,7 +79,7 @@
                </center>
             </BorderPane>
             <ImageView fx:id="dfnIcon5" fitHeight="20.0" fitWidth="20.0" layoutX="76.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
-            <Label fx:id="dfnLbl5" layoutX="82.0" layoutY="25.0" prefHeight="18.0" prefWidth="0.0" />
+            <Label fx:id="dfnLbl5" layoutX="77.0" layoutY="25.0" textAlignment="CENTER" />
             <Label fx:id="atkLbl5" layoutX="6.0" layoutY="25.0" />
             <ImageView fx:id="atkIcon5" fitHeight="20.0" fitWidth="20.0" layoutX="5.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
             <Label fx:id="expLvlLbl5" alignment="CENTER" layoutX="14.0" layoutY="79.0" prefHeight="18.0" prefWidth="71.0" textAlignment="CENTER" />
