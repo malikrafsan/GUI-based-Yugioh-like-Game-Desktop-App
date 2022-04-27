@@ -26,12 +26,12 @@ public class CardInfoController {
     public void setCardInfo(Card card){
         List<Pair<String,String>> cardInfo = card.displayInfo();
 
-        this.card_name.setText(cardInfo.get(0).getValue());
-        this.card_desc.setText(cardInfo.get(2).getValue());
+        this.card_name.setText(card.getName());
+        this.card_desc.setText(card.getDesc());
 
-        Integer attrCount = cardInfo.size() - 2;
+        Integer attrCount = cardInfo.size();
         for (int i = 0; i < attrCount; i++){
-            attrLabel[i].setText(cardInfo.get(i+2).getKey() + " : " + cardInfo.get(i+2).getValue());
+            attrLabel[i].setText(cardInfo.get(i).getKey() + " : " + cardInfo.get(i).getValue());
         }
         for (int i = attrCount; i < 5; i++){
             attrLabel[i].setText("");
