@@ -28,14 +28,16 @@ public class SelectCardController implements Observer, ISubscriber {
     private HandCardController[] cardController = new HandCardController[3];
     private AppController appController;
     private Integer currentSelectCardCount;
-    private MockGameState mockGameState; // TODO: DELETE LATER
+    private MockGameStateSelectCard mockGameState; // TODO: DELETE LATER
 
     @FXML
     public void initialize(){
-        this.mockGameState = new MockGameState();
+        // TODO: DELETE LATER
+        this.mockGameState = new MockGameStateSelectCard();
         this.mockGameState.addObserver(this);
         try {
-            MockGameState mgs = this.mockGameState;
+            // TODO: DELETE LATER
+            MockGameStateSelectCard mgs = this.mockGameState;
             for (int i=0; i<3; i++){
                 FXMLLoader loaderHandCard = new FXMLLoader(getClass().getResource("/view/HandCard.fxml"));
                 this.cardsToSelect[i] = loaderHandCard.load();
@@ -150,7 +152,7 @@ public class SelectCardController implements Observer, ISubscriber {
     }
 }
 
-class MockGameState extends Observable implements IPhaseGetter {
+class MockGameStateSelectCard extends Observable implements IPhaseGetter {
     private Phase phase;
 
     public Phase getPhase() { return this.phase; }
