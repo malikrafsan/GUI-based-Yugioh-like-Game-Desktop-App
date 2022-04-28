@@ -147,13 +147,13 @@ public class HandCardsContainerController {
 
 
     public void update(Observable obs, Object obj) {
-
-//        if (obs instanceof ClickObject) {
-//            this.unsetAllCardClickEffect();
-//            ClickObject c = (ClickObject) obs;
-//            if (c.getType().equal("HANDCARD") && c.getPlayerNo() == this.playerNo) {
-//                this.setClickEffect(c.getIdx());
-//            }
-//        }
+        if (obs instanceof ClickObject) {
+            ClickObject co = (ClickObject) obs;
+            
+            unsetAllCardClickEffect();
+            if (co.getName().equals("HANDCARD")) {
+                setCardClickEffect(co.getIndex());
+            }
+        }
     }
 }
