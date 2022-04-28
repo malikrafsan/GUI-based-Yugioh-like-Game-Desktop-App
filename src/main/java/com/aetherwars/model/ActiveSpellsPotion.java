@@ -28,6 +28,10 @@ public class ActiveSpellsPotion {
         return (this.healthPotion);
     }
 
+    public void getDamage(int damage) {
+        this.healthPotion = this.healthPotion - damage;
+    }
+
     public void setHealthPotion(double damage) { this.healthPotion = this.healthPotion - damage ;}
 
     public void newRound() {

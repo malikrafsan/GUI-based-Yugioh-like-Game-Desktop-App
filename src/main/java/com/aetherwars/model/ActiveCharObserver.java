@@ -64,8 +64,16 @@ public class ActiveCharObserver extends Observable implements IActiveCharObserve
     }
 
     public void newRound() {
-
+        for (int i=0; i<5; i++) {
+            if (this.chars[i] != null) {
+                this.chars[i].newRound();
+            }
+        }
     }
+
+    public void cannotAttack(int index) {this.chars[index].cannotAttack();}
+
+    public boolean canAttack(int index) { return (this.chars[index].canAttack()); }
 
     public void sync() {
         this.setChanged();
