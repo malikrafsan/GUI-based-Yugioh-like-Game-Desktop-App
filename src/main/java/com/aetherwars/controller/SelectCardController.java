@@ -30,21 +30,13 @@ public class SelectCardController implements Observer, ISubscriber {
     private final Background hoverBackground = new Background(new BackgroundFill(Color.LIGHTCORAL, null, null));
     private final Background normalBackground = new Background(new BackgroundFill(null, null, null));
 
-    // TODO: DELETE LATER
-    private MockGameStateSelectCard mockGameState;
-    private MockDeck mockDeck;
-
     @FXML
-    public void initialize(){
-        // TODO: DELETE LATER
-        this.mockDeck = new MockDeck();
+    public void initialize() {
         GameManager.getInstance().getEventBroker().addSubscriber("PICKCARD", this);
-        this.mockGameState = new MockGameStateSelectCard();
-        this.mockGameState.addObserver(this);
-        try {
-            // TODO: DELETE LATER
-            MockGameStateSelectCard mgs = this.mockGameState;
+        GameManager.getInstance().addObserver("GAMESTATE", this);
 
+        try {
+            SelectCardController THIS = this;
             for (int i=0; i<3; i++){
                 FXMLLoader loaderHandCard = new FXMLLoader(getClass().getResource("/view/HandCard.fxml"));
                 this.cardsToSelect[i] = loaderHandCard.load();
@@ -69,13 +61,9 @@ public class SelectCardController implements Observer, ISubscriber {
                     @Override
                     public void handle(MouseEvent mouseEvent) {
                         System.out.println("CARD " + finalI + " IS CLICKED");
-
-//                        appController.setPhase(Phase.PLANNING);
-                        // TODO : use game manager
-
-                        // TODO: DELETE LATER
-                        Phase[] lst = new Phase[]{DRAW, PLANNING, ATTACK, END};
-                        mgs.setPhase(lst[new Random().nextInt(lst.length)]);
+                        // TODO : CALL GAME MANAGER FOR PICKING CARD
+                        
+                        THIS.nonDrawPhaseSelectCard();
                     }
                 });
             }
@@ -129,12 +117,6 @@ public class SelectCardController implements Observer, ISubscriber {
             if (gs.getPhase() == DRAW) {
                 System.out.println("HERE");
                 drawPhaseSelectCard();
-
-                // TODO: DELETE LATER
-                this.mockDeck.pickCard();
-            } else {
-                System.out.println("THERE");
-                nonDrawPhaseSelectCard();
             }
         }
     }

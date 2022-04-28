@@ -116,8 +116,10 @@ public class CardManager {
         }
 
         Collections.shuffle(res);
-        for(int i=0;i<res.size();i++) {
+        for (int i = 0; i < res.size(); i++) {
             deck.addCard(res.get(i));
         }
+        System.out.println("FILLED DECK");
+        System.out.println(deck);
     }
 }

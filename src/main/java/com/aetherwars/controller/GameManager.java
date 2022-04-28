@@ -71,6 +71,8 @@ public class GameManager {
         gs.getClickObject().sync();
         pm[0].syncAll();
         pm[1].syncAll();
+
+        gs.getPlayer1().getDeck().pickCard();
     }
 
     public void click(int player, String name, int index) {

@@ -1,13 +1,13 @@
 package com.aetherwars.model;
 import com.aetherwars.interfaces.Hoverable;
-import com.aetherwars.interfaces.IRoundGetter;
+import com.aetherwars.interfaces.*;
 
 import java.util.Observable;
 
 import static com.aetherwars.model.Phase.*;
 import static com.aetherwars.model.Turn.*;
 
-public class GameState extends Observable implements IRoundGetter{
+public class GameState extends Observable implements IRoundGetter, IPhaseGetter {
     private Player player1;
     private Player player2;
     private int round;
