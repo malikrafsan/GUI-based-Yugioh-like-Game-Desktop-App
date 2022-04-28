@@ -95,20 +95,24 @@ public class CardManager {
         int nsm = 4+rand.nextInt(2+1);
         int nsl = 2+rand.nextInt(1+1);
 
-        for(int i=0; i<nc; i++) {
-            res.add(this.cards.get(rand.nextInt(ctC)));
-        }
-        for(int i=0; i<nsp; i++) {
-            res.add(this.cards.get(ctC+rand.nextInt(ctSP)));
-        }
-        for(int i=0; i<nss; i++) {
-            res.add(this.cards.get(ctC+ctSP+rand.nextInt(ctSS)));
-        }
-        for(int i=0; i<nsm; i++) {
-            res.add(this.cards.get(ctC+ctSP+ctSS+rand.nextInt(ctSM)));
-        }
-        for(int i=0; i<nsl; i++) {
-            res.add(this.cards.get(ctC+ctSP+ctSS+ctSM+rand.nextInt(ctSL)));
+        try {
+            for(int i=0; i<nc; i++) {
+                res.add(this.cards.get(rand.nextInt(ctC)));
+            }
+            for(int i=0; i<nsp; i++) {
+                res.add(this.cards.get(ctC+rand.nextInt(ctSP)));
+            }
+            for(int i=0; i<nss; i++) {
+                res.add(this.cards.get(ctC+ctSP+rand.nextInt(ctSS)));
+            }
+            for(int i=0; i<nsm; i++) {
+                res.add(this.cards.get(ctC+ctSP+ctSS+rand.nextInt(ctSM)));
+            }
+            for(int i=0; i<nsl; i++) {
+                res.add(this.cards.get(ctC+ctSP+ctSS+ctSM+rand.nextInt(ctSL)));
+            }
+        } catch(Exception e) {
+            System.out.println("In setupDeck: " + e );
         }
 
         Collections.shuffle(res);
