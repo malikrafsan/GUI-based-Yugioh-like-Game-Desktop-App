@@ -75,4 +75,8 @@ public class Player extends Observable{
         this.hovered = false;
         this.notifyObservers();
     }
+
+    public int getHealth() {
+        return this.health;
+    }
 }

@@ -100,6 +100,7 @@ public class PlayerBoardController implements Observer {
     private Label[] expLvlLbls;
 
     private int ID_BOARD;
+    private final int MAX_HEALTH_PLAYER = 80;
     private final String IMG_DIR_PATH = "/com/aetherwars/card/image/";
 
     private final String inactiveCardStyle = "-fx-border-color: black; -fx-border-width: 1px; -fx-border-radius: 16;";
@@ -308,6 +309,10 @@ public class PlayerBoardController implements Observer {
             } else {
                 this.unsetAllCardClickEffect();
             }
+        } else if (obs instanceof Player) {
+            Player p = (Player) obs;
+
+            this.updateProgressBar(p.getHealth(), this.MAX_HEALTH_PLAYER);
         }
     }
 }
