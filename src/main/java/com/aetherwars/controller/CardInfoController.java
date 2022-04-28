@@ -42,7 +42,8 @@ public class CardInfoController implements Observer {
             Image cardImage  = new Image(inputStream);
             this.card_img.setImage(cardImage);
         }
-        catch (Exception e){
+        catch (Exception e) {
+            System.out.println("CARD INFO CONTAINER ERROR");
             System.out.println(e);
         }
     }
@@ -56,7 +57,8 @@ public class CardInfoController implements Observer {
         try {
             this.card_img.setImage(null);
         }
-        catch (Exception e){
+        catch (Exception e) {
+            System.out.println("CARD INFO CONTAINER ERROR");
             System.out.println(e);
         }
     }

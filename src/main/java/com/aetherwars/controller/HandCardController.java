@@ -25,11 +25,14 @@ public class HandCardController {
 
     public void setCardImageView(String imagePath){
         try {
-            InputStream inputStream = getClass().getResourceAsStream(imagePath);
-            Image cardImage  = new Image(inputStream);
+            // InputStream inputStream = getClass().getResourceAsStream(imagePath);
+            File file = new File(getClass().getResource(imagePath).toURI());
+            Image cardImage  = new Image(file.toURI().toString());
             this.cardImageView.setImage(cardImage);
         }
-        catch (Exception e){
+        catch (Exception e) {
+            System.out.println("HAND CARD CONTROLLER ERROR");
+            System.out.println("IMAGEPATH: " + imagePath);
             System.out.println(e);
         }
     }

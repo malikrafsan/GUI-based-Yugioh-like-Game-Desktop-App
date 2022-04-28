@@ -69,6 +69,7 @@ public class SelectCardController implements Observer, ISubscriber {
             }
             this.currentSelectCardCount = 3;
         } catch (Exception e) {
+            System.out.println("SELECT CARD CONTROLLER ERROR");
             System.out.println(e);
         }
         testUpdateHandCards();

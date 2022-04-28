@@ -43,6 +43,7 @@ public class HandCardsContainerController {
             }
             this.currentActiveCardCount = 5;
         } catch (Exception e) {
+            System.out.println("HAND CARD CONTAINER CONTROLLER ERROR");
             System.out.println(e);
         }
         testUpdateHandCards();

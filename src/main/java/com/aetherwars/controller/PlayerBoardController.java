@@ -150,6 +150,7 @@ public class PlayerBoardController implements Observer {
             Image playerImg = new Image(file.toURI().toString());
             this.playerImageView.setImage(playerImg);
         } catch (Exception e) {
+            System.out.println("PLAYER BOARD CONTROLLER ERROR");
             System.out.println(e);
         }
 
@@ -268,6 +269,7 @@ public class PlayerBoardController implements Observer {
                 }
             }
         } catch (Exception e) {
+            System.out.println("PLAYER BOARD CONTROLLER ERROR");
             System.out.println(e);
         }
     }
