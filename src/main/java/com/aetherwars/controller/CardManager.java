@@ -13,11 +13,11 @@ import java.util.Random;
 
 public class CardManager {
     private List<Card> cards;
-    private static final String CHARACTER_PATH = "../card/data/character.csv";
-    private static final String SPELL_PTN_PATH = "../card/data/spell_ptn.csv";
-    private static final String SPELL_SWAP_PATH = "../card/data/spell_swap.csv";
-    private static final String SPELL_MORPH_PATH = "../card/data/spell_morph.csv";
-    private static final String SPELL_LVL_PATH = "../card/data/spell_lvl.csv";
+    private static final String CHARACTER_PATH = "/com/aetherwars/card/data/character.csv";
+    private static final String SPELL_PTN_PATH = "/com/aetherwars/card/data/spell_ptn.csv";
+    private static final String SPELL_SWAP_PATH = "/com/aetherwars/card/data/spell_swap.csv";
+    private static final String SPELL_MORPH_PATH = "/com/aetherwars/card/data/spell_morph.csv";
+    private static final String SPELL_LVL_PATH = "/com/aetherwars/card/data/spell_lvl.csv";
     private int ctC;
     private int ctSP;
     private int ctSS;
@@ -43,7 +43,7 @@ public class CardManager {
         CSVReader spellPtnReader = new CSVReader(spellPtnFile, "\t");
         CSVReader spellSwapReader = new CSVReader(spellSwapFile, "\t");
         CSVReader spellMorphReader = new CSVReader(spellMorphFile, "\t");
-        CSVReader spellLvlReader = new CSVReader(spellLvlFile, "\t");
+        CSVReader spellLvlReader = new CSVReader(spellLvlFile, ",");
 
         characterReader.setSkipHeader(true);
         spellPtnReader.setSkipHeader(true);
@@ -119,7 +119,5 @@ public class CardManager {
         for (int i = 0; i < res.size(); i++) {
             deck.addCard(res.get(i));
         }
-        System.out.println("FILLED DECK");
-        System.out.println(deck);
     }
 }

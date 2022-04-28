@@ -1,0 +1,3 @@
+id,name,description,imagepath,mana,levelUp
+41,levelUp,menaikkan level,card/image/spell/morph/Crybaby Dominion.png,-1,1
+42,levelDown,menurunkan level,card/image/spell/morph/Crybaby Dominion.png,-1,-1
