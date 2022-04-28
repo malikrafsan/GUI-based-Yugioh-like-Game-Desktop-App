@@ -46,13 +46,13 @@ public class BoardController implements Observer {
     @FXML private Button deleteBtn;
     @FXML private Pane boardPane;
 
-    private MockGameStateBoard mockGameState; // TODO: DELETE LATER
+    private final int MAX_CAP_DECK = 40;
 
     @FXML
     private void initialize() throws Exception{
-        // TODO: DELETE LATER
-        this.mockGameState = new MockGameStateBoard();
-        this.mockGameState.addObserver(this);
+        GameManager.getInstance().addObserver("GAMESTATE", this);
+        // GameManager.getInstance().addObserver("PLAYER1", this);
+        // GameManager.getInstance().addObserver("PLAYER2", this);
 
         FXMLLoader loaderCardInfo = new FXMLLoader(getClass().getResource("/view/CardInfo.fxml"));
         Pane cardInfo = loaderCardInfo.load();
@@ -84,17 +84,10 @@ public class BoardController implements Observer {
         this.deckValueLabel.setText("40/40");
         this.manaValueLabel.setText("2/2");
 
-        // TODO: DELETE LATER
-        MockGameStateBoard mgs = this.mockGameState;
-
         this.addExpBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 System.out.println("ADD EXP BUTTON CLICKED");
-
-                // TODO: DELETE LATER
-                Phase[] lst = new Phase[]{DRAW, PLANNING, ATTACK, END};
-                mgs.setPhase(lst[new Random().nextInt(lst.length)]);
             }
         });
 
@@ -102,10 +95,6 @@ public class BoardController implements Observer {
             @Override
             public void handle(MouseEvent event) {
                 System.out.println("DELETE BTN CLICKED");
-
-                // TODO: DELETE LATER
-                Phase[] lst = new Phase[]{DRAW, PLANNING, ATTACK, END};
-                mgs.setPhase(lst[new Random().nextInt(lst.length)]);
             }
         });
     }
@@ -124,11 +113,9 @@ public class BoardController implements Observer {
         if (obs instanceof IPhaseGetter) {
             IPhaseGetter gs = (IPhaseGetter) obs;
             System.out.println("PHASE: " + gs.getPhase());
-            if (gs.getPhase() == DRAW) {
-                System.out.println("HERE");
+            if (gs.getPhase() == DRAW && !gs.getHasPickCard()) {
                 drawPhaseBoard();
             } else {
-                System.out.println("THERE");
                 nonDrawPhaseBoard();
             }
         }
@@ -137,6 +124,7 @@ public class BoardController implements Observer {
 
 class MockGameStateBoard extends Observable implements IPhaseGetter {
     private Phase phase;
+    private boolean hasPickCard = false;
 
     public Phase getPhase() { return this.phase; }
 
@@ -145,5 +133,9 @@ class MockGameStateBoard extends Observable implements IPhaseGetter {
         System.out.println("CHANGING TO " + newPhase);
         setChanged();
         notifyObservers();
+    }
+
+    public boolean getHasPickCard() {
+        return this.hasPickCard;
     }
 }

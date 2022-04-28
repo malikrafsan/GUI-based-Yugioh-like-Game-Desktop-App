@@ -77,6 +77,7 @@ public class PhaseController implements Observer {
     //TODO : DELETE LATER
     private class MockPhaseGetter extends Observable implements IPhaseGetter{
         Phase currentPhase = Phase.DRAW;
+        boolean hasPickCard = false;
 
         public Phase getPhase(){
             System.out.println("CURRENT PHASE :" + currentPhase);
@@ -88,6 +89,10 @@ public class PhaseController implements Observer {
             System.out.println("CHANGING PHASE TO :" + currentPhase);
             setChanged();
             notifyObservers();
+        }
+
+        public boolean getHasPickCard() {
+            return this.hasPickCard;
         }
     }
 }

@@ -22,6 +22,7 @@ public class Deck extends Observable implements IPublisher {
     }
 
     public void pickCard() {
+        System.out.println("PUBLISHING PICK CARD");
         this.publish("PICKCARD", new PickCardEvent(this.getThreeCard()));
     }
 

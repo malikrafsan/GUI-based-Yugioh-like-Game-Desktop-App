@@ -62,8 +62,7 @@ public class SelectCardController implements Observer, ISubscriber {
                     public void handle(MouseEvent mouseEvent) {
                         System.out.println("CARD " + finalI + " IS CLICKED");
                         // TODO : CALL GAME MANAGER FOR PICKING CARD
-                        
-                        THIS.nonDrawPhaseSelectCard();
+                        GameManager.getInstance().clickPickCard(finalI);
                     }
                 });
             }
@@ -108,6 +107,7 @@ public class SelectCardController implements Observer, ISubscriber {
     public void onEvent(IEvent event) {
         if (event instanceof PickCardEvent) {
             PickCardEvent pickCardEvent = (PickCardEvent) event;
+            System.out.println("ON EVENT PICK CARD");
             updateSelectCards(pickCardEvent.getData());
         }
     }
@@ -115,9 +115,12 @@ public class SelectCardController implements Observer, ISubscriber {
         if (obs instanceof IPhaseGetter) {
             IPhaseGetter gs = (IPhaseGetter) obs;
             System.out.println("PHASE: " + gs.getPhase());
-            if (gs.getPhase() == DRAW) {
+            System.out.println("HAS PICK CARD: " + (gs.getHasPickCard() ? " YES" : "NO"));
+            if (gs.getPhase() == DRAW && !gs.getHasPickCard()) {
                 System.out.println("HERE");
                 drawPhaseSelectCard();
+            } else {
+                nonDrawPhaseSelectCard();
             }
         }
     }
@@ -140,6 +143,7 @@ public class SelectCardController implements Observer, ISubscriber {
 
 class MockGameStateSelectCard extends Observable implements IPhaseGetter {
     private Phase phase;
+    private boolean hasPickCard;
 
     public Phase getPhase() { return this.phase; }
 
@@ -148,6 +152,10 @@ class MockGameStateSelectCard extends Observable implements IPhaseGetter {
         System.out.println("CHANGING TO " + newPhase);
         setChanged();
         notifyObservers();
+    }
+
+    public boolean getHasPickCard() {
+        return this.hasPickCard;
     }
 }
 

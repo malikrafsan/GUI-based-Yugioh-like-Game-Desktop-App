@@ -77,14 +77,23 @@ public class GameManager {
 
     public void click(int player, String name, int index) {
         ClickObject prevClicked = new ClickObject();
-        prevClicked.setClickObject(gs.getClickObject().getPlayer(), gs.getClickObject().getName(), gs.getClickObject().getIndex());
-        gs.setClickObject(player,name,index);
+        prevClicked.setClickObject(gs.getClickObject().getPlayer(), gs.getClickObject().getName(),
+                gs.getClickObject().getIndex());
+        gs.setClickObject(player, name, index);
 
-        if(gs.getClickObject().getName().equals("ACTIVECHAR")) {
+        if (gs.getClickObject().getName().equals("ACTIVECHAR")) {
             clickedActChar(prevClicked);
-        } else if(gs.getClickObject().getName().equals("PLAYER")) {
+        } else if (gs.getClickObject().getName().equals("PLAYER")) {
             clickedPlayer(prevClicked);
         }
+    }
+    
+    public void clickPickCard(int idx) {
+        // TODO: recheck lagi yaa, kalau semisal butuh data parameter tambahan
+
+        // TODO: tambah fungsionalitas add card into handcard
+        this.gs.setHasPickCard(true);
+        System.out.println("PICK CARD WITH IDX " + idx);
     }
 
     public void clickedActChar(ClickObject prevClicked) {

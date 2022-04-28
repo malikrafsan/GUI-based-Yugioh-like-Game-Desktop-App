@@ -15,6 +15,7 @@ public class GameState extends Observable implements IRoundGetter, IPhaseGetter 
     private Turn turn;
     private Hoverable hoveredObject;
     private ClickObject clickObject;
+    private boolean hasPickCard;
 
     public GameState() {
         this.player1 = new Player();
@@ -23,12 +24,21 @@ public class GameState extends Observable implements IRoundGetter, IPhaseGetter 
         this.phase = DRAW;
         this.turn = PLAYER1;
         this.clickObject = new ClickObject();
+        this.hasPickCard = false;
     }
 
     public void sync() {
         setChanged();
         notifyObservers();
     }
+
+    public void setHasPickCard(boolean hasPickCard) {
+        this.hasPickCard = hasPickCard;
+        setChanged();
+        notifyObservers();
+    }
+
+    public boolean getHasPickCard() { return this.hasPickCard; }
 
     public void setHoverObject(Hoverable hoverable){
         this.hoveredObject = hoverable;
@@ -58,6 +68,7 @@ public class GameState extends Observable implements IRoundGetter, IPhaseGetter 
             case END:
                 this.phase = DRAW;
                 this.nextTurn();
+                this.setHasPickCard(false);
                 break;  
         }
         setChanged();
