@@ -15,6 +15,22 @@ public class HandCard extends Observable {
         }
     }
 
+    public void addCard(Card card) {
+        if (this.size == 5) {
+            // throw exception untuk lanjut ke pembuangan
+        }
+
+        for (int i=0; i<5; i++) {
+            if (this.handCard[i] == null) {
+                this.handCard[i] = card;
+                this.size++;
+                this.setChanged();
+                this.notifyObservers();
+                break;
+            }
+        }
+    }
+
     public void addCard(Card card, int idx) {
         this.handCard[idx] = card;
         this.size++;
