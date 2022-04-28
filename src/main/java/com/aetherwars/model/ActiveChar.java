@@ -172,21 +172,21 @@ public class ActiveChar implements IActiveCharGetter, Hoverable {
         List<Pair<String,String>> res = new ArrayList<>();
         List<Pair<String,String>> temp = this.card.displayInfo();
         for (Pair<String,String> p: temp) {
-            if (p.getKey().equals("Attack")) {
-                if (this.attackPlus != 0) {
-                    res.add(new Pair<>("Attack", p.getValue() + " (+" + this.attackPlus + ")"));
-                } else {
-                    res.add(p);
-                }
-            } else if (p.getKey().equals("Health")) {
-                if (this.attackPlus != 0) {
-                    res.add(new Pair<>("Health", p.getValue() + " (+" + this.healthPlus + ")"));
-                } else {
-                    res.add(p);
-                }
-            } else {
-                res.add(p);
-            }
+//            if (p.getKey().equals("Attack")) {
+//                if (this.attackPlus != 0) {
+//                    res.add(new Pair<>("Attack", p.getValue() + " (+" + this.attackPlus + ")"));
+//                } else {
+//                    res.add(p);
+//                }
+//            } else if (p.getKey().equals("Health")) {
+//                if (this.attackPlus != 0) {
+//                    res.add(new Pair<>("Health", p.getValue() + " (+" + this.healthPlus + ")"));
+//                } else {
+//                    res.add(p);
+//                }
+//            } else {
+//                res.add(p);
+//            }
         }
         return res;
     }

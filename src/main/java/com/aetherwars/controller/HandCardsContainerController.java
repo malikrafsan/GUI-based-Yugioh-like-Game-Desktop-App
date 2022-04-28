@@ -71,6 +71,7 @@ public class HandCardsContainerController {
             this.handCards[i].setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
+                    // TODO: DELETE LATER
                     for (int j = 0; j < 5; j++){
                         if (finalI == j){
                             setCardClickEffect(j);
@@ -137,13 +138,8 @@ public class HandCardsContainerController {
         }
     }
 
-//    public void setAppController(AppController appController){
-//        this.appController = appController;
-//    }
 
-    public void setClickEffect(int idx){
 
-    }
 
 
     public void update(Observable obs, Object obj) {
