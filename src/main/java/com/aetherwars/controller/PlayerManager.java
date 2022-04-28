@@ -3,13 +3,11 @@ package com.aetherwars.controller;
 import com.aetherwars.model.*;
 
 public class PlayerManager {
-    private GameManager gm;
     private CardManager cm;
     private Player p;
 
     public PlayerManager(Player p, CardManager cm) {
         this.p = p;
-        this.gm = gm.getInstance();
         this.cm = cm;
         cm.setupDeck(p.getDeck());
     }
@@ -86,13 +84,13 @@ public class PlayerManager {
     public void hoverHand(int idx_hand) {
         Card c = p.getHand().getCard(idx_hand);
         // panggil hover kali
-        gm.hover(p.getHand().getCard(idx_hand));
+        GameManager.getInstance().hover(p.getHand().getCard(idx_hand));
     }
 
     public void hoverBoard(int idx_board) {
         ActiveChar ac = p.getActiveChars().getActChar(idx_board);
         ac.onHover();
-        gm.hover(p.getActiveChars().getActChar(idx_board));
+        GameManager.getInstance().hover(p.getActiveChars().getActChar(idx_board));
     }
 
 //    public void minusHealth(Double x) {
