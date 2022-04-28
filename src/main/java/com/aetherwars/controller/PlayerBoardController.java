@@ -119,7 +119,15 @@ public class PlayerBoardController implements Observer {
         GameManager.getInstance().addObserver("GAMESTATE", this);
 
         this.activeCards = new ImageView[] { activeCard1, activeCard2, activeCard3, activeCard4, activeCard5 };
-        String playerImgPath = "character/Villager.png";
+
+        String playerImgPath;
+        if (ID_BOARD == 1){
+            playerImgPath = "player/steve.jpeg";
+        }
+        else {
+            playerImgPath = "player/alex.jpeg";
+        }
+
         //        String[] cardImgPaths = new String[]{"character/Zombie.png", null, "character/Skeleton.png", null, "character/Ghast.png"};
 
         int boardID = this.ID_BOARD;
