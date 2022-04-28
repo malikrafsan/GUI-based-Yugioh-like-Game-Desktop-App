@@ -71,7 +71,7 @@ public class SelectCardController implements Observer, ISubscriber {
             System.out.println("SELECT CARD CONTROLLER ERROR");
             System.out.println(e);
         }
-        testUpdateHandCards();
+        // testUpdateHandCards();
         setPlayer(1);
     }
 

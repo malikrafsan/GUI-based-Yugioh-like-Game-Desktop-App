@@ -46,7 +46,7 @@ public class HandCardsContainerController {
             System.out.println("HAND CARD CONTAINER CONTROLLER ERROR");
             System.out.println(e);
         }
-        testUpdateHandCards();
+        // testUpdateHandCards();
         enableMouseHover();
 //        disableMouseHover();
     }
