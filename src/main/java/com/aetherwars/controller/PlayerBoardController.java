@@ -325,7 +325,7 @@ public class PlayerBoardController implements Observer {
             if (gs.getTurn() == turns[this.ID_BOARD - 1]) {
                 this.setPlayerCardTurnEffect();
             } else {
-                this.unsetAllCardClickEffect();
+                this.unsetPlayerCardTurnEffect();
             }
         } else if (obs instanceof Player) {
             Player p = (Player) obs;
