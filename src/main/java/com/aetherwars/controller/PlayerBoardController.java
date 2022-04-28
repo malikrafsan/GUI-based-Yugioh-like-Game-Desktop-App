@@ -140,6 +140,8 @@ public class PlayerBoardController implements Observer {
             public void handle(MouseEvent event) {
                 System.out.println("PLAYER " + boardID + " ICON MOUSE CLICK EVENT DETECTED");
 
+                GameManager.getInstance().click(boardID, "PLAYER", 0);
+
                 // TODO: DELETE LATER
                 p.updateActiveChars(p.mockActiveCharsData());
                 p.updateProgressBar(new Random().nextInt(80), 80);
@@ -173,10 +175,15 @@ public class PlayerBoardController implements Observer {
             int boardId = this.ID_BOARD;
             Pane pane = (Pane) this.activeCards[i].getParent().getParent();
 
+            ImageView cardImg = this.activeCards[i];
             this.activeCards[i].setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
                     System.out.println("CARD " + (finalI + 1) + " FROM PLAYER " + boardId + " IS CLICKED");
+
+                    if (cardImg.getImage() != null) {
+                        GameManager.getInstance().click(boardId, "ACTIVECHAR", finalI);
+                    }
 
                     // TODO: DELETE LATER
                     t.setCardClickEffect(finalI);
@@ -186,23 +193,29 @@ public class PlayerBoardController implements Observer {
             this.activeCards[i].setOnMouseEntered(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
-                    Background bg = new Background(new BackgroundFill(Color.MEDIUMVIOLETRED, null, null));
-                    pane.setBackground(bg);
-                    System.out.println("CARD " + (finalI + 1) + " FROM PLAYER " + boardId + " IS HOVERED");
+                    if (cardImg.getImage() != null) {
+                        Background bg = new Background(new BackgroundFill(Color.MEDIUMVIOLETRED, null, null));
+                        pane.setBackground(bg);
+                        System.out.println("CARD " + (finalI + 1) + " FROM PLAYER " + boardId + " IS HOVERED");
+    
+                        GameManager.getInstance().hoverBoard(finalI,boardID);
+                    }
                 }
             });
 
             this.activeCards[i].setOnMouseExited(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
-                    Background bg = new Background(new BackgroundFill(null, null, null));
-                    pane.setBackground(bg);
-                    System.out.println("CARD " + (finalI + 1) + " NO LONGER HOVERED");
+                    if (cardImg.getImage() != null) {
+                        Background bg = new Background(new BackgroundFill(null, null, null));
+                        pane.setBackground(bg);
+                        System.out.println("CARD " + (finalI + 1) + " NO LONGER HOVERED");
+    
+                        GameManager.getInstance().unhover();
+                    }
                 }
             });
         }
-
-        this.updateActiveChars(this.mockActiveCharsData());
 
         int health = 50;
         int maxHealth = 80;
