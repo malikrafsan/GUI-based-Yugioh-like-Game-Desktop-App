@@ -85,6 +85,6 @@
                 <ImageView fx:id="playerImageView" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-color: black;" BorderPane.alignment="CENTER" />
             </center>
         </BorderPane>
-      <Label fx:id="playerLabel" ellipsisString="" layoutX="427.0" layoutY="43.0" prefHeight="18.0" prefWidth="49.0" text="Alex [xx]" textAlignment="RIGHT" />
+      <Label fx:id="playerLabel" ellipsisString="" layoutX="427.0" layoutY="43.0" prefHeight="18.0" text="Alex [xx]" textAlignment="RIGHT" />
     </children>
 </AnchorPane>

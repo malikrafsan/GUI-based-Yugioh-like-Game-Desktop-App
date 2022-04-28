@@ -85,6 +85,6 @@
             <Label fx:id="expLvlLbl5" alignment="CENTER" layoutX="14.0" layoutY="79.0" prefHeight="18.0" prefWidth="71.0" textAlignment="CENTER" />
          </children>
       </Pane>
-      <Label fx:id="playerLabel" layoutX="14.0" layoutY="42.0" prefHeight="18.0" prefWidth="71.0" text="Steve [xx]" />
+      <Label fx:id="playerLabel" layoutX="14.0" layoutY="42.0" prefHeight="18.0" text="Steve [xx]" />
    </children>
 </AnchorPane>
