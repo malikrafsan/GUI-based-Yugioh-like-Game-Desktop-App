@@ -50,6 +50,10 @@ public class ActiveChar implements IActiveCharGetter, Hoverable {
         this.health = this.health + this.card.getHealthUp();
     }
 
+    public void addSpellPotion(SpellPotionCard card) {
+        this.spellsPotionList.add(new ActiveSpellsPotion(card));
+    }
+
     public void onClick() {
         this.clicked = true;
     }
@@ -91,6 +95,10 @@ public class ActiveChar implements IActiveCharGetter, Hoverable {
         }
     }
 
+    public void levelUpSpell(SpellLevelCard card) {
+
+    }
+
     public void newRound() {
         this.isCanAttack = true;
     }
@@ -99,21 +107,29 @@ public class ActiveChar implements IActiveCharGetter, Hoverable {
         this.isCanAttack = false;
     }
 
-    public int getHealthPotion() {
-        int total = 0;
+    public double getHealthPotion() {
+        double total = 0;
         for (int i = 0; i < this.spellsPotionList.size(); i++) {
             total += this.spellsPotionList.get(i).getHealthPotion();
         }
         return total;
     }
 
-    public int getAttackPotion() {
-        int total = 0;
+    public double getAttackPotion() {
+        double total = 0;
         for (int i = 0; i < this.spellsPotionList.size(); i++) {
             total += this.spellsPotionList.get(i).getAttackPotion();
         }
         return total;
     }
+
+    public double getBaseHealth() { return (this.card.getHealth());}
+
+    public double getBaseAttack() { return (this.card.getAttack());}
+
+    public double getHealthPlus() { return (this.health - this.getBaseHealth());}
+
+    public double getAttackPlus() { return (this.attack - this.getBaseAttack());}
 
     public boolean canAttack() { return (this.isCanAttack); }
 
