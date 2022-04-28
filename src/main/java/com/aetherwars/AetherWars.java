@@ -14,6 +14,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import com.aetherwars.util.CSVReader;
+import com.aetherwars.controller.*;
 
 public class AetherWars extends Application {
   private static final String CHARACTER_CSV_FILE_PATH = "card/data/character.csv";
@@ -21,6 +22,8 @@ public class AetherWars extends Application {
   @Override
   public void start(Stage stage) throws Exception {
     Parent root = FXMLLoader.load(getClass().getResource("/view/App.fxml"));
+    GameManager.getInstance().syncAll();
+
     stage.setScene(new Scene(root));
     stage.show();
   }

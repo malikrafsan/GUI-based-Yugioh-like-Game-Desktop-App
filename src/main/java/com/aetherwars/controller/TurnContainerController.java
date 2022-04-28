@@ -13,10 +13,11 @@ public class TurnContainerController implements Observer {
     @FXML private Text turnCounter;
 
     @FXML private void initialize() {
+        GameManager.getInstance().addObserver("GAMESTATE", this);
 
         this.turnCounter.setText("Turn:\n");
 
-        // TODO: delete later and
+        // TODO: delete later
         this.updateTurn(this.mockRoundGameState());
         TurnContainerController t = this;
         this.turnCounter.setOnMouseClicked(new EventHandler<MouseEvent>() {

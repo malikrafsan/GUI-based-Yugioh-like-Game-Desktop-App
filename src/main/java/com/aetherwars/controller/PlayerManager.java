@@ -29,25 +29,26 @@ public class PlayerManager {
     public void handToBoard(int idx_hand, int idx_board) {
         Card c = p.getHand().getCard(idx_hand);
         ActiveChar ac = p.getActiveChars().getActChar(idx_board);
-        if(c.getMana()<= p.getMana()) {
-            if(c instanceof SpellCard) {
-                if(ac != null) {
-                    System.out.println("apply spell c to ac");
-                    // TODO:pake activeChar manager
-                } else {
-                    System.out.println("Selected board is empty");
-                }
-            } else if(c instanceof CharacterCard) {
-                if(ac == null) {
-                    summon(idx_hand, idx_board);
-                } else {
-                    System.out.println("Selected board is already occupied");
+        if(c instanceof SpellCard) {
+            if(ac != null) {
+                System.out.println("apply spell c to ac");
+                // TODO:pake activeChar manager, kurangin mana, cek ada mana, trs notify jg
+                SpellCard sc = (SpellCard) p.getHand().takeCard(idx_hand);
+//                    ac.addSpell(new ActiveSpell((SpellCard) sc));
+                if(canGiveSpell(sc, ac.getLevel())) {
+                    ;
                 }
             } else {
-                System.out.println("not recognized card");
+                System.out.println("Selected board is empty");
+            }
+        } else if(c instanceof CharacterCard) {
+            if(ac == null && c.getMana() <= p.getMana()) {
+                summon(idx_hand, idx_board);
+            } else {
+                System.out.println("Selected board is already occupied or mana is not enough");
             }
         } else {
-            System.out.println("Not enough mana");
+            System.out.println("not recognized card");
         }
     }
 
@@ -55,9 +56,25 @@ public class PlayerManager {
         return p.getActiveChars().getActChar(idx_board) != null;
     }
 
-    public boolean canGiveSpellAt(int idx_hand) {
+    public boolean canGiveSpellAt(int idx_hand, int levelActChar) {
         Card c = p.getHand().getCard(idx_hand);
-        return c instanceof SpellCard && p.getMana()>=c.getMana();
+        return c instanceof SpellCard && p.getMana()>=c.getMana() && canGiveSpell((SpellCard) c, levelActChar);
+    }
+
+    public boolean canGiveSpell(SpellCard sc, int levelActChar) {
+        if(sc instanceof SpellLevelCard) {
+            return p.getMana()>= (levelActChar+1)/2;
+        } else {
+            return p.getMana()>=sc.getMana();
+        }
+    }
+
+    public int getMana(SpellCard sc, int levelActChar) {
+        if(sc instanceof SpellLevelCard) {
+            return (levelActChar+1)/2;
+        } else {
+            return sc.getMana();
+        }
     }
 
     public SpellCard takeSpellAt(int idx_hand) {
@@ -67,6 +84,11 @@ public class PlayerManager {
     public void receiveSpell(SpellCard sc, int idx_board) {
 //        p.getActiveChars().getActChar(idx_board).addSpell(new ActiveSpell(sc));
         ;
+    }
+
+    public void giveSpell(SpellCard sc, ActiveChar ac) {
+//        ac.addSpell(new ActiveSpell(sc));
+        // TODO:kurangin mana
     }
 
     public void useMana(int x) {

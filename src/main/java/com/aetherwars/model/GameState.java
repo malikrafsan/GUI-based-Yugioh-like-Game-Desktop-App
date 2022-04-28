@@ -96,6 +96,8 @@ public class GameState extends Observable implements IRoundGetter{
 
     public void setHoveredObject(Hoverable hoveredObject) {
         this.hoveredObject = hoveredObject;
+        setChanged();
+        notifyObservers();
     }
 
     public ClickObject getClickObject() { return clickObject; }

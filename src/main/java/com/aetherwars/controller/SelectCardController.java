@@ -194,7 +194,7 @@ class MockDeck implements IPublisher {
 
         for (int i=0;i<3;i++) {
             if (rand.nextDouble() > 0.5) {
-                lst.add(new CharacterCard(rand.nextInt(), "INI NAMA" + rand.nextInt(), types[rand.nextInt(types.length)], "...", imgPaths[rand.nextInt(imgPaths.length)], rand.nextInt(), rand.nextInt(), rand.nextInt(), rand.nextInt(), rand.nextInt()));
+                lst.add(new CharacterCard(rand.nextInt(10), "INI NAMA" + rand.nextInt(10), types[rand.nextInt(types.length)], "...", imgPaths[rand.nextInt(imgPaths.length)], rand.nextInt(10), rand.nextInt(10), rand.nextInt(10), rand.nextInt(10), rand.nextInt(10)));
             } else {
                 if (rand.nextDouble() > 0.5) {
                     lst.add(new SpellMorphCard(2, "Sugondese", "...", "/com/aetherwars/card/image/spell/morph/Sugondese.png", 7, 2));

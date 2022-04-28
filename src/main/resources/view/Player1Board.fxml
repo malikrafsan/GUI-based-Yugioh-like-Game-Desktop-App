@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane id="1" fx:id="playerBoardContainer" prefHeight="286.0" prefWidth="490.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aetherwars.controller.PlayerBoardController">
+<AnchorPane id="1" fx:id="playerBoardContainer" prefHeight="286.0" prefWidth="490.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aetherwars.controller.PlayerBoardController">
    <children>
       <ProgressBar fx:id="progressBar" layoutY="14.0" prefHeight="20.0" prefWidth="455.0" progress="0.0" />
       <BorderPane layoutX="14.0" layoutY="99.0" prefHeight="100.0" prefWidth="100.0" style="-fx-border-color: black; -fx-border-radius: 16;">
@@ -85,5 +85,6 @@
             <Label fx:id="expLvlLbl5" alignment="CENTER" layoutX="14.0" layoutY="79.0" prefHeight="18.0" prefWidth="71.0" textAlignment="CENTER" />
          </children>
       </Pane>
+      <Label fx:id="playerLabel" layoutX="14.0" layoutY="42.0" prefHeight="18.0" prefWidth="71.0" text="Steve [xx]" />
    </children>
 </AnchorPane>

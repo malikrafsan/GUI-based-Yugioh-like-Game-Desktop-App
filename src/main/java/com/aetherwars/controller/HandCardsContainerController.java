@@ -59,6 +59,7 @@ public class HandCardsContainerController {
                     handCards[finalI].setBackground(hoverBackground);
                     System.out.println("HAND CARD " + finalI + " IS HOVERED");
 
+                    GameManager.getInstance().hoverHand(finalI);
                 }
             });
             this.handCards[i].setOnMouseExited(new EventHandler<MouseEvent>() {
@@ -66,11 +67,15 @@ public class HandCardsContainerController {
                 public void handle(MouseEvent event) {
                     handCards[finalI].setBackground(normalBackground);
                     System.out.println("HAND CARD " + finalI + " NO LONGER LONGER HOVERED");
+
+                    GameManager.getInstance().unhover();
                 }
             });
             this.handCards[i].setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
+                    GameManager.getInstance().click(-1, "HANDCARD", finalI);
+
                     // TODO: DELETE LATER
                     for (int j = 0; j < 5; j++){
                         if (finalI == j){

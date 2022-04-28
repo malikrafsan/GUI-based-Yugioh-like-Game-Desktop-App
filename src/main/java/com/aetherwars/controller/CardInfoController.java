@@ -62,9 +62,10 @@ public class CardInfoController implements Observer {
     }
 
     public void update(Observable obs, Object obj){
-        if (obs instanceof GameState){
+        if (obs instanceof GameState) {
             GameState gs = (GameState) obs;
             Hoverable h = gs.getHoverObject();
+
             if (h != null){
                 setCardInfo(h);
             }
@@ -76,6 +77,7 @@ public class CardInfoController implements Observer {
 
 
     @FXML public void initialize(){
-        this.attrLabel = new Label[]{attr1Label, attr2Label, attr3Label, attr4Label, attr5Label};
+        this.attrLabel = new Label[] { attr1Label, attr2Label, attr3Label, attr4Label, attr5Label };
+        GameManager.getInstance().addObserver("GAMESTATE", this);
     }
 }
