@@ -39,9 +39,9 @@ public class HandCardsContainerController {
                 FXMLLoader loaderHandCard = new FXMLLoader(getClass().getResource("/view/HandCard.fxml"));
                 this.handCards[i] = loaderHandCard.load();
                 this.handCardControllers[i] = loaderHandCard.getController();
-                this.cardContainer.getChildren().add(this.handCards[i]);
+//                this.cardContainer.getChildren().add(this.handCards[i]);
             }
-            this.currentActiveCardCount = 5;
+            this.currentActiveCardCount = 0;
         } catch (Exception e) {
             System.out.println("HAND CARD CONTAINER CONTROLLER ERROR");
             System.out.println(e);
@@ -121,10 +121,10 @@ public class HandCardsContainerController {
 
     private ArrayList<Card> cards = new ArrayList<>();
     private void testUpdateHandCards(){
-        cards.add(new CharacterCard(1, "Shulker", CharType.END, "Shulkers are box-shaped hostile mobs found in end cities.", "/com/aetherwars/card/image/character/Shulker.png", 10, 5, 3, 4, 3));
-        cards.add(new CharacterCard(2, "Zombie", CharType.OVERWORLD, "Zombies are common undead hostile mobs that deal melee damage and attack in groups.", "/com/aetherwars/card/image/character/Zombie.png", 8, 4, 1, 4, 3));
-        cards.add(new SpellMorphCard(2, "Sugondese", "Nuts", "/com/aetherwars/card/image/spell/morph/Sugondese.png", 7, 2));
-        cards.add(new SpellPotionCard(1, "Sadikin Elixir", "The best elixir in the world", "/com/aetherwars/card/image/spell/potion/Sadikin Elixir.png", 3, 5, 1, 5));
+        cards.add(new CharacterCard(1, "Shulker", CharType.END, "Shulkers are box-shaped hostile mobs found in end cities.", "card/image/character/Shulker.png", 10, 5, 3, 4, 3));
+        cards.add(new CharacterCard(2, "Zombie", CharType.OVERWORLD, "Zombies are common undead hostile mobs that deal melee damage and attack in groups.", "card/image/character/Zombie.png", 8, 4, 1, 4, 3));
+        cards.add(new SpellMorphCard(2, "Sugondese", "Nuts", "card/image/spell/morph/Sugondese.png", 7, 2));
+        cards.add(new SpellPotionCard(1, "Sadikin Elixir", "The best elixir in the world", "card/image/spell/potion/Sadikin Elixir.png", 3, 5, 1, 5));
         //cards.add(new CharacterCard(1, "Shulker", CharType.END, "...", "card/data/image/character/Shulker.png", 10, 5, 2, 4, 3));
         updateHandCards(cards);
     }

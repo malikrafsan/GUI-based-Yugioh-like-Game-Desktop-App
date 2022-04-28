@@ -6,6 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane id="1" fx:id="playerBoardContainer" prefHeight="286.0" prefWidth="490.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aetherwars.controller.PlayerBoardController">
    <children>
@@ -85,6 +86,9 @@
             <Label fx:id="expLvlLbl5" alignment="CENTER" layoutX="14.0" layoutY="79.0" prefHeight="18.0" prefWidth="71.0" textAlignment="CENTER" />
          </children>
       </Pane>
-      <Label fx:id="playerLabel" layoutX="14.0" layoutY="42.0" prefHeight="18.0" prefWidth="71.0" text="Steve [xx]" />
+      <Label fx:id="playerLabel" layoutX="14.0" layoutY="42.0" prefHeight="18.0" prefWidth="71.0" text="Steve [xx]">
+         <font>
+            <Font size="16.0" />
+         </font></Label>
    </children>
 </AnchorPane>

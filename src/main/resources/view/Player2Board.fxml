@@ -6,6 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane id="2" fx:id="playerBoardContainer" prefHeight="286.0" prefWidth="490.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aetherwars.controller.PlayerBoardController">
     <children>
@@ -85,6 +86,9 @@
                 <ImageView fx:id="playerImageView" fitHeight="85.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-color: black;" BorderPane.alignment="CENTER" />
             </center>
         </BorderPane>
-      <Label fx:id="playerLabel" ellipsisString="" layoutX="427.0" layoutY="43.0" prefHeight="18.0" text="Alex [xx]" textAlignment="RIGHT" />
+      <Label fx:id="playerLabel" ellipsisString="" layoutX="418.0" layoutY="43.0" prefHeight="18.0" text="Alex [xx]" textAlignment="RIGHT">
+         <font>
+            <Font size="16.0" />
+         </font></Label>
     </children>
 </AnchorPane>

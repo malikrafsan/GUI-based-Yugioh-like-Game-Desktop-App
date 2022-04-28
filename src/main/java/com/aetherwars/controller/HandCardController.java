@@ -26,7 +26,7 @@ public class HandCardController {
     public void setCardImageView(String imagePath){
         try {
             // InputStream inputStream = getClass().getResourceAsStream(imagePath);
-            File file = new File(getClass().getResource(imagePath).toURI());
+            File file = new File(getClass().getResource("/com/aetherwars/" +imagePath).toURI());
             Image cardImage  = new Image(file.toURI().toString());
             this.cardImageView.setImage(cardImage);
         }
