@@ -141,15 +141,6 @@ public class PlayerBoardController implements Observer {
                 System.out.println("PLAYER " + boardID + " ICON MOUSE CLICK EVENT DETECTED");
 
                 GameManager.getInstance().click(boardID, "PLAYER", 0);
-
-                // TODO: DELETE LATER
-                p.updateActiveChars(p.mockActiveCharsData());
-                p.updateProgressBar(new Random().nextInt(80), 80);
-                if (new Random().nextDouble() > 0.5) {
-                    p.setPlayerCardTurnEffect();
-                } else {
-                    p.unsetPlayerCardTurnEffect();
-                }
             }
         });
 
@@ -167,9 +158,6 @@ public class PlayerBoardController implements Observer {
         this.dfnIcons = new ImageView[] { dfnIcon1, dfnIcon2, dfnIcon3, dfnIcon4, dfnIcon5 };
         this.expLvlLbls = new Label[] { expLvlLbl1, expLvlLbl2, expLvlLbl3, expLvlLbl4, expLvlLbl5 };
 
-        // TODO: DELETE LATER
-        PlayerBoardController t = this;
-
         for (int i = 0; i < this.activeCards.length; i++) {
             int finalI = i;
             int boardId = this.ID_BOARD;
@@ -184,9 +172,6 @@ public class PlayerBoardController implements Observer {
                     if (cardImg.getImage() != null) {
                         GameManager.getInstance().click(boardId, "ACTIVECHAR", finalI);
                     }
-
-                    // TODO: DELETE LATER
-                    t.setCardClickEffect(finalI);
                 }
             });
 
