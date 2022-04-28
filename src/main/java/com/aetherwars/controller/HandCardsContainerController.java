@@ -28,6 +28,10 @@ public class HandCardsContainerController {
     private final Background hoverBackground = new Background(new BackgroundFill(Color.LIGHTCORAL, null, null));
     private final Background normalBackground = new Background(new BackgroundFill(null, null, null));
 
+    private final String inactiveCardStyle = "-fx-border-color: black; -fx-border-width: 1px";
+    private final String activeCardStyle = "-fx-border-color: red; -fx-border-width: 3px";
+
+
     @FXML
     private void initialize(){
         try {
@@ -54,7 +58,6 @@ public class HandCardsContainerController {
                 public void handle(MouseEvent event) {
                     handCards[finalI].setBackground(hoverBackground);
                     System.out.println("HAND CARD " + finalI + " IS HOVERED");
-                    handleHoverCard(finalI);
 
                 }
             });
@@ -68,15 +71,31 @@ public class HandCardsContainerController {
             this.handCards[i].setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
-
+                    for (int j = 0; j < 5; j++){
+                        if (finalI == j){
+                            setCardClickEffect(j);
+                        }
+                        else {
+                            unsetCardClickEffect(j);
+                        }
+                    }
                 }
             });
         }
     }
 
-    // TODO: implements in game manager
-    public void handleHoverCard(int idx){
-//        appController.setCardInfo(this.cards.get(idx));
+    private void setCardClickEffect(int idx){
+        handCards[idx].styleProperty().setValue(activeCardStyle);
+    }
+
+    private void unsetCardClickEffect(int idx){
+        handCards[idx].styleProperty().setValue(inactiveCardStyle);
+    }
+
+    private void unsetAllCardClickEffect(){
+        for (int i = 0; i < 5; i++){
+            unsetCardClickEffect(i);
+        }
     }
 
 
@@ -130,7 +149,7 @@ public class HandCardsContainerController {
     public void update(Observable obs, Object obj) {
 
 //        if (obs instanceof ClickObject) {
-//            this.clearClickEffect();
+//            this.unsetAllCardClickEffect();
 //            ClickObject c = (ClickObject) obs;
 //            if (c.getType().equal("HANDCARD") && c.getPlayerNo() == this.playerNo) {
 //                this.setClickEffect(c.getIdx());

@@ -28,6 +28,9 @@ public class SelectCardController implements Observer, ISubscriber {
     private HandCardController[] cardController = new HandCardController[3];
     private AppController appController;
     private Integer currentSelectCardCount;
+    private final Background hoverBackground = new Background(new BackgroundFill(Color.LIGHTCORAL, null, null));
+    private final Background normalBackground = new Background(new BackgroundFill(null, null, null));
+
     private MockGameStateSelectCard mockGameState; // TODO: DELETE LATER
 
     @FXML
@@ -47,16 +50,14 @@ public class SelectCardController implements Observer, ISubscriber {
                 this.cardsToSelect[i].setOnMouseEntered(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent event) {
-                        Background bg = new Background(new BackgroundFill(Color.MEDIUMVIOLETRED, null, null));
-                        cardsToSelect[finalI - 1].setBackground(bg);
+                        cardsToSelect[finalI - 1].setBackground(hoverBackground);
                         System.out.println("CARD " + finalI + " IS HOVERED");
                     }
                 });
                 this.cardsToSelect[i].setOnMouseExited(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent event) {
-                        Background bg = new Background(new BackgroundFill(null, null, null));
-                        cardsToSelect[finalI - 1].setBackground(bg);
+                        cardsToSelect[finalI - 1].setBackground(normalBackground);
                         System.out.println("CARD " + finalI + " IS NO LONGER LONGER HOVERED");
                     }
                 });
