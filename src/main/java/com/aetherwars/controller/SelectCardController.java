@@ -26,21 +26,25 @@ public class SelectCardController implements Observer, ISubscriber {
     @FXML private Label playerLabel;
     private Pane[] cardsToSelect = new Pane[3];
     private HandCardController[] cardController = new HandCardController[3];
-    private AppController appController;
     private Integer currentSelectCardCount;
     private final Background hoverBackground = new Background(new BackgroundFill(Color.LIGHTCORAL, null, null));
     private final Background normalBackground = new Background(new BackgroundFill(null, null, null));
 
-    private MockGameStateSelectCard mockGameState; // TODO: DELETE LATER
+    // TODO: DELETE LATER
+    private MockGameStateSelectCard mockGameState;
+    private MockDeck mockDeck;
 
     @FXML
     public void initialize(){
         // TODO: DELETE LATER
+        this.mockDeck = new MockDeck();
+        GameManager.getInstance().getEventBroker().addSubscriber("PICKCARD", this);
         this.mockGameState = new MockGameStateSelectCard();
         this.mockGameState.addObserver(this);
         try {
             // TODO: DELETE LATER
             MockGameStateSelectCard mgs = this.mockGameState;
+
             for (int i=0; i<3; i++){
                 FXMLLoader loaderHandCard = new FXMLLoader(getClass().getResource("/view/HandCard.fxml"));
                 this.cardsToSelect[i] = loaderHandCard.load();
@@ -82,11 +86,6 @@ public class SelectCardController implements Observer, ISubscriber {
         testUpdateHandCards();
         setPlayer(1);
     }
-
-    public void setAppController(AppController appController){
-        this.appController = appController;
-    }
-
 
     public void setPlayer(Integer playerNo){
         this.playerLabel.setText("PLAYER " + playerNo.toString());
@@ -130,6 +129,9 @@ public class SelectCardController implements Observer, ISubscriber {
             if (gs.getPhase() == DRAW) {
                 System.out.println("HERE");
                 drawPhaseSelectCard();
+
+                // TODO: DELETE LATER
+                this.mockDeck.pickCard();
             } else {
                 System.out.println("THERE");
                 nonDrawPhaseSelectCard();
@@ -163,5 +165,45 @@ class MockGameStateSelectCard extends Observable implements IPhaseGetter {
         System.out.println("CHANGING TO " + newPhase);
         setChanged();
         notifyObservers();
+    }
+}
+
+class MockDeck implements IPublisher {
+    List<Card> deck;
+//    private EventBroker eb;
+
+    public MockDeck() {
+        this.deck = new ArrayList<Card>();
+//        this.eb = GameManager.getInstance().getEventBroker();
+    }
+
+    public void pickCard() {
+        this.publish("PICKCARD", new PickCardEvent(this.getThreeCard()));
+    }
+
+    public void publish(String topic, IEvent event) {
+        GameManager.getInstance().getEventBroker().sendEvent(topic, event);
+    }
+
+    private List<Card> getThreeCard() {
+        List<Card> lst = new ArrayList<>();
+
+        Random rand = new Random();
+        CharType[] types = new CharType[] {CharType.END, CharType.OVERWORLD, CharType.NETHER};
+        String[] imgPaths = new String[]{"/com/aetherwars/card/image/spell/morph/Sugondese.png", "/com/aetherwars/card/image/spell/potion/Sadikin Elixir.png", "/com/aetherwars/card/image/character/Shulker.png", "/com/aetherwars/card/image/character/Zombie.png", "card/data/image/character/Shulker.png"};
+
+        for (int i=0;i<3;i++) {
+            if (rand.nextDouble() > 0.5) {
+                lst.add(new CharacterCard(rand.nextInt(), "INI NAMA" + rand.nextInt(), types[rand.nextInt(types.length)], "...", imgPaths[rand.nextInt(imgPaths.length)], rand.nextInt(), rand.nextInt(), rand.nextInt(), rand.nextInt(), rand.nextInt()));
+            } else {
+                if (rand.nextDouble() > 0.5) {
+                    lst.add(new SpellMorphCard(2, "Sugondese", "...", "/com/aetherwars/card/image/spell/morph/Sugondese.png", 7, 2));
+                }else {
+                    lst.add(new SpellPotionCard(1, "Sadikin Elixir", "...", "/com/aetherwars/card/image/spell/potion/Sadikin Elixir.png", 3, 5, 1, 5));
+                }
+            }
+        }
+
+        return lst;
     }
 }
