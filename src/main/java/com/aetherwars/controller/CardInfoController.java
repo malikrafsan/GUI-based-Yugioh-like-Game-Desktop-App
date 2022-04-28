@@ -27,8 +27,6 @@ public class CardInfoController implements Observer {
     public void setCardInfo(Hoverable hoverable){
         List<Pair<String,String>> cardInfo = hoverable.displayInfo();
 
-        System.out.println("Display Card: " + hoverable.getName());
-
         this.card_name.setText(hoverable.getName());
         this.card_desc.setText(hoverable.getDesc());
 
@@ -51,40 +49,39 @@ public class CardInfoController implements Observer {
     }
 
     public void unsetCardInfo(){
-//        this.card_desc.setText("");
-//        this.card_name.setText("");
-//        for (int i = 0; i < 5; i++){
-//            attrLabel[i].setText("");
-//        }
-//        try {
-//            this.card_img.setImage(null);
-//        }
-//        catch (Exception e) {
-//            System.out.println("CARD INFO CONTAINER ERROR");
-//            System.out.println(e);
-//        }
+        this.card_desc.setText("");
+        this.card_name.setText("");
+        for (int i = 0; i < 5; i++){
+            attrLabel[i].setText("");
+        }
+        try {
+            this.card_img.setImage(null);
+        }
+        catch (Exception e) {
+            System.out.println("CARD INFO CONTAINER ERROR");
+            System.out.println(e);
+        }
     }
 
     public void update(Observable obs, Object obj){
-//        if (obs instanceof GameState) {
-//            GameState gs = (GameState) obs;
-//            Hoverable h = gs.getHoverObject();
-//
-//            if (h != null){
-//                setCardInfo(h);
-//            }
-//            else {
-//                unsetCardInfo();
-//            }
-//        }
+        if (obs instanceof GameState) {
+            GameState gs = (GameState) obs;
+            Hoverable h = gs.getHoverObject();
+
+            if (h != null){
+                setCardInfo(h);
+            }
+            else {
+                unsetCardInfo();
+            }
+        }
     }
 
 
     @FXML public void initialize(){
         this.attrLabel = new Label[] { attr1Label, attr2Label, attr3Label, attr4Label, attr5Label };
         GameManager.getInstance().addObserver("GAMESTATE", this);
-        Card dummy = new CharacterCard(1, "Dummy", CharType.END, "Dummy character", "/com/aetherwars/card/image/character/Enderman.png", -1, -1, -1, -1, -1 );
-        setCardInfo(dummy);
-        System.out.println("Dummy card set");
+//        Card dummy = new CharacterCard(1, "Dummy", CharType.END, "Dummy character", "/com/aetherwars/card/image/character/Enderman.png", -1, -1, -1, -1, -1 );
+//        setCardInfo(dummy);
     }
 }
