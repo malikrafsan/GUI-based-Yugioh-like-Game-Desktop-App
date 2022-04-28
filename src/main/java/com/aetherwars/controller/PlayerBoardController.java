@@ -16,6 +16,7 @@ import java.io.File;
 import com.gluonhq.charm.glisten.control.ProgressBar;
 
 import com.aetherwars.interfaces.*;
+import com.aetherwars.model.*;
 
 public class PlayerBoardController implements Observer {
     @FXML
@@ -101,14 +102,23 @@ public class PlayerBoardController implements Observer {
     private int ID_BOARD;
     private final String IMG_DIR_PATH = "/com/aetherwars/card/image/";
 
+    private final String inactiveCardStyle = "-fx-border-color: black; -fx-border-width: 1px; -fx-border-radius: 16;";
+    private final String activeCardStyle = "-fx-border-color: red; -fx-border-width: 3px; -fx-border-radius: 16;";
+    private final String activePlayerCardStyle = "-fx-border-color: yellow; -fx-border-width: 3px; -fx-border-radius: 16;";
+
     @FXML
     private void initialize() {
         this.ID_BOARD = Integer.parseInt(this.playerBoardContainer.getId());
         System.out.println("ID_BOARD: " + this.ID_BOARD);
 
-        this.activeCards = new ImageView[]{activeCard1, activeCard2, activeCard3, activeCard4, activeCard5};
+        GameManager.getInstance().addObserver("PLAYER" + this.ID_BOARD, this);
+        GameManager.getInstance().addObserver("CLICKOBJECT", this);
+        GameManager.getInstance().addObserver("ACTIVECHAR" + this.ID_BOARD, this);
+        GameManager.getInstance().addObserver("GAMESTATE", this);
+
+        this.activeCards = new ImageView[] { activeCard1, activeCard2, activeCard3, activeCard4, activeCard5 };
         String playerImgPath = "character/Villager.png";
-//        String[] cardImgPaths = new String[]{"character/Zombie.png", null, "character/Skeleton.png", null, "character/Ghast.png"};
+        //        String[] cardImgPaths = new String[]{"character/Zombie.png", null, "character/Skeleton.png", null, "character/Ghast.png"};
 
         int boardID = this.ID_BOARD;
         this.playerImageView.setOnMouseEntered(new EventHandler<MouseEvent>() {
@@ -132,6 +142,11 @@ public class PlayerBoardController implements Observer {
                 // TODO: DELETE LATER
                 p.updateActiveChars(p.mockActiveCharsData());
                 p.updateProgressBar(new Random().nextInt(80), 80);
+                if (new Random().nextDouble() > 0.5) {
+                    p.setPlayerCardTurnEffect();
+                } else {
+                    p.unsetPlayerCardTurnEffect();
+                }
             }
         });
 
@@ -143,11 +158,14 @@ public class PlayerBoardController implements Observer {
             System.out.println(e);
         }
 
-        this.atkLbls = new Label[]{atkLbl1, atkLbl2, atkLbl3, atkLbl4, atkLbl5};
-        this.dfnLbls = new Label[]{dfnLbl1, dfnLbl2, dfnLbl3, dfnLbl4, dfnLbl5};
-        this.atkIcons = new ImageView[]{atkIcon1, atkIcon2, atkIcon3, atkIcon4, atkIcon5};
-        this.dfnIcons = new ImageView[] {dfnIcon1, dfnIcon2, dfnIcon3, dfnIcon4, dfnIcon5};
-        this.expLvlLbls = new Label[] {expLvlLbl1, expLvlLbl2, expLvlLbl3, expLvlLbl4, expLvlLbl5};
+        this.atkLbls = new Label[] { atkLbl1, atkLbl2, atkLbl3, atkLbl4, atkLbl5 };
+        this.dfnLbls = new Label[] { dfnLbl1, dfnLbl2, dfnLbl3, dfnLbl4, dfnLbl5 };
+        this.atkIcons = new ImageView[] { atkIcon1, atkIcon2, atkIcon3, atkIcon4, atkIcon5 };
+        this.dfnIcons = new ImageView[] { dfnIcon1, dfnIcon2, dfnIcon3, dfnIcon4, dfnIcon5 };
+        this.expLvlLbls = new Label[] { expLvlLbl1, expLvlLbl2, expLvlLbl3, expLvlLbl4, expLvlLbl5 };
+
+        // TODO: DELETE LATER
+        PlayerBoardController t = this;
 
         for (int i = 0; i < this.activeCards.length; i++) {
             int finalI = i;
@@ -158,6 +176,9 @@ public class PlayerBoardController implements Observer {
                 @Override
                 public void handle(MouseEvent event) {
                     System.out.println("CARD " + (finalI + 1) + " FROM PLAYER " + boardId + " IS CLICKED");
+
+                    // TODO: DELETE LATER
+                    t.setCardClickEffect(finalI);
                 }
             });
 
@@ -185,6 +206,32 @@ public class PlayerBoardController implements Observer {
         int health = 50;
         int maxHealth = 80;
         this.updateProgressBar(health, maxHealth);
+    }
+    
+    private void setCardClickEffect(int idx) {
+        Pane pane = (Pane) this.activeCards[idx].getParent().getParent();
+        pane.styleProperty().setValue(this.activeCardStyle);
+    }
+
+    private void unsetCardClickEffect(int idx) {
+        Pane pane = (Pane) this.activeCards[idx].getParent().getParent();
+        pane.styleProperty().setValue(this.inactiveCardStyle);
+    }
+
+    private void unsetAllCardClickEffect() {
+        for (int i = 0; i < this.activeCards.length; i++) {
+            unsetCardClickEffect(i);
+        }
+    }
+
+    private void setPlayerCardTurnEffect() {
+        Pane pane = (Pane) this.playerImageView.getParent();
+        pane.styleProperty().setValue(this.activePlayerCardStyle);
+    }
+
+    private void unsetPlayerCardTurnEffect() {
+        Pane pane = (Pane) this.playerImageView.getParent();
+        pane.styleProperty().setValue(this.inactiveCardStyle);
     }
 
     private void updateProgressBar(int health, int maxHealth) {
@@ -245,6 +292,22 @@ public class PlayerBoardController implements Observer {
     public void update(Observable obs, Object obj) {
         if (obs instanceof IActiveCharObserverGetter) {
             this.updateActiveChars(((IActiveCharObserverGetter) obs).getChars());
+        } else if (obs instanceof ClickObject) {
+            ClickObject co = (ClickObject) obs;
+
+            this.unsetAllCardClickEffect();
+            if (co.getName().equals("ACTIVECHAR") && co.getPlayer() == this.ID_BOARD) {
+                this.setCardClickEffect(co.getIndex());
+            }
+        } else if (obs instanceof GameState) {
+            Turn[] turns = new Turn[]{Turn.PLAYER1, Turn.PLAYER2};
+            GameState gs = (GameState) obs;
+
+            if (gs.getTurn() == turns[this.ID_BOARD - 1]) {
+                this.setPlayerCardTurnEffect();
+            } else {
+                this.unsetAllCardClickEffect();
+            }
         }
     }
 }
