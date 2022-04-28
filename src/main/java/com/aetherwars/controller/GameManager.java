@@ -74,7 +74,8 @@ public class GameManager {
     }
 
     public void click(int player, String name, int index) {
-        ClickObject prevClicked = gs.getClickObject();
+        ClickObject prevClicked = new ClickObject();
+        prevClicked.setClickObject(gs.getClickObject().getPlayer(), gs.getClickObject().getName(), gs.getClickObject().getIndex());
         gs.setClickObject(player,name,index);
 
         if(gs.getClickObject().getName().equals("ACTIVECHAR")) {
@@ -96,10 +97,19 @@ public class GameManager {
                     pm[idxSelf].handToBoard(idxHand, curActCharClicked.getIndex());
                 } else {
                     // kasih spell ke lawan
-                    if(pm[idxEnemy].canReceiveSpellAt(curActCharClicked.getIndex()) && pm[idxSelf].canGiveSpellAt(idxHand)) {
+                    ActiveChar ac;
+                    ActiveCharObserver acs;
+                    if(gs.getTurn().equals(Turn.PLAYER1)) {
+                        acs = gs.getPlayer2().getActiveChars();
+                        ac = gs.getPlayer2().getActiveChars().getActChar(curActCharClicked.getIndex());
+                    } else {
+                        acs = gs.getPlayer1().getActiveChars();
+                        ac = gs.getPlayer1().getActiveChars().getActChar(curActCharClicked.getIndex());
+                    }
+                    if(pm[idxEnemy].canReceiveSpellAt(curActCharClicked.getIndex()) && pm[idxSelf].canGiveSpellAt(idxHand,ac.getLevel())) {
                         SpellCard spell = pm[idxSelf].takeSpellAt(idxHand); // or take spell
-                        pm[idxEnemy].receiveSpell(spell, curActCharClicked.getIndex());
-                        pm[idxSelf].useMana(spell.getMana());
+                        pm[idxSelf].giveSpell(spell, ac);
+                        acs.update();
                     }
                 }
             }

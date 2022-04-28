@@ -20,8 +20,7 @@ public class BattleManager {
     }
 
     public boolean canBattle() {
-//        return self != null && enemy != null && self.canAttack();
-        return false; // TODO:placeholder
+        return self != null && enemy != null && self.canAttack();
     }
 
     public void battle() {
@@ -40,5 +39,8 @@ public class BattleManager {
 //        enemy.addHealth(-1*self.getAttack() * selfMult);
 //        self.addHealth(-1*enemy.getAttack() * enemyMult);
         // janlup +exp buat penyerang kl menang
+        if(enemy.getHealth()<=0 && self.getHealth()>0) {
+            self.addExp(enemy.getLevel());
+        }
     }
 }
