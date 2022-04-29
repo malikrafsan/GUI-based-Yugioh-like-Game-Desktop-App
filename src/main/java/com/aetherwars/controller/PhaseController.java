@@ -29,6 +29,10 @@ public class PhaseController implements Observer {
         GameManager.getInstance().addObserver("GAMESTATE", this);
     }
 
+    /**
+     * @param labelToSet label yang akan di set
+     * Meset label yang aktif menjadi labelToSet
+     */
     private void setActiveLabel(Label labelToSet){
         for (Label label:labels){
             if (label == labelToSet){
@@ -40,6 +44,10 @@ public class PhaseController implements Observer {
         }
     }
 
+    /**
+     * @param phase phase yang akan di set
+     * Mengeset phase sesuai input
+     */
     public void setPhase(Phase phase) {
         switch (phase) {
             case DRAW:
@@ -57,6 +65,10 @@ public class PhaseController implements Observer {
         }
     }
 
+    /**
+     * @param e event
+     * Lanjut ke phase selanjutnya
+     */
     @FXML
     private void nextPhase(ActionEvent e){
         GameManager.getInstance().nextPhase();

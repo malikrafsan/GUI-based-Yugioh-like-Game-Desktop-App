@@ -50,6 +50,10 @@ public class HandCardsContainerController implements Observer {
         }
     }
 
+    /**
+     * @param idx index kartu yang diset
+     * Mengaktifkan mouse event pada kartu ke-idx
+     */
     public void enableMouseEvent(int idx) {
         this.handCards[idx].setOnMouseEntered(new EventHandler<MouseEvent>() {
             @Override
@@ -74,7 +78,10 @@ public class HandCardsContainerController implements Observer {
             }
         });
     }
-
+    /**
+     * @param idx index kartu yang diset
+     * Menonaktifkan mouse event pada kartu ke-idx
+     */
     public void disableMouseEvent(int idx) {
         this.handCards[idx].setOnMouseEntered(new EventHandler<MouseEvent>() {
             @Override
@@ -90,6 +97,10 @@ public class HandCardsContainerController implements Observer {
         });
     }
 
+    /**
+     * @param idx index kartu yang diset
+     * Mengaktifkan efek klik pada kartu ke-idx
+     */
     private void setCardClickEffect(int idx){
         handCards[idx].styleProperty().setValue(activeCardStyle);
     }
@@ -117,6 +128,10 @@ public class HandCardsContainerController implements Observer {
         updateHandCards(cards);
     }
 
+    /**
+     * @param listCards kartu yang dipakai
+     * Memperbarui tampilan handCard sesuai listCards
+     */
     public void updateHandCards(Card[] listCards){
         for (int i = 0; i < this.currentActiveCardCount; i++){
             this.cardContainer.getChildren().remove(0);

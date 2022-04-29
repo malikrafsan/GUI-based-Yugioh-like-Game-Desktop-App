@@ -19,22 +19,39 @@ public class HandCardController {
     private FadeTransition fadeIn;
     private FadeTransition fadeOut;
 
+    /**
+     * Menghapus nilai mana
+     */
     public void unsetLabelMana() {
         this.labelMana.setText("");
     }
 
+    /**
+     * @param value nilai mana
+     * Meset nilai mana sesuai value
+     */
     public void setLabelMana(Integer value){
         this.labelMana.setText("MANA " + value.toString());
     }
 
+    /**
+     * Menghapus nilai atribut
+     */
     public void unsetLabelAttr() {
         this.labelAttr.setText("");
     }
 
+    /**
+     * @param value nilai dari attribut
+     * Menyetel nilai atribut sesuai value
+     */
     public void setLabelAttr(String value){
         this.labelAttr.setText(value);
     }
 
+    /**
+     * Menghapus gambar kartu
+     */
     public void unsetCardImageView() {
         this.cardImageView.setImage(null);
     }
@@ -67,10 +84,16 @@ public class HandCardController {
         fadeOut.setDuration(Duration.millis(750));
     }
 
+    /**
+     * Play animasi fade in
+     */
     public void fadeIn(){
         fadeIn.play();
     }
 
+    /**
+     * Play animasi fade out
+     */
     public void fadeOut(){
         fadeOut.play();
     }

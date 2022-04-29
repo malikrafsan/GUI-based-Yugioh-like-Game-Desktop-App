@@ -25,6 +25,10 @@ public class CardInfoController implements Observer {
     private Label[] attrLabel = new Label[5];
     private final String prefixImagePath = "/com/aetherwars/";
 
+    /**
+     * @param hoverable objek yang sedang dihover
+     * Menampilkan info objek yang sedang dihover
+     */
     public void setCardInfo(Hoverable hoverable){
         List<Pair<String,String>> cardInfo = hoverable.displayInfo();
 
@@ -49,6 +53,9 @@ public class CardInfoController implements Observer {
         }
     }
 
+    /**
+     * Menghapus informasi objek jika sudah tidak dihover
+     */
     public void unsetCardInfo(){
         this.card_desc.setText("");
         this.card_name.setText("");
