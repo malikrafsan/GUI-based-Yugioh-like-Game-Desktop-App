@@ -29,6 +29,7 @@ public class ActiveChar implements IActiveCharGetter, Hoverable {
         this.exp = 0;
         this.expUp = 1;
         this.level = 1;
+        this.spellsPotionList = new ArrayList<>();
         this.swap = 0;
     }
 
@@ -42,6 +43,7 @@ public class ActiveChar implements IActiveCharGetter, Hoverable {
         this.exp = 0;
         this.expUp = 1;
         this.level = 1;
+        this.spellsPotionList = new ArrayList<>();
         this.swap = 0;
     }
 
@@ -150,6 +152,15 @@ public class ActiveChar implements IActiveCharGetter, Hoverable {
     public void newRound() {
         int before = this.swap;
         this.isCanAttack = true;
+        int i = 0;
+        while (i < this.spellsPotionList.size()) {
+            this.spellsPotionList.get(i).newRound();
+            if (this.spellsPotionList.get(i).getDuration() == 0) {
+                this.spellsPotionList.remove(i);
+            } else {
+                i++;
+            }
+        }
         this.swap--;
         if (this.swap == 0 && before > 0) {
             this.swap();
@@ -162,18 +173,31 @@ public class ActiveChar implements IActiveCharGetter, Hoverable {
 
     public double getHealthPotion() {
         double total = 0.0;
-        for (int i = 0; i < this.spellsPotionList.size(); i++) {
+        int i = 0;
+        while (i < this.spellsPotionList.size()) {
             total += this.spellsPotionList.get(i).getHealthPotion();
+            i++;
         }
         return total;
     }
 
     public double getAttackPotion() {
         double total = 0.0;
-        for (int i = 0; i < this.spellsPotionList.size(); i++) {
+        int i = 0;
+        while (i < this.spellsPotionList.size()) {
             total += this.spellsPotionList.get(i).getAttackPotion();
+            i++;
         }
         return total;
+    }
+
+    public void displayActiveSpells() {
+        if (this.spellsPotionList.size() == 0) {
+            System.out.println("Kosong");
+        }
+        for (ActiveSpellsPotion potion: this.spellsPotionList) {
+            potion.display();
+        }
     }
 
     public double getBaseHealth() { return (this.card.getHealth());}
@@ -221,21 +245,21 @@ public class ActiveChar implements IActiveCharGetter, Hoverable {
         List<Pair<String,String>> res = new ArrayList<>();
         List<Pair<String,String>> temp = this.card.displayInfo();
         for (Pair<String,String> p: temp) {
-//            if (p.getKey().equals("Attack")) {
-//                if (this.attackPlus != 0) {
-//                    res.add(new Pair<>("Attack", p.getValue() + " (+" + this.attackPlus + ")"));
-//                } else {
-//                    res.add(p);
-//                }
-//            } else if (p.getKey().equals("Health")) {
-//                if (this.attackPlus != 0) {
-//                    res.add(new Pair<>("Health", p.getValue() + " (+" + this.healthPlus + ")"));
-//                } else {
-//                    res.add(p);
-//                }
-//            } else {
-//                res.add(p);
-//            }
+            if (p.getKey().equals("Attack")) {
+                if (Double.compare(this.getAttackPotion(), 0.0) != 0) {
+                    res.add(new Pair<>("Attack", p.getValue() + " (+" + this.getAttackPotion() + ")"));
+                } else {
+                    res.add(p);
+                }
+            } else if (p.getKey().equals("Health")) {
+                if (Double.compare(this.getHealthPotion(), 0.0) != 0) {
+                    res.add(new Pair<>("Health", p.getValue() + " (+" + this.getHealthPotion() + ")"));
+                } else {
+                    res.add(p);
+                }
+            } else {
+                res.add(p);
+            }
         }
         return res;
     }

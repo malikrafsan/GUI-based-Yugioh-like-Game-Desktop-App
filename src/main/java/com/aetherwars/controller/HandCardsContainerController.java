@@ -14,8 +14,9 @@ import javafx.scene.paint.Color;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
+import java.util.Observer;
 
-public class HandCardsContainerController {
+public class HandCardsContainerController implements Observer {
 
     @FXML
     private HBox cardContainer;
@@ -33,7 +34,10 @@ public class HandCardsContainerController {
 
 
     @FXML
-    private void initialize(){
+    private void initialize() {
+        GameManager.getInstance().addObserver("HANDCARD1", this);
+        GameManager.getInstance().addObserver("HANDCARD2", this);
+
         try {
             for (int i=0; i<5; i++){
                 FXMLLoader loaderHandCard = new FXMLLoader(getClass().getResource("/view/HandCard.fxml"));
@@ -46,49 +50,57 @@ public class HandCardsContainerController {
             System.out.println("HAND CARD CONTAINER CONTROLLER ERROR");
             System.out.println(e);
         }
-        // testUpdateHandCards();
-        enableMouseHover();
-//        disableMouseHover();
     }
 
-    public void enableMouseHover(){
-        for (int i = 0; i < this.currentActiveCardCount; i++){
-            int finalI = i;
-            this.handCards[i].setOnMouseEntered(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    handCards[finalI].setBackground(hoverBackground);
-                    System.out.println("HAND CARD " + finalI + " IS HOVERED");
+    public void enableMouseEvent(int idx) {
+        this.handCards[idx].setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                handCards[idx].setBackground(hoverBackground);
+                System.out.println("HAND CARD " + idx + " IS HOVERED");
 
-                    GameManager.getInstance().hoverHand(finalI);
-                }
-            });
-            this.handCards[i].setOnMouseExited(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    handCards[finalI].setBackground(normalBackground);
-                    System.out.println("HAND CARD " + finalI + " NO LONGER LONGER HOVERED");
+                GameManager.getInstance().hoverHand(idx);
+            }
+        });
+        this.handCards[idx].setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                handCards[idx].setBackground(normalBackground);
+                System.out.println("HAND CARD " + idx + " NO LONGER LONGER HOVERED");
 
-                    GameManager.getInstance().unhover();
-                }
-            });
-            this.handCards[i].setOnMouseClicked(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent mouseEvent) {
-                    GameManager.getInstance().click(-1, "HANDCARD", finalI);
+                GameManager.getInstance().unhover();
+            }
+        });
+        this.handCards[idx].setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                GameManager.getInstance().click(-1, "HANDCARD", idx);
 
-                    // TODO: DELETE LATER
-                    for (int j = 0; j < 5; j++){
-                        if (finalI == j){
-                            setCardClickEffect(j);
-                        }
-                        else {
-                            unsetCardClickEffect(j);
-                        }
+                // TODO: DELETE LATER
+                for (int j = 0; j < 5; j++) {
+                    if (idx == j) {
+                        setCardClickEffect(j);
+                    } else {
+                        unsetCardClickEffect(j);
                     }
                 }
-            });
-        }
+            }
+        });
+    }
+
+    public void disableMouseEvent(int idx) {
+        this.handCards[idx].setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {}
+        });
+        this.handCards[idx].setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {}
+        });
+        this.handCards[idx].setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {}
+        });
     }
 
     private void setCardClickEffect(int idx){
@@ -105,48 +117,39 @@ public class HandCardsContainerController {
         }
     }
 
+    private void testUpdateHandCards() {
+        Card[] cards = new Card[5];
 
-    public void disableMouseHover(){
-        for (int i = 0; i < this.currentActiveCardCount; i++){
-            this.handCards[i].setOnMouseEntered(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {}
-            });
-            this.handCards[i].setOnMouseExited(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {}
-            });
-        }
-    }
-
-    private ArrayList<Card> cards = new ArrayList<>();
-    private void testUpdateHandCards(){
-        cards.add(new CharacterCard(1, "Shulker", CharType.END, "Shulkers are box-shaped hostile mobs found in end cities.", "card/image/character/Shulker.png", 10, 5, 3, 4, 3));
-        cards.add(new CharacterCard(2, "Zombie", CharType.OVERWORLD, "Zombies are common undead hostile mobs that deal melee damage and attack in groups.", "card/image/character/Zombie.png", 8, 4, 1, 4, 3));
-        cards.add(new SpellMorphCard(2, "Sugondese", "Nuts", "card/image/spell/morph/Sugondese.png", 7, 2));
-        cards.add(new SpellPotionCard(1, "Sadikin Elixir", "The best elixir in the world", "card/image/spell/potion/Sadikin Elixir.png", 3, 5, 1, 5));
+        cards[0] = new CharacterCard(1, "Shulker", CharType.END, "Shulkers are box-shaped hostile mobs found in end cities.", "card/image/character/Shulker.png", 10, 5, 3, 4, 3);
+        cards[1] = new CharacterCard(2, "Zombie", CharType.OVERWORLD, "Zombies are common undead hostile mobs that deal melee damage and attack in groups.", "card/image/character/Zombie.png", 8, 4, 1, 4, 3);
+        cards[2] = new SpellMorphCard(2, "Sugondese", "Nuts", "card/image/spell/morph/Sugondese.png", 7, 2);
+        cards[3] = new SpellPotionCard(1, "Sadikin Elixir", "The best elixir in the world",
+                "card/image/spell/potion/Sadikin Elixir.png", 3, 5, 1, 5);
+        cards[4] = null;
         //cards.add(new CharacterCard(1, "Shulker", CharType.END, "...", "card/data/image/character/Shulker.png", 10, 5, 2, 4, 3));
         updateHandCards(cards);
     }
 
-
-    public void updateHandCards(List<Card> listCards){
+    public void updateHandCards(Card[] listCards){
         for (int i = 0; i < this.currentActiveCardCount; i++){
             this.cardContainer.getChildren().remove(0);
         }
 
-        this.currentActiveCardCount = Math.min(listCards.size(), 5);
+        this.currentActiveCardCount = Math.min(listCards.length, 5);
         for (int i = 0; i < this.currentActiveCardCount; i++){
             this.cardContainer.getChildren().add(this.handCards[i]);
-            this.handCardControllers[i].setLabelMana(listCards.get(i).getMana());
-            this.handCardControllers[i].setLabelAttr(listCards.get(i).preview());
-            this.handCardControllers[i].setCardImageView(listCards.get(i).getImagePath());
+
+            if (listCards[i] != null) {
+                this.handCardControllers[i].setLabelMana(listCards[i].getMana());
+                this.handCardControllers[i].setLabelAttr(listCards[i].preview());
+                this.handCardControllers[i].setCardImageView(listCards[i].getImagePath());
+
+                this.enableMouseEvent(i);
+            } else {
+                this.disableMouseEvent(i);
+            }
         }
     }
-
-
-
-
 
     public void update(Observable obs, Object obj) {
         if (obs instanceof ClickObject) {
@@ -156,6 +159,9 @@ public class HandCardsContainerController {
             if (co.getName().equals("HANDCARD")) {
                 setCardClickEffect(co.getIndex());
             }
+        } else if (obs instanceof HandCard) {
+            HandCard hc = (HandCard) obs;
+            updateHandCards(hc.getCards());
         }
     }
 }
