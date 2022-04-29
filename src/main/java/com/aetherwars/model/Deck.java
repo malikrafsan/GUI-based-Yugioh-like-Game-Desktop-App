@@ -4,7 +4,6 @@ import com.aetherwars.event.PickCardEvent;
 import com.aetherwars.interfaces.IEvent;
 import com.aetherwars.interfaces.IPublisher;
 
-import java.beans.EventHandler;
 import java.util.Collections;
 import java.util.List;
 import java.util.ArrayList;
@@ -49,6 +48,7 @@ public class Deck extends Observable implements IPublisher {
         for (Card card: this.threeCard) {
             addCard(card);
         }
+        this.threeCard = new ArrayList<>();
         sync();
         return temp;
     }
@@ -80,13 +80,6 @@ public class Deck extends Observable implements IPublisher {
             }
         }
         sync();
-    }
-
-    // Just for debugging, deprecated soon
-    public void getInfo() {
-        for (Card card : this.deck) {
-            System.out.println(card.getName());
-        }
     }
 
     public void sync() {

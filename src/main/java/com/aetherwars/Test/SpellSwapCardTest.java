@@ -10,7 +10,7 @@ class SpellSwapCardTest {
 
     @Test
     void getType() {
-        assertEquals(catFood.getType().toString(), "SpellType.SWAP");
+        assertEquals(catFood.getType().toString(), "SWAP");
     }
 
     @Test

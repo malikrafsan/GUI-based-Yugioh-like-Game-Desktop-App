@@ -10,7 +10,7 @@ class SpellMorphCardTest {
 
     @Test
     void getType() {
-        assertEquals(sheepify.getType().toString(), "SpellType.MORPH");
+        assertEquals(sheepify.getType().toString(), "MORPH");
     }
 
     @Test

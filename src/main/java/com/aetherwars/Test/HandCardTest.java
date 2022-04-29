@@ -28,7 +28,9 @@ class HandCardTest {
         assertEquals(handCard.getSize(), 1);
         handCard.addCard(levelplus, 2);
         assertEquals(handCard.getSize(), 2);
-        assertNull(handCard.getCard(1));
+        handCard.addCard(catFood);
+        assertEquals(handCard.getSize(), 3);
+        assertNull(handCard.getCard(3));
     }
 
     @Test

@@ -16,7 +16,7 @@ class SpellPotionCardTest {
 
     @Test
     void getTypeTest() {
-        assertEquals(deathlyMagic.getType().toString(), "SpellType.POTION");
+        assertEquals(deathlyMagic.getType().toString(), "POTION");
     }
 
     @Test

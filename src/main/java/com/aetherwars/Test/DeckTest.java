@@ -28,6 +28,7 @@ class DeckTest {
         deck.addCard(levelplus);
         deck.addCard(catFood);
         assertEquals(deck.getSize(), 3);
+
     }
 
     @Test
@@ -43,6 +44,19 @@ class DeckTest {
         List<Card> res = deck.getThreeCard();
         assertEquals(res.size(), 3);
         assertEquals(deck.getSize(), 1);
+
+        Card temp = deck.select(1);
+        assertEquals(deck.getSize(), 3);
+        assertEquals(deck.getThreeCard().size(), 0);
+
+        deck.draw();
+        temp = deck.select(0);
+        assertEquals(deck.getSize(), 2);
+        assertEquals(deck.getThreeCard().size(), 0);
+
+        deck.draw();
+        assertEquals(deck.getSize(), 0);
+        assertEquals(deck.getThreeCard().size(), 2);
     }
 
 }

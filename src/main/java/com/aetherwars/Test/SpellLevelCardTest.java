@@ -10,7 +10,7 @@ class SpellLevelCardTest {
 
     @Test
     void getType() {
-        assertEquals(levelplus.getType().toString(), "SpellType.LEVEL");
+        assertEquals(levelplus.getType().toString(), "LEVEL");
     }
 
     @Test
