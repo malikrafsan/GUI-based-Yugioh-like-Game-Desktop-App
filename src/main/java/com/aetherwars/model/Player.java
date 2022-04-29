@@ -35,6 +35,7 @@ public class Player extends Observable{
             this.activeChars.newRound();
         }
         if(this.getHand().getSize() <5) {
+            this.deck.draw();
             this.deck.pickCard();
         }
     }
