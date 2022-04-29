@@ -4,7 +4,7 @@ import java.util.Observable;
 
 public class Player extends Observable{
     private String name;
-    private int health;
+    private double health;
     private int mana;
     private Deck deck;
     private HandCard handCard;
@@ -59,6 +59,10 @@ public class Player extends Observable{
         this.mana = this.mana - x;
     }
 
+    public void receiveDamage(double damage) {
+        this.health = this.health - damage;
+    }
+
     public void onClick() {
         this.clicked = true;
         this.notifyObservers();
@@ -79,7 +83,7 @@ public class Player extends Observable{
         this.notifyObservers();
     }
 
-    public int getHealth() {
+    public double getHealth() {
         return this.health;
     }
 }
