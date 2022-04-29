@@ -13,17 +13,19 @@ public class Player extends Observable{
     private boolean clicked;
     private boolean hovered;
     
-    static int no = 1; 
+    static int no = 1;
+    static int firstMana = 1;
 
     public Player() {
         this.name = "Player " + no;
         this.health = 80;
-        this.mana = 0;
-        this.maxMana = 0;
+        this.mana = firstMana;
+        this.maxMana = firstMana;
         this.deck = new Deck();
         this.handCard = new HandCard();
         this.activeChars = new ActiveCharObserver();
         no++;
+        firstMana--;
     }
 
     public void sync() {
