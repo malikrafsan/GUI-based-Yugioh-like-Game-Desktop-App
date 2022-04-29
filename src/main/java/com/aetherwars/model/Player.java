@@ -18,8 +18,8 @@ public class Player extends Observable{
     public Player() {
         this.name = "Player " + no;
         this.health = 80;
-        this.mana = 0;
-        this.maxMana = 10;
+        this.mana = 1;
+        this.maxMana = 1;
         this.deck = new Deck();
         this.handCard = new HandCard();
         this.activeChars = new ActiveCharObserver();
@@ -32,10 +32,11 @@ public class Player extends Observable{
     }
 
     public void newRound() {
-        if (this.mana < 10) {
-            this.mana = this.mana + 1;
+        if (this.maxMana < 10) {
+            this.maxMana = this.maxMana + 1;
             this.activeChars.newRound();
         }
+        this.mana = this.maxMana;
         if(this.getHand().getSize() <5) {
             this.deck.draw();
             this.deck.pickCard();
