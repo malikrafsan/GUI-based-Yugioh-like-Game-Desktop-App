@@ -18,6 +18,10 @@ public class SpellMorphCard extends SpellCard {
         this.targetid = targetid;
     }
 
+    public int getTargetId() {
+        return targetid;
+    }
+
     @Override
     public String preview() {
         return "MORPH";

@@ -51,6 +51,10 @@ public class HandCard extends Observable {
         return res;
     }
 
+    public int getSize() {
+        return this.size;
+    }
+
     // Just for debugging, deprecated soon
     public void getInfo() {
         for (int i=0; i<5; i++){

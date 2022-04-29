@@ -69,8 +69,8 @@ public class GameManager {
     public void syncAll() {
         gs.sync();
         gs.getClickObject().sync();
-        pm[0].syncAll();
         pm[1].syncAll();
+        pm[0].syncAll();
 
         gs.getPlayer1().getDeck().pickCard();
     }
@@ -85,6 +85,8 @@ public class GameManager {
             clickedActChar(prevClicked);
         } else if (gs.getClickObject().getName().equals("PLAYER")) {
             clickedPlayer(prevClicked);
+        } else if(gs.getClickObject().getName().equals("DELETE")) {
+            delete(prevClicked);
         }
     }
     
@@ -92,6 +94,9 @@ public class GameManager {
         // TODO: recheck lagi yaa, kalau semisal butuh data parameter tambahan
 
         // TODO: tambah fungsionalitas add card into handcard
+        int idxSelf = gs.getTurn().ordinal();
+//        pm[idxSelf].chooseCard(idx);
+
         this.gs.setHasPickCard(true);
         System.out.println("PICK CARD WITH IDX " + idx);
     }
@@ -119,8 +124,12 @@ public class GameManager {
                     }
                     if(pm[idxEnemy].canReceiveSpellAt(curActCharClicked.getIndex()) && pm[idxSelf].canGiveSpellAt(idxHand,ac.getLevel())) {
                         SpellCard spell = pm[idxSelf].takeSpellAt(idxHand); // or take spell
-                        pm[idxSelf].giveSpell(spell, ac);
-                        acs.update();
+                        if(spell instanceof  SpellMorphCard) {
+                            pm[idxEnemy].morph((SpellMorphCard) spell, curActCharClicked.getIndex());
+                        } else {
+                            pm[idxSelf].giveSpell(spell, ac);
+                            acs.update();
+                        }
                     }
                 }
             }
@@ -177,10 +186,24 @@ public class GameManager {
     }
 
     // delete kartu
+    public void delete(ClickObject prevClicked) {
+        int idxSelf = gs.getTurn().ordinal();
+        if(prevClicked.getName().equals("HANDCARD")) {
+            int idx_hand = prevClicked.getIndex();
+            pm[idxSelf].removeCard(idx_hand);
+        } else if(prevClicked.getName().equals("ACTIVECHAR") && prevClicked.getPlayer()-1==idxSelf) {
+            int idx_board = prevClicked.getIndex();
+            pm[idxSelf].removeChar(idx_board);
+        }
+    }
     // add exp from mana
 
     public void nextPhase() {
-        gs.nextPhase();
+        if(gs.getPhase().equals(Phase.DRAW) && gs.getHasPickCard()==false) {
+            System.out.println("DELETE/DRAW DULU");
+        } else {
+            gs.nextPhase();
+        }
     }
 
 }

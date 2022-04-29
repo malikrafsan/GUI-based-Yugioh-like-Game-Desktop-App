@@ -132,6 +132,20 @@ public class ActiveChar implements IActiveCharGetter, Hoverable {
 
     }
 
+    public void addSpell(SpellCard card) {
+        switch (card.getType()) {
+            case POTION:
+                addSpellPotion((SpellPotionCard) card);
+                break;
+            case LEVEL:
+                levelUpSpell((SpellLevelCard) card);
+                break;
+            case SWAP:
+                swapSpell((SpellSwapCard) card);
+                break;
+        }
+    }
+
 
     public void newRound() {
         int before = this.swap;

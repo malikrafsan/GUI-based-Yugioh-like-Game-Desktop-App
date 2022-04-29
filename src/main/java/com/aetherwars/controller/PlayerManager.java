@@ -1,10 +1,16 @@
 package com.aetherwars.controller;
 
+import com.aetherwars.event.PickCardEvent;
+import com.aetherwars.interfaces.IEvent;
+import com.aetherwars.interfaces.ISubscriber;
 import com.aetherwars.model.*;
+
+import java.util.List;
 
 public class PlayerManager {
     private CardManager cm;
     private Player p;
+    private List<Card> threeCards;
 
     public PlayerManager(Player p, CardManager cm) {
         this.p = p;
@@ -17,6 +23,15 @@ public class PlayerManager {
         p.getDeck().sync();
         p.getHand().sync();
         p.getActiveChars().sync();
+    }
+
+
+    public void removeCard(int idx_hand) {
+        p.getHand().takeCard(idx_hand);
+    }
+
+    public void removeChar(int idx_board) {
+        p.getActiveChars().delChar(idx_board);
     }
 
     // idx_board kosong && mana cukup, melakukan summon
@@ -32,11 +47,14 @@ public class PlayerManager {
         if(c instanceof SpellCard) {
             if(ac != null) {
                 System.out.println("apply spell c to ac");
-                // TODO:pake activeChar manager, kurangin mana, cek ada mana, trs notify jg
                 SpellCard sc = (SpellCard) p.getHand().takeCard(idx_hand);
-//                    ac.addSpell(new ActiveSpell((SpellCard) sc));
                 if(canGiveSpell(sc, ac.getLevel())) {
-                    ;
+                    if(sc instanceof SpellMorphCard) {
+                        morph((SpellMorphCard) sc, idx_board);
+                    } else {
+                        giveSpell(sc, ac);
+                        p.getActiveChars().update();
+                    }
                 }
             } else {
                 System.out.println("Selected board is empty");
@@ -58,7 +76,7 @@ public class PlayerManager {
 
     public boolean canGiveSpellAt(int idx_hand, int levelActChar) {
         Card c = p.getHand().getCard(idx_hand);
-        return c instanceof SpellCard && p.getMana()>=c.getMana() && canGiveSpell((SpellCard) c, levelActChar);
+        return c instanceof SpellCard && canGiveSpell((SpellCard) c, levelActChar);
     }
 
     public boolean canGiveSpell(SpellCard sc, int levelActChar) {
@@ -69,7 +87,7 @@ public class PlayerManager {
         }
     }
 
-    public int getMana(SpellCard sc, int levelActChar) {
+    public int getManaFromSpell(SpellCard sc, int levelActChar) {
         if(sc instanceof SpellLevelCard) {
             return (levelActChar+1)/2;
         } else {
@@ -88,7 +106,14 @@ public class PlayerManager {
 
     public void giveSpell(SpellCard sc, ActiveChar ac) {
 //        ac.addSpell(new ActiveSpell(sc));
-        // TODO:kurangin mana
+        p.useMana(getManaFromSpell(sc, ac.getLevel()));
+        ac.addSpell(sc);
+    }
+
+    public void morph(SpellMorphCard spellMorphCard, int idx_board) {
+        CharacterCard cc = this.cm.getCharacterCard(spellMorphCard.getTargetId());
+        p.getActiveChars().addChar(cc, idx_board);
+        p.useMana(spellMorphCard.getMana());
     }
 
     public void useMana(int x) {
