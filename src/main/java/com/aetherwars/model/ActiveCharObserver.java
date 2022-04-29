@@ -10,7 +10,7 @@ public class ActiveCharObserver extends Observable implements IActiveCharObserve
         for (int i = 0; i < 5; i++) {
             this.chars[i] = null;
         }
-        randomizeHandCard();
+        // randomizeHandCard();
     }
 
     public void randomizeHandCard() {
@@ -26,7 +26,7 @@ public class ActiveCharObserver extends Observable implements IActiveCharObserve
     }
 
     public void addChar(CharacterCard card, int index) {
-        System.out.println("\n\nadd char to board\n\n");
+        // System.out.println("\n\nadd char to board\n\n");
         this.chars[index] = new ActiveChar(card);
         this.sync();
     }
