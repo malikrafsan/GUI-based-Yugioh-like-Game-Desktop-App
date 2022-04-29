@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.text.Font?>
 
-<Pane prefHeight="174.0" prefWidth="97.0" style="-fx-border-color: grey; -fx-background-color: rgb(240,236,236);" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aetherwars.controller.HandCardController">
+<Pane prefHeight="174.0" prefWidth="97.0" style="-fx-border-color: grey; -fx-background-color: rgb(240,236,236);" xmlns="http://javafx.com/javafx/8.0.51" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aetherwars.controller.HandCardController">
    <children>
       <TilePane alignment="CENTER" layoutY="12.0" prefHeight="90.0" prefWidth="97.0">
          <children>

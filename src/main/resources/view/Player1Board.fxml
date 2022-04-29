@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="1" fx:id="playerBoardContainer" prefHeight="286.0" prefWidth="490.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aetherwars.controller.PlayerBoardController">
+<AnchorPane id="1" fx:id="playerBoardContainer" prefHeight="286.0" prefWidth="490.0" xmlns="http://javafx.com/javafx/8.0.51" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aetherwars.controller.PlayerBoardController">
    <children>
       <ProgressBar fx:id="progressBar" layoutY="14.0" prefHeight="20.0" prefWidth="455.0" progress="0.0" />
       <BorderPane layoutX="14.0" layoutY="99.0" prefHeight="100.0" prefWidth="100.0" style="-fx-border-color: black; -fx-border-radius: 16;">
