@@ -14,8 +14,9 @@ import javafx.scene.paint.Color;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
+import java.util.Observer;
 
-public class HandCardsContainerController {
+public class HandCardsContainerController implements Observer {
 
     @FXML
     private HBox cardContainer;
@@ -33,7 +34,10 @@ public class HandCardsContainerController {
 
 
     @FXML
-    private void initialize(){
+    private void initialize() {
+        GameManager.getInstance().addObserver("HANDCARD1", this);
+        GameManager.getInstance().addObserver("HANDCARD2", this);
+
         try {
             for (int i=0; i<5; i++){
                 FXMLLoader loaderHandCard = new FXMLLoader(getClass().getResource("/view/HandCard.fxml"));
@@ -119,34 +123,35 @@ public class HandCardsContainerController {
         }
     }
 
-    private ArrayList<Card> cards = new ArrayList<>();
-    private void testUpdateHandCards(){
-        cards.add(new CharacterCard(1, "Shulker", CharType.END, "Shulkers are box-shaped hostile mobs found in end cities.", "card/image/character/Shulker.png", 10, 5, 3, 4, 3));
-        cards.add(new CharacterCard(2, "Zombie", CharType.OVERWORLD, "Zombies are common undead hostile mobs that deal melee damage and attack in groups.", "card/image/character/Zombie.png", 8, 4, 1, 4, 3));
-        cards.add(new SpellMorphCard(2, "Sugondese", "Nuts", "card/image/spell/morph/Sugondese.png", 7, 2));
-        cards.add(new SpellPotionCard(1, "Sadikin Elixir", "The best elixir in the world", "card/image/spell/potion/Sadikin Elixir.png", 3, 5, 1, 5));
+    private void testUpdateHandCards() {
+        Card[] cards = new Card[5];
+
+        cards[0] = new CharacterCard(1, "Shulker", CharType.END, "Shulkers are box-shaped hostile mobs found in end cities.", "card/image/character/Shulker.png", 10, 5, 3, 4, 3);
+        cards[1] = new CharacterCard(2, "Zombie", CharType.OVERWORLD, "Zombies are common undead hostile mobs that deal melee damage and attack in groups.", "card/image/character/Zombie.png", 8, 4, 1, 4, 3);
+        cards[2] = new SpellMorphCard(2, "Sugondese", "Nuts", "card/image/spell/morph/Sugondese.png", 7, 2);
+        cards[3] = new SpellPotionCard(1, "Sadikin Elixir", "The best elixir in the world",
+                "card/image/spell/potion/Sadikin Elixir.png", 3, 5, 1, 5);
+        cards[4] = null;
         //cards.add(new CharacterCard(1, "Shulker", CharType.END, "...", "card/data/image/character/Shulker.png", 10, 5, 2, 4, 3));
         updateHandCards(cards);
     }
 
-
-    public void updateHandCards(List<Card> listCards){
+    public void updateHandCards(Card[] listCards){
         for (int i = 0; i < this.currentActiveCardCount; i++){
             this.cardContainer.getChildren().remove(0);
         }
 
-        this.currentActiveCardCount = Math.min(listCards.size(), 5);
+        this.currentActiveCardCount = Math.min(listCards.length, 5);
         for (int i = 0; i < this.currentActiveCardCount; i++){
             this.cardContainer.getChildren().add(this.handCards[i]);
-            this.handCardControllers[i].setLabelMana(listCards.get(i).getMana());
-            this.handCardControllers[i].setLabelAttr(listCards.get(i).preview());
-            this.handCardControllers[i].setCardImageView(listCards.get(i).getImagePath());
+
+            if (listCards[i] != null) {
+                this.handCardControllers[i].setLabelMana(listCards[i].getMana());
+                this.handCardControllers[i].setLabelAttr(listCards[i].preview());
+                this.handCardControllers[i].setCardImageView(listCards[i].getImagePath());
+            }
         }
     }
-
-
-
-
 
     public void update(Observable obs, Object obj) {
         if (obs instanceof ClickObject) {
@@ -156,6 +161,9 @@ public class HandCardsContainerController {
             if (co.getName().equals("HANDCARD")) {
                 setCardClickEffect(co.getIndex());
             }
+        } else if (obs instanceof HandCard) {
+            HandCard hc = (HandCard) obs;
+            updateHandCards(hc.getCards());
         }
     }
 }

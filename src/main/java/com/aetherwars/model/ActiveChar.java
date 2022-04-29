@@ -17,6 +17,7 @@ public class ActiveChar implements IActiveCharGetter, Hoverable {
     private int exp;
     private int expUp;
     private int level;
+    private int swap;
 
     public ActiveChar() {
         this.card = new CharacterCard();
@@ -29,6 +30,7 @@ public class ActiveChar implements IActiveCharGetter, Hoverable {
         this.expUp = 1;
         this.level = 1;
         this.spellsPotionList = new ArrayList<>();
+        this.swap = 0;
     }
 
     public ActiveChar(CharacterCard card) {
@@ -42,6 +44,7 @@ public class ActiveChar implements IActiveCharGetter, Hoverable {
         this.expUp = 1;
         this.level = 1;
         this.spellsPotionList = new ArrayList<>();
+        this.swap = 0;
     }
 
     public void addAttackLvl() {
@@ -98,10 +101,42 @@ public class ActiveChar implements IActiveCharGetter, Hoverable {
     }
 
     public void levelUpSpell(SpellLevelCard card) {
+        if (card.getLevelUp() > 0) {
+            if (this.level + card.getLevelUp() < 10) {
+                this.level = this.level + card.getLevelUp();
+            }
+            else {
+                this.level = 10;
+                this.exp = 0;
+                this.expUp = 0;
+            }
+        }
+        else if (card.getLevelUp() < 0) {
+            if (this.level + card.getLevelUp() > 1) {
+                this.level = this.level + card.getLevelUp();
+            }
+            else {
+                this.level = 1;
+            }
+
+        }
+    }
+
+    public void swapSpell (SpellSwapCard card) {
+        int before = this.swap;
+        this.swap = this.swap + card.getDuration();
+        if (before == 0 && this.swap > 0) {
+            this.swap();
+        }
+    }
+
+    public void swap() {
 
     }
 
+
     public void newRound() {
+        int before = this.swap;
         this.isCanAttack = true;
         int i = 0;
         while (i < this.spellsPotionList.size()) {
@@ -111,6 +146,10 @@ public class ActiveChar implements IActiveCharGetter, Hoverable {
             } else {
                 i++;
             }
+        }
+        this.swap--;
+        if (this.swap == 0 && before > 0) {
+            this.swap();
         }
     }
 
@@ -150,10 +189,6 @@ public class ActiveChar implements IActiveCharGetter, Hoverable {
     public double getBaseHealth() { return (this.card.getHealth());}
 
     public double getBaseAttack() { return (this.card.getAttack());}
-
-    public double getHealthPlus() { return (this.health - this.getBaseHealth());}
-
-    public double getAttackPlus() { return (this.attack - this.getBaseAttack());}
 
     public boolean canAttack() { return (this.isCanAttack); }
 
