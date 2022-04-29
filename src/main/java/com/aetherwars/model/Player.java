@@ -18,7 +18,7 @@ public class Player extends Observable{
     public Player() {
         this.name = "Player " + no;
         this.health = 80;
-        this.mana = 1;
+        this.mana = 0;
         this.maxMana = 1;
         this.deck = new Deck();
         this.handCard = new HandCard();
