@@ -50,49 +50,57 @@ public class HandCardsContainerController implements Observer {
             System.out.println("HAND CARD CONTAINER CONTROLLER ERROR");
             System.out.println(e);
         }
-        // testUpdateHandCards();
-        enableMouseHover();
-//        disableMouseHover();
     }
 
-    public void enableMouseHover(){
-        for (int i = 0; i < this.currentActiveCardCount; i++){
-            int finalI = i;
-            this.handCards[i].setOnMouseEntered(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    handCards[finalI].setBackground(hoverBackground);
-                    System.out.println("HAND CARD " + finalI + " IS HOVERED");
+    public void enableMouseEvent(int idx) {
+        this.handCards[idx].setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                handCards[idx].setBackground(hoverBackground);
+                System.out.println("HAND CARD " + idx + " IS HOVERED");
 
-                    GameManager.getInstance().hoverHand(finalI);
-                }
-            });
-            this.handCards[i].setOnMouseExited(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    handCards[finalI].setBackground(normalBackground);
-                    System.out.println("HAND CARD " + finalI + " NO LONGER LONGER HOVERED");
+                GameManager.getInstance().hoverHand(idx);
+            }
+        });
+        this.handCards[idx].setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                handCards[idx].setBackground(normalBackground);
+                System.out.println("HAND CARD " + idx + " NO LONGER LONGER HOVERED");
 
-                    GameManager.getInstance().unhover();
-                }
-            });
-            this.handCards[i].setOnMouseClicked(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent mouseEvent) {
-                    GameManager.getInstance().click(-1, "HANDCARD", finalI);
+                GameManager.getInstance().unhover();
+            }
+        });
+        this.handCards[idx].setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                GameManager.getInstance().click(-1, "HANDCARD", idx);
 
-                    // TODO: DELETE LATER
-                    for (int j = 0; j < 5; j++){
-                        if (finalI == j){
-                            setCardClickEffect(j);
-                        }
-                        else {
-                            unsetCardClickEffect(j);
-                        }
+                // TODO: DELETE LATER
+                for (int j = 0; j < 5; j++) {
+                    if (idx == j) {
+                        setCardClickEffect(j);
+                    } else {
+                        unsetCardClickEffect(j);
                     }
                 }
-            });
-        }
+            }
+        });
+    }
+
+    public void disableMouseEvent(int idx) {
+        this.handCards[idx].setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {}
+        });
+        this.handCards[idx].setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {}
+        });
+        this.handCards[idx].setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {}
+        });
     }
 
     private void setCardClickEffect(int idx){
@@ -106,20 +114,6 @@ public class HandCardsContainerController implements Observer {
     private void unsetAllCardClickEffect(){
         for (int i = 0; i < 5; i++){
             unsetCardClickEffect(i);
-        }
-    }
-
-
-    public void disableMouseHover(){
-        for (int i = 0; i < this.currentActiveCardCount; i++){
-            this.handCards[i].setOnMouseEntered(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {}
-            });
-            this.handCards[i].setOnMouseExited(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {}
-            });
         }
     }
 
@@ -149,6 +143,10 @@ public class HandCardsContainerController implements Observer {
                 this.handCardControllers[i].setLabelMana(listCards[i].getMana());
                 this.handCardControllers[i].setLabelAttr(listCards[i].preview());
                 this.handCardControllers[i].setCardImageView(listCards[i].getImagePath());
+
+                this.enableMouseEvent(i);
+            } else {
+                this.disableMouseEvent(i);
             }
         }
     }
