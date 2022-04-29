@@ -190,6 +190,15 @@ public class ActiveChar implements IActiveCharGetter, Hoverable {
 
             i--;
         }
+
+        if (damageLeft > 0) {
+            if (damageLeft <= this.getBaseHealth()){
+                this.health = this.health - damageLeft;
+            }
+            else {
+                this.health = 0;
+            }
+        }
     }
 
     public void addSpell(SpellCard card) {
