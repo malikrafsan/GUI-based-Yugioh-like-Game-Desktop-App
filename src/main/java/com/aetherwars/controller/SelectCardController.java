@@ -84,6 +84,10 @@ public class SelectCardController implements Observer, ISubscriber {
 
     }
 
+
+    /**
+     * Menginisiasi animasi transisi
+     */
     private void initializeTransition(){
         fadeIn = new FadeTransition();
         fadeIn.setNode(pane);
@@ -111,6 +115,10 @@ public class SelectCardController implements Observer, ISubscriber {
         scaleOut.setDuration(Duration.millis(300));
     }
 
+    /**
+     * @param playerNo nomor player
+     * Mengeset nomor player
+     */
     public void setPlayer(Integer playerNo){
         this.playerLabel.setText("PLAYER " + playerNo.toString());
     }
@@ -126,6 +134,10 @@ public class SelectCardController implements Observer, ISubscriber {
     }
 
 
+    /**
+     * @param listCards kartu untuk dipilih
+     * Memperbarui kartu yang bisa dipilih
+     */
     public void updateSelectCards(List<Card> listCards) {
         for (int i = 0; i < this.currentSelectCardCount; i++) {
             this.cardContainer.getChildren().remove(0);
@@ -159,6 +171,9 @@ public class SelectCardController implements Observer, ISubscriber {
         }
     }
 
+    /**
+     * Menampilkan pane draw phase
+     */
     private void drawPhaseSelectCard() {
         this.pane.setVisible(true);
         this.pane.setDisable(false);
@@ -168,6 +183,9 @@ public class SelectCardController implements Observer, ISubscriber {
         scaleIn.play();
     }
 
+    /**
+     * Menyembunyikan pane draw phase
+     */
     private void nonDrawPhaseSelectCard() {
         scaleOut.play();
         fadeOut.play();

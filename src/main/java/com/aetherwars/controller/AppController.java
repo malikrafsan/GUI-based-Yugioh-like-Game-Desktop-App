@@ -14,6 +14,7 @@ public class AppController {
     @FXML private Pane boardContainer;
     private Pane boardPane;
     private Pane selectCardPane;
+    private Pane gameOverPane;
     private BoardController boardController;
     private SelectCardController selectCardController;
 
@@ -26,6 +27,10 @@ public class AppController {
         FXMLLoader selectCardLoader = new FXMLLoader(getClass().getResource("/view/SelectCard.fxml"));
         this.selectCardPane = selectCardLoader.load();
         this.selectCardController = selectCardLoader.getController();
+        this.selectCardContainer.getChildren().add(this.selectCardPane);
+
+        FXMLLoader gameOverLoader = new FXMLLoader(getClass().getResource("/view/SelectCard.fxml"));
+        this.gameOverPane = selectCardLoader.load();
         this.selectCardContainer.getChildren().add(this.selectCardPane);
 
 //        this.selectCardController.setAppController(this);

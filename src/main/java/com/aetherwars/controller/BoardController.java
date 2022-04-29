@@ -104,11 +104,17 @@ public class BoardController implements Observer {
         });
     }
 
+    /**
+     * Mengeset pane-pane menjadi draw phase
+     */
     private void drawPhaseBoard() {
         this.boardPane.setEffect(new GaussianBlur());
         this.boardPane.setDisable(true);
     }
 
+    /**
+     * Mengeset pane-pane menjadi non draw phase
+     */
     private void nonDrawPhaseBoard() {
         this.boardPane.setDisable(false);
         this.boardPane.setEffect(null);
