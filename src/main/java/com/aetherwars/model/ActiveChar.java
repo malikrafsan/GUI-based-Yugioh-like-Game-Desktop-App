@@ -118,7 +118,6 @@ public class ActiveChar implements IActiveCharGetter, Hoverable {
             else {
                 this.level = 1;
             }
-
         }
     }
 

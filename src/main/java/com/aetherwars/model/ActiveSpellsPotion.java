@@ -10,11 +10,7 @@ public class ActiveSpellsPotion {
         this.card = card;
         this.healthPotion = card.getHp();
         this.attackPotion = card.getAttack();
-        if (card.getDuration() == 0) {
-            this.duration = -1;
-        } else {
-            this.duration = card.getDuration();
-        }
+        this.duration = card.getDuration();
     }
 
     public void swap() {
