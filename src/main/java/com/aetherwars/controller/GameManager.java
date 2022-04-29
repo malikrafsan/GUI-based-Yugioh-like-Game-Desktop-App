@@ -87,6 +87,8 @@ public class GameManager {
             clickedPlayer(prevClicked);
         } else if(gs.getClickObject().getName().equals("DELETE")) {
             delete(prevClicked);
+        } else if(gs.getClickObject().getName().equals("ADDEXP")) {
+            addExpFromMana(prevClicked);
         }
     }
     
@@ -147,14 +149,6 @@ public class GameManager {
                     acsEnemy.update();
                 }
             }
-        } else if(prevClicked.getName().equals("MANA")) {
-            // add exp from mana
-            int idxDst = curActCharClicked.getPlayer()-1;
-            ActiveChar ac = pm[idxDst].getActiveChars().getActChar(curActCharClicked.getIndex());
-            if(gs.getPhase().equals(Phase.PLANNING) && ac!=null) {
-                ac.addExp(pm[idxSelf].getMana());
-                pm[idxSelf].useMana(pm[idxSelf].getMana());
-            }
         }
     }
 
@@ -202,6 +196,16 @@ public class GameManager {
         } else if(prevClicked.getName().equals("ACTIVECHAR") && prevClicked.getPlayer()-1==idxSelf) {
             int idx_board = prevClicked.getIndex();
             pm[idxSelf].removeChar(idx_board);
+        }
+    }
+
+    public void addExpFromMana(ClickObject prevClicked) {
+        int idxSelf = gs.getTurn().ordinal();
+        int idxDst = prevClicked.getPlayer()-1;
+        ActiveChar ac = pm[idxDst].getActiveChars().getActChar(prevClicked.getIndex());
+        if(gs.getPhase().equals(Phase.PLANNING) && ac!=null) {
+            ac.addExp(pm[idxSelf].getMana());
+            pm[idxSelf].useMana(pm[idxSelf].getMana());
         }
     }
 
