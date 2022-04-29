@@ -104,6 +104,7 @@ public class PlayerBoardController implements Observer {
     private int ID_BOARD;
     private final int MAX_HEALTH_PLAYER = 80;
     private final String IMG_DIR_PATH = "/com/aetherwars/card/image/";
+    private final String CHAR_DIR_PATH = "/com/aetherwars/";
 
     private final String inactiveCardStyle = "-fx-border-color: black; -fx-border-width: 1px; -fx-border-radius: 16;";
     private final String activeCardStyle = "-fx-border-color: red; -fx-border-width: 3px; -fx-border-radius: 16;";
@@ -268,12 +269,14 @@ public class PlayerBoardController implements Observer {
                     this.expLvlLbls[i].setText("");
                 } else {
                     try {
-                        File file = new File(getClass().getResource(this.IMG_DIR_PATH + m.getImagePath()).toURI());
+                        File file = new File(getClass().getResource(this.CHAR_DIR_PATH + m.getImagePath()).toURI());
                         Image activeCardImg = new Image(file.toURI().toString());
                         this.activeCards[i].setImage(activeCardImg);
+                        System.out.println("Image " + this.CHAR_DIR_PATH + m.getImagePath() + " can be loaded");
                     } catch (Exception e) {
                         System.out.println("PLAYER BOARD CONTROLLER ERROR");
                         System.out.println("ERROR: " + e.getMessage());
+                        System.out.println("Image " + this.CHAR_DIR_PATH + m.getImagePath() + " cannot be loaded");
                     }
                     this.atkIcons[i].setImage(atkImg);
                     this.dfnIcons[i].setImage(dfnImg);
