@@ -12,14 +12,11 @@
       <TilePane alignment="CENTER" layoutY="12.0" prefHeight="90.0" prefWidth="97.0">
          <children>
             <ImageView fx:id="cardImageView" fitHeight="87.0" fitWidth="89.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../com/aetherwars/card/image/character/Enderman.png" />
-               </image>
             </ImageView>
          </children>
       </TilePane>
-      <Label fx:id="labelMana" alignment="TOP_CENTER" contentDisplay="CENTER" layoutY="113.0" prefHeight="21.0" prefWidth="97.0" text="MANA X" wrapText="true" />
-      <Label fx:id="labelAttr" alignment="TOP_CENTER" contentDisplay="CENTER" layoutY="134.0" prefHeight="36.0" prefWidth="97.0" text="attr" wrapText="true">
+      <Label fx:id="labelMana" alignment="TOP_CENTER" contentDisplay="CENTER" layoutY="113.0" prefHeight="21.0" prefWidth="97.0" wrapText="true" />
+      <Label fx:id="labelAttr" alignment="TOP_CENTER" contentDisplay="CENTER" layoutY="134.0" prefHeight="36.0" prefWidth="97.0" wrapText="true">
          <font>
             <Font size="11.0" />
          </font>

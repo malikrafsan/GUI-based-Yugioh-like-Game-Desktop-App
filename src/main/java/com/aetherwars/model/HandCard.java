@@ -10,7 +10,7 @@ public class HandCard extends Observable {
         this.capacity = 5;
         this.size = 0;
         this.handCard = new Card[this.capacity];
-        for (int i=0; i<this.capacity; i++){
+        for (int i = 0; i < this.capacity; i++) {
             this.handCard[i] = null;
         }
     }
@@ -65,5 +65,9 @@ public class HandCard extends Observable {
     public void sync() {
         this.setChanged();
         this.notifyObservers();
+    }
+
+    public Card[] getCards() {
+        return this.handCard;
     }
 }
