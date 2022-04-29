@@ -147,6 +147,14 @@ public class GameManager {
                     acsEnemy.update();
                 }
             }
+        } else if(prevClicked.getName().equals("MANA")) {
+            // add exp from mana
+            int idxDst = curActCharClicked.getPlayer()-1;
+            ActiveChar ac = pm[idxDst].getActiveChars().getActChar(curActCharClicked.getIndex());
+            if(gs.getPhase().equals(Phase.PLANNING) && ac!=null) {
+                ac.addExp(pm[idxSelf].getMana());
+                pm[idxSelf].useMana(pm[idxSelf].getMana());
+            }
         }
     }
 
@@ -196,7 +204,6 @@ public class GameManager {
             pm[idxSelf].removeChar(idx_board);
         }
     }
-    // add exp from mana
 
     public void nextPhase() {
         if(gs.getPhase().equals(Phase.DRAW) && gs.getHasPickCard()==false) {

@@ -120,6 +120,10 @@ public class PlayerManager {
         p.useMana(x);
     }
 
+    public int getMana() {
+        return p.getMana();
+    }
+
     public ActiveCharObserver getActiveChars() {
         return p.getActiveChars();
     }
