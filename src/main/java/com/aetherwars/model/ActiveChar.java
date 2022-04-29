@@ -94,7 +94,7 @@ public class ActiveChar implements IActiveCharGetter, Hoverable {
         if (this.level < 10) {
             this.exp = this.exp + exp;
 
-            if (this.exp > this.expUp) {
+            if (this.exp >= this.expUp) {
                 this.levelUp();
             }
         }
@@ -175,9 +175,9 @@ public class ActiveChar implements IActiveCharGetter, Hoverable {
 
     public void receiveDamage(double damage) {
         double damageLeft = damage;
-        int i = this.spellsPotionList.size();
+        int i = this.spellsPotionList.size() - 1;
 
-        while (i > 0 && damageLeft > 0) {
+        while (i > -1 && damageLeft > 0) {
             if (this.spellsPotionList.get(i).getHealthPotion() > 0) {
                 if (this.spellsPotionList.get(i).getHealthPotion() >= damageLeft) {
                     this.spellsPotionList.get(i).receiveDamage(damageLeft);
@@ -189,6 +189,15 @@ public class ActiveChar implements IActiveCharGetter, Hoverable {
             }
 
             i--;
+        }
+
+        if (damageLeft > 0) {
+            if (damageLeft <= this.getBaseHealth()){
+                this.health = this.health - damageLeft;
+            }
+            else {
+                this.health = 0;
+            }
         }
     }
 
