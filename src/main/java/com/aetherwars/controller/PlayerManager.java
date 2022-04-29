@@ -44,6 +44,11 @@ public class PlayerManager {
         p.getHand().addCard(c);
     }
 
+    public void drawCard() {
+        p.getDeck().draw();
+        p.getDeck().pickCard();
+    }
+
     // idx_board kosong && mana cukup, melakukan summon
     public void summon(int idx_hand, int idx_board) {
         Card c = p.getHand().takeCard(idx_hand);

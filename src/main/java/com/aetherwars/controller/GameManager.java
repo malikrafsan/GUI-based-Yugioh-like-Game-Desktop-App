@@ -194,6 +194,11 @@ public class GameManager {
         if(prevClicked.getName().equals("HANDCARD")) {
             int idx_hand = prevClicked.getIndex();
             pm[idxSelf].removeCard(idx_hand);
+            // draw dan pick kalo belom
+            if(gs.getHasPickCard()==false) {
+                pm[idxSelf].drawCard();
+                gs.setHasPickCard(true);
+            }
         } else if(prevClicked.getName().equals("ACTIVECHAR") && prevClicked.getPlayer()-1==idxSelf) {
             int idx_board = prevClicked.getIndex();
             pm[idxSelf].removeChar(idx_board);
