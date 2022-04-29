@@ -18,6 +18,7 @@ import javafx.scene.effect.Lighting;
 
 import java.util.*;
 
+import com.aetherwars.model.*;
 import static com.aetherwars.model.Phase.*;
 import static com.aetherwars.model.Phase.END;
 
@@ -46,13 +47,13 @@ public class BoardController implements Observer {
     @FXML private Button deleteBtn;
     @FXML private Pane boardPane;
 
-    private final int MAX_CAP_DECK = 40;
-
     @FXML
     private void initialize() throws Exception{
         GameManager.getInstance().addObserver("GAMESTATE", this);
-        // GameManager.getInstance().addObserver("PLAYER1", this);
-        // GameManager.getInstance().addObserver("PLAYER2", this);
+        GameManager.getInstance().addObserver("DECK1", this);
+        GameManager.getInstance().addObserver("DECK2", this);
+        GameManager.getInstance().addObserver("PLAYER1", this);
+        GameManager.getInstance().addObserver("PLAYER2", this);
 
         FXMLLoader loaderCardInfo = new FXMLLoader(getClass().getResource("/view/CardInfo.fxml"));
         Pane cardInfo = loaderCardInfo.load();
@@ -81,13 +82,15 @@ public class BoardController implements Observer {
         this.player2Board = player2BoardLoader.load();
         this.player2Pane.getChildren().add(this.player2Board);
 
-        this.deckValueLabel.setText("40/40");
-        this.manaValueLabel.setText("2/2");
+        // this.deckValueLabel.setText("40/40");
+        // this.manaValueLabel.setText("2/2");
 
         this.addExpBtn.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 System.out.println("ADD EXP BUTTON CLICKED");
+
+                GameManager.getInstance().click(-1, "ADDEXP", -1);
             }
         });
 
@@ -95,6 +98,8 @@ public class BoardController implements Observer {
             @Override
             public void handle(MouseEvent event) {
                 System.out.println("DELETE BTN CLICKED");
+
+                GameManager.getInstance().click(-1, "DELETE", -1);
             }
         });
     }
@@ -117,6 +122,14 @@ public class BoardController implements Observer {
             } else {
                 nonDrawPhaseBoard();
             }
+        } else if (obs instanceof Deck) {
+            Deck deck = (Deck) obs;
+            this.deckValueLabel.setText(deck.getSize() + "/" + deck.getCapacity());
+        } else if (obs instanceof Player) {
+            Player player = (Player) obs;
+
+            // TODO: CHANGE LATER MAX MANA
+            this.manaValueLabel.setText(player.getMana() + "/" + player.getMana());
         }
     }
 }

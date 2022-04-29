@@ -242,8 +242,8 @@ public class PlayerBoardController implements Observer {
         pane.styleProperty().setValue(this.inactiveCardStyle);
     }
 
-    private void updateProgressBar(int health, int maxHealth) {
-        this.progressBar.setProgress((float) health / maxHealth);
+    private void updateProgressBar(double health, int maxHealth) {
+        this.progressBar.setProgress((double) health / maxHealth);
     }
 
     private void updateActiveChars(IActiveCharGetter[] lst) {
@@ -281,12 +281,13 @@ public class PlayerBoardController implements Observer {
         }
     }
 
-    private void setPlayerLabel(int hp){
+    private void setPlayerLabel(double hp) {
+        double roundOff = Math.round(hp * 100.0) / 100.0;
         if (this.ID_BOARD == 1){
-            this.playerLabel.setText(String.format("Steve [%d]", hp));
+            this.playerLabel.setText("Steve " + roundOff);
         }
         else {
-            this.playerLabel.setText(String.format("Alex [%d]", hp));
+            this.playerLabel.setText("Alex " + roundOff);
         }
     }
 
