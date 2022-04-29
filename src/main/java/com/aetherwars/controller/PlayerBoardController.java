@@ -188,9 +188,6 @@ public class PlayerBoardController implements Observer {
                 @Override
                 public void handle(MouseEvent event) {
                     if (cardImg.getImage() != null) {
-                        Background bg = new Background(new BackgroundFill(Color.MEDIUMVIOLETRED, null, null));
-                        pane.setBackground(bg);
-    
                         GameManager.getInstance().hoverBoard(finalI,boardID);
                     }
                 }
@@ -200,9 +197,6 @@ public class PlayerBoardController implements Observer {
                 @Override
                 public void handle(MouseEvent event) {
                     if (cardImg.getImage() != null) {
-                        Background bg = new Background(new BackgroundFill(null, null, null));
-                        pane.setBackground(bg);
-    
                         GameManager.getInstance().unhover();
                     }
                 }
