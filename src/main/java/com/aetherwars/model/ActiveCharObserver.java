@@ -14,12 +14,12 @@ public class ActiveCharObserver extends Observable implements IActiveCharObserve
 
     public void addChar(CharacterCard card, int index) {
         this.chars[index] = new ActiveChar(card);
-        this.notifyObservers();
+        this.sync();
     }
 
     public void delChar(int index) {
         this.chars[index] = null;
-        this.notifyObservers();
+        this.sync();
     }
 
     public ActiveChar getActChar(int idx_board) {
@@ -28,27 +28,27 @@ public class ActiveCharObserver extends Observable implements IActiveCharObserve
 
     public void onClick(int index) {
         this.chars[index].onClick();
-        this.notifyObservers();
+        this.sync();
     }
 
     public void offClick(int index) {
         this.chars[index].offClick();
-        this.notifyObservers();
+        this.sync();
     }
     
     public void onHover(int index) {
         this.chars[index].onHover();
-        this.notifyObservers();
+        this.sync();
     }
 
     public void offHover(int index) {
         this.chars[index].offHover();
-        this.notifyObservers();
+        this.sync();
     }
 
     public void addExp(int index, int exp) {
         this.chars[index].addExp(exp);
-        this.notifyObservers();
+        this.sync();
     }
 
     public void update() {
@@ -57,6 +57,7 @@ public class ActiveCharObserver extends Observable implements IActiveCharObserve
                 delChar(i);
             }
         }
+        this.sync();
     }
 
     public ActiveChar[] getChars() {
@@ -69,6 +70,7 @@ public class ActiveCharObserver extends Observable implements IActiveCharObserve
                 this.chars[i].newRound();
             }
         }
+        this.sync();
     }
 
     public void addSpell(int index, SpellCard card) {
@@ -83,13 +85,18 @@ public class ActiveCharObserver extends Observable implements IActiveCharObserve
                 this.chars[index].swapSpell((SpellSwapCard) card);
                 break;
         }
+        this.sync();
     }
 
     public void receiveDamage(int index, double damage) {
         this.chars[index].receiveDamage(damage);
+        this.sync();
     }
 
-    public void cannotAttack(int index) {this.chars[index].cannotAttack();}
+    public void cannotAttack(int index) {
+        this.chars[index].cannotAttack();
+        this.sync();
+    }
 
     public boolean canAttack(int index) { return (this.chars[index].canAttack()); }
 
