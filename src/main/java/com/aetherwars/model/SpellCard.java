@@ -17,6 +17,9 @@ public abstract class SpellCard extends Card {
         this.type = type;
     }
 
+    /**
+     * @return Mengembalikan tipe spell
+     */
     public SpellType getType() {
         return (this.type);
     }

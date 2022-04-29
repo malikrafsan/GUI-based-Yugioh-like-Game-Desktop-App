@@ -30,20 +30,41 @@ public class CharacterCard extends Card {
         this.healthUp = healthUp;
     }
 
+    /**
+     * @return Mengembalikan attack
+     */
     public int getAttack() { return (this.attack);}
 
+    /**
+     * @return Mengembalikan health
+     */
     public int getHealth() { return (this.health);}
 
+    /**
+     * @return Mengembalikan attackup
+     */
     public int getAttackUp() { return (this.attackUp);}
 
+    /**
+     * @return Mengembalikan healthup
+     */
     public int getHealthUp() { return (this.healthUp);}
 
+    /**
+     * @return Mengembalikan path image
+     */
     public String getImagePath() { return (this.image_path);}
 
+    /**
+     * @return Mengembalikan tipe sebuah kartu karakter
+     */
     public CharType getType() {
         return type;
     }
 
+    /**
+     * @return Preview untuk kartu spell level
+     */
     @Override
     public String preview() {
         return "ATK " + this.attack + "/HP " + this.health;
@@ -60,6 +81,10 @@ public class CharacterCard extends Card {
                 "\nHealthUp:" + healthUp;
     }
 
+    /**
+     * @brief Method untuk display info yang dibutuhkan
+     * @return Mengembalikan list of pair untuk setiap key dan value yang ditampilkan
+     */
     @Override
     public List<Pair<String,String>> displayInfo() {
         List<Pair<String,String>> res = new ArrayList<>();
