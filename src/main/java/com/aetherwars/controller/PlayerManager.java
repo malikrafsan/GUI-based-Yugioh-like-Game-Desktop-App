@@ -65,7 +65,7 @@ public class PlayerManager {
                 System.out.println("Selected board is empty");
             }
         } else if(c instanceof CharacterCard) {
-            if(ac == null && c.getMana() <= p.getMana()) {
+            if (ac == null && c.getMana() <= p.getMana()) {
                 summon(idx_hand, idx_board);
             } else {
                 System.out.println("Selected board is already occupied or mana is not enough");

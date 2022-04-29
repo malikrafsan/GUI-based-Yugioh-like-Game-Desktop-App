@@ -1,18 +1,32 @@
 package com.aetherwars.model;
 import com.aetherwars.interfaces.IActiveCharObserverGetter;
-import java.util.Observable;
+import java.util.*;
 
 public class ActiveCharObserver extends Observable implements IActiveCharObserverGetter{
     private ActiveChar[] chars;
 
     public ActiveCharObserver() {
         this.chars = new ActiveChar[5];
-        for (int i=0; i<5; i++) {
+        for (int i = 0; i < 5; i++) {
             this.chars[i] = null;
+        }
+        randomizeHandCard();
+    }
+
+    public void randomizeHandCard() {
+        Random rand = new Random();
+        CharType[] types = new CharType[] {CharType.END, CharType.OVERWORLD, CharType.NETHER};
+        String[] imgPaths = new String[]{"card/image/spell/morph/Sugondese.png", "card/image/spell/potion/Sadikin Elixir.png", "card/image/character/Shulker.png", "card/image/character/Zombie.png", "card/data/image/character/Shulker.png"};
+
+        for (int i = 0; i < this.chars.length; i++) {
+            if (rand.nextDouble() > 0.5) {
+                this.chars[i] = new ActiveChar(new CharacterCard(rand.nextInt(10), "INI NAMA" + rand.nextInt(10), types[rand.nextInt(types.length)], "...", imgPaths[rand.nextInt(imgPaths.length)], rand.nextInt(10), rand.nextInt(10), rand.nextInt(10), rand.nextInt(10), rand.nextInt(10)));
+            }
         }
     }
 
     public void addChar(CharacterCard card, int index) {
+        System.out.println("\n\nadd char to board\n\n");
         this.chars[index] = new ActiveChar(card);
         this.sync();
     }

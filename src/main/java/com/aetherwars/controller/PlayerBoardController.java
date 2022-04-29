@@ -114,7 +114,7 @@ public class PlayerBoardController implements Observer {
 
         GameManager.getInstance().addObserver("PLAYER" + this.ID_BOARD, this);
         GameManager.getInstance().addObserver("CLICKOBJECT", this);
-        GameManager.getInstance().addObserver("ACTIVECHAR" + this.ID_BOARD, this);
+        GameManager.getInstance().addObserver("ACTIVECHARS" + this.ID_BOARD, this);
         GameManager.getInstance().addObserver("GAMESTATE", this);
 
         this.activeCards = new ImageView[] { activeCard1, activeCard2, activeCard3, activeCard4, activeCard5 };
@@ -188,7 +188,6 @@ public class PlayerBoardController implements Observer {
                     if (cardImg.getImage() != null) {
                         Background bg = new Background(new BackgroundFill(Color.MEDIUMVIOLETRED, null, null));
                         pane.setBackground(bg);
-                        System.out.println("CARD " + (finalI + 1) + " FROM PLAYER " + boardId + " IS HOVERED");
     
                         GameManager.getInstance().hoverBoard(finalI,boardID);
                     }
@@ -201,7 +200,6 @@ public class PlayerBoardController implements Observer {
                     if (cardImg.getImage() != null) {
                         Background bg = new Background(new BackgroundFill(null, null, null));
                         pane.setBackground(bg);
-                        System.out.println("CARD " + (finalI + 1) + " NO LONGER HOVERED");
     
                         GameManager.getInstance().unhover();
                     }
@@ -245,6 +243,11 @@ public class PlayerBoardController implements Observer {
     }
 
     private void updateActiveChars(IActiveCharGetter[] lst) {
+        for (int i = 0; i < lst.length; i++) {
+            System.out.println(lst[i]);
+        }
+        System.out.println("===========");
+
         try {
             File fileAtkIcon = new File(getClass().getResource(this.IMG_DIR_PATH + "/active_char/sword.png").toURI());
             Image atkImg = new Image(fileAtkIcon.toURI().toString());
@@ -263,13 +266,18 @@ public class PlayerBoardController implements Observer {
                     this.activeCards[i].setImage(null);
                     this.expLvlLbls[i].setText("");
                 } else {
-                    File file = new File(getClass().getResource(this.IMG_DIR_PATH + m.getImagePath()).toURI());
-                    Image activeCardImg = new Image(file.toURI().toString());
+                    try {
+                        File file = new File(getClass().getResource(this.IMG_DIR_PATH + m.getImagePath()).toURI());
+                        Image activeCardImg = new Image(file.toURI().toString());
+                        this.activeCards[i].setImage(activeCardImg);
+                    } catch (Exception e) {
+                        System.out.println("PLAYER BOARD CONTROLLER ERROR");
+                        System.out.println("ERROR: " + e.getMessage());
+                    }
                     this.atkIcons[i].setImage(atkImg);
                     this.dfnIcons[i].setImage(dfnImg);
                     this.atkLbls[i].setText(Double.toString(m.getAttack()));
                     this.dfnLbls[i].setText(Double.toString(m.getHealth()));
-                    this.activeCards[i].setImage(activeCardImg);
                     this.expLvlLbls[i].setText(Integer.toString(m.getExp()) + "/" + Integer.toString(m.getExpUp()) + " [" + Integer.toString(m.getLevel()) + "]");
                 }
             }
@@ -307,8 +315,9 @@ public class PlayerBoardController implements Observer {
     }
 
     public void update(Observable obs, Object obj) {
-        if (obs instanceof IActiveCharObserverGetter) {
-            this.updateActiveChars(((IActiveCharObserverGetter) obs).getChars());
+        if (obs instanceof ActiveCharObserver) {
+            System.out.println("\n\nPLAYER BOARD CONTROLLER UPDATE OBSERVER ACTIVECHAR\n\n");
+            this.updateActiveChars(((ActiveCharObserver) obs).getChars());
         } else if (obs instanceof ClickObject) {
             ClickObject co = (ClickObject) obs;
 

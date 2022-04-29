@@ -55,7 +55,6 @@ public class HandCardsContainerController implements Observer {
             @Override
             public void handle(MouseEvent event) {
                 handCards[idx].setBackground(hoverBackground);
-                System.out.println("HAND CARD " + idx + " IS HOVERED");
 
                 GameManager.getInstance().hoverHand(idx);
             }
@@ -64,7 +63,6 @@ public class HandCardsContainerController implements Observer {
             @Override
             public void handle(MouseEvent event) {
                 handCards[idx].setBackground(normalBackground);
-                System.out.println("HAND CARD " + idx + " NO LONGER LONGER HOVERED");
 
                 GameManager.getInstance().unhover();
             }

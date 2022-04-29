@@ -109,7 +109,7 @@ public class GameManager {
         if((prevClicked.getName()).equals("HANDCARD")) {
             if(gs.getPhase().equals(Phase.PLANNING)) {
                 int idxHand = prevClicked.getIndex();
-                if(curActCharClicked.getPlayer()-1==idxSelf) {
+                if (curActCharClicked.getPlayer() - 1 == idxSelf) {
                     pm[idxSelf].handToBoard(idxHand, curActCharClicked.getIndex());
                 } else {
                     // kasih spell ke lawan

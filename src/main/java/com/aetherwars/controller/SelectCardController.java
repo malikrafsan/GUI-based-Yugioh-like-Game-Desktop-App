@@ -47,14 +47,12 @@ public class SelectCardController implements Observer, ISubscriber {
                     @Override
                     public void handle(MouseEvent event) {
                         cardsToSelect[finalI - 1].setBackground(hoverBackground);
-                        System.out.println("CARD " + finalI + " IS HOVERED");
                     }
                 });
                 this.cardsToSelect[i].setOnMouseExited(new EventHandler<MouseEvent>() {
                     @Override
                     public void handle(MouseEvent event) {
                         cardsToSelect[finalI - 1].setBackground(normalBackground);
-                        System.out.println("CARD " + finalI + " IS NO LONGER LONGER HOVERED");
                     }
                 });
                 this.cardsToSelect[i].setOnMouseClicked(new EventHandler<MouseEvent>() {

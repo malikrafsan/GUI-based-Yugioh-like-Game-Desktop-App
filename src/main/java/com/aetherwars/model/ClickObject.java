@@ -37,4 +37,8 @@ public class ClickObject extends Observable {
         this.setChanged();
         this.notifyObservers();
     }
+
+    public String toString() {
+        return "ClickObject: " + this.player + " " + this.name + " " + this.index;
+    }
 }
