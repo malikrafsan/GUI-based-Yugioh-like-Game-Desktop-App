@@ -37,7 +37,9 @@ public class SelectCardController implements Observer, ISubscriber {
     private ScaleTransition scaleIn;
     private ScaleTransition scaleOut;
 
-
+    /**
+     * Melakukan inisiasi GUI
+     */
     @FXML
     public void initialize() {
         GameManager.getInstance().getEventBroker().addSubscriber("PICKCARD", this);
@@ -153,6 +155,11 @@ public class SelectCardController implements Observer, ISubscriber {
         }
     }
 
+
+    /**
+     * @param event event
+     * Merespons event yang didapat
+     */
     public void onEvent(IEvent event) {
         if (event instanceof PickCardEvent) {
             System.out.println("PICK CARD EVENT ON SELECT CARD");
@@ -161,6 +168,12 @@ public class SelectCardController implements Observer, ISubscriber {
             drawPhaseSelectCard();
         }
     }
+
+    /**
+     * @param obs observable
+     * @param obj object
+     * Merespons terjadinya update pada observable
+     */
     public void update(Observable obs, Object obj) {
         if (obs instanceof IPhaseGetter) {
             IPhaseGetter gs = (IPhaseGetter) obs;

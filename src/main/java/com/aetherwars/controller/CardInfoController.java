@@ -71,6 +71,11 @@ public class CardInfoController implements Observer {
         }
     }
 
+    /**
+     * @param obs observable
+     * @param obj object
+     * Merespons terjadinya update pada observable
+     */
     public void update(Observable obs, Object obj){
         if (obs instanceof GameState) {
             GameState gs = (GameState) obs;
@@ -85,7 +90,9 @@ public class CardInfoController implements Observer {
         }
     }
 
-
+    /**
+     * Melakukan inisiasi GUI
+     */
     @FXML public void initialize(){
         this.attrLabel = new Label[] { attr1Label, attr2Label, attr3Label, attr4Label, attr5Label };
         GameManager.getInstance().addObserver("GAMESTATE", this);

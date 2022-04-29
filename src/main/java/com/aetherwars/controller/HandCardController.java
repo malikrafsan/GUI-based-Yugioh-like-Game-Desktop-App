@@ -70,6 +70,9 @@ public class HandCardController {
         }
     }
 
+    /**
+     * Melakukan inisiasi GUI
+     */
     @FXML
     private void initialize(){
         fadeIn = new FadeTransition();

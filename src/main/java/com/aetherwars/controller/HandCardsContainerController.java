@@ -29,7 +29,9 @@ public class HandCardsContainerController implements Observer {
     private final String inactiveCardStyle = "-fx-border-color: black; -fx-border-width: 1px";
     private final String activeCardStyle = "-fx-border-color: red; -fx-border-width: 3px";
 
-
+    /**
+     * Melakukan inisiasi GUI
+     */
     @FXML
     private void initialize() {
         GameManager.getInstance().addObserver("HANDCARD1", this);
@@ -164,6 +166,11 @@ public class HandCardsContainerController implements Observer {
         }
     }
 
+    /**
+     * @param obs observable
+     * @param obj object
+     * Merespons terjadinya update pada observable
+     */
     public void update(Observable obs, Object obj) {
         if (obs instanceof ClickObject) {
             ClickObject co = (ClickObject) obs;

@@ -22,6 +22,9 @@ public class AppController {
     private SelectCardController selectCardController;
     private GameOverController gameOverController;
 
+    /**
+     * Melakukan inisiasi GUI
+     */
     @FXML private void initialize() throws Exception {
         FXMLLoader boardLoader = new FXMLLoader(getClass().getResource("/view/Board.fxml"));
         this.boardPane = boardLoader.load();

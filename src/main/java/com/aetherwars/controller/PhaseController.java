@@ -19,6 +19,9 @@ public class PhaseController implements Observer {
     private final String inactivePhase = "-fx-background-color: rgb(240,236,236); -fx-border-color: black;";
     private final String activePhase = "-fx-background-color: orange; -fx-border-color: black;";
 
+    /**
+     * Melakukan inisiasi GUI
+     */
     @FXML
     public void initialize(){
         labels[0] = labelDraw;
@@ -75,8 +78,11 @@ public class PhaseController implements Observer {
     }
 
 
-
-
+    /**
+     * @param obs observable
+     * @param obj object
+     * Merespons terjadinya update pada observable
+     */
     public void update(Observable obs, Object obj) {
         if (obs instanceof IPhaseGetter) {
             IPhaseGetter pg = (IPhaseGetter) obs;
