@@ -31,8 +31,9 @@ public class GameOverController {
         this.pane.setDisable(true);
         this.pane.setVisible(false);
         this.pane.setMouseTransparent(true);
-        this.pane.getParent().setMouseTransparent(true);
     }
+
+
 
 
     /**
