@@ -71,11 +71,6 @@ public class Player extends Observable{
         this.sync();
     }
 
-    public void receiveDamage(double damage) {
-        this.health = this.health - damage;
-        this.sync();
-    }
-
     public void onClick() {
         this.clicked = true;
         this.sync();
