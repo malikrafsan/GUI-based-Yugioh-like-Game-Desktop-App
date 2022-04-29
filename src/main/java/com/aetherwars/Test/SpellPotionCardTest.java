@@ -44,9 +44,4 @@ class SpellPotionCardTest {
         String text = "ATK +2/HP +2 (2)";
         assertEquals(deathlyMagic.preview(), text);
     }
-
-    @Test
-    void displayInfo() {
-
-    }
 }

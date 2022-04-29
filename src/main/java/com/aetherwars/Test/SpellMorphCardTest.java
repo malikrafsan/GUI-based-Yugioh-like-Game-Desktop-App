@@ -32,8 +32,4 @@ class SpellMorphCardTest {
     void preview() {
         assertEquals(sheepify.preview(), "MORPH");
     }
-
-    @Test
-    void displayInfo() {
-    }
 }

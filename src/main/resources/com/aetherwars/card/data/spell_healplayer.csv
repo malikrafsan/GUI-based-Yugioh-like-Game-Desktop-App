@@ -1,0 +1,4 @@
+id,name,description,imagepath,mana,heal
+501,Yoasobi,Menambah health player sebesar 1 poin,card/image/spell/potion/Yoasobi.png, 2, 1
+502,Ngewibu,Kamu bisa mendapatkan healing sebesar 20 poin dengan ngewibu sepuasnyaa,card/image/spell/potion/Mother's Prayer.png,5,20
+503,Tidur,Tidur membuatmu pulih dan HP mu akan bertambah sebesar 10 poin,card/image/spell/potion/Kordas' CUrse.png,4,10

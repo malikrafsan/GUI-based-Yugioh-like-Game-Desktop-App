@@ -32,8 +32,4 @@ class SpellSwapCardTest {
     void preview() {
         assertEquals(catFood.preview(), "ATK <-> HP");
     }
-
-    @Test
-    void displayInfo() {
-    }
 }

@@ -32,8 +32,4 @@ class SpellLevelCardTest {
     void preview() {
         assertEquals(levelplus.preview(), "LVL +1");
     }
-
-    @Test
-    void displayInfo() {
-    }
 }
