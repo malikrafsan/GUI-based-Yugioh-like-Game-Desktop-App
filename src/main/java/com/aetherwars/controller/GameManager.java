@@ -152,7 +152,7 @@ public class GameManager {
 
     public void clickedPlayer(ClickObject prevClicked) {
         ClickObject curPlayerClicked = gs.getClickObject();
-        int id = curPlayerClicked.getPlayer()-1;
+        int id = curPlayerClicked.getPlayer();
         int idxSelf = gs.getTurn().ordinal();
         int idxEnemy = 1- idxSelf;
         if(prevClicked.getName().equals("ACTIVECHAR") && prevClicked.getPlayer()-1==idxSelf && id-1==idxEnemy) {
