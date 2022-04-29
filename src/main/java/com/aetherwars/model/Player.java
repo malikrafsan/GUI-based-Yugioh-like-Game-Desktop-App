@@ -19,7 +19,7 @@ public class Player extends Observable{
         this.name = "Player " + no;
         this.health = 80;
         this.mana = 0;
-        this.maxMana = 1;
+        this.maxMana = 0;
         this.deck = new Deck();
         this.handCard = new HandCard();
         this.activeChars = new ActiveCharObserver();
