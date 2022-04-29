@@ -34,8 +34,8 @@ public class Player extends Observable{
     public void newRound() {
         if (this.maxMana < 10) {
             this.maxMana = this.maxMana + 1;
-            this.activeChars.newRound();
         }
+        this.activeChars.newRound();
         this.mana = this.maxMana;
         if(this.getHand().getSize() <5) {
             this.deck.draw();

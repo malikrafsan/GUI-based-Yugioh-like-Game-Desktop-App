@@ -92,7 +92,6 @@ public class GameState extends Observable implements IRoundGetter, IPhaseGetter 
                 this.player1.getHand().sync();
                 break;
         }
-        this.sync();
     }
 
     public Player getPlayer1() {
@@ -121,6 +120,5 @@ public class GameState extends Observable implements IRoundGetter, IPhaseGetter 
 
     public void setClickObject(int player, String name, int index) {
         clickObject.setClickObject(player, name, index);
-        this.sync();
     }
 }
