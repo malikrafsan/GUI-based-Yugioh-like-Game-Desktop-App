@@ -11,18 +11,33 @@ public class BattleManager {
         enemy = null;
     }
 
+    /**
+     * mengeset penyerang
+     * @param self penyerang
+     */
     public void setSelf(ActiveChar self) {
         this.self = self;
     }
 
+    /**
+     * mengeset lawan
+     * @param enemy
+     */
     public void setEnemy(ActiveChar enemy) {
         this.enemy = enemy;
     }
 
+    /**
+     * cek penyerang bisa menyerang
+     * @return
+     */
     public boolean canBattle() {
         return self != null && enemy != null && self.canAttack();
     }
 
+    /**
+     * bertukar serangan dan update exp
+     */
     public void battle() {
         Double selfMult, enemyMult;
         if(self.getType().equals(enemy.getType())) {
