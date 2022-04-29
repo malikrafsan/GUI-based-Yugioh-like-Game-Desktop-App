@@ -16,6 +16,11 @@ public class PlayerManager {
         this.p = p;
         this.cm = cm;
         cm.setupDeck(p.getDeck());
+        p.getDeck().draw();
+        List<Card> threeCards = p.getDeck().getThreeCard();
+        for(Card c : threeCards) {
+            p.getHand().addCard(c);
+        }
     }
 
     public void syncAll() {
