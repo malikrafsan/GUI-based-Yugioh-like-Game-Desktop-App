@@ -155,18 +155,21 @@ public class GameManager {
     public void clickedPlayer(ClickObject prevClicked) {
         ClickObject curPlayerClicked = gs.getClickObject();
         int id = curPlayerClicked.getPlayer()-1;
-        // && id==3-curPlayer, belum cek board nya ada attacker ga.
         int idxSelf = gs.getTurn().ordinal();
         int idxEnemy = 1- idxSelf;
-//        if(lastClicked.get(0).equals("ACTIVECHAR") && (Integer)lastClicked.get(2)-1==idxSelf && id-1==idxEnemy) {
-//            // bila board lawan kosong, direct attack
-//            int idx_board = (Integer)lastClicked.get(1);
-//            ActiveChar acSelf = pm[idxSelf].getActiveChars().getActChar(idx_board);
-//            if(gs.getPhase().equals(Phase.ATTACK) && acSelf!=null && acSelf.canAttack() && pm[idxEnemy].canBeDirectAttacked()) {
-//                int atk = acSelf.getAttack();
-//                pm[idxEnemy].minusHealth(atk);
-//                // if lawan mati, win
-//            }
+        if(prevClicked.getName().equals("ACTIVECHAR") && prevClicked.getPlayer()-1==idxSelf && id-1==idxEnemy) {
+            int idx_board = prevClicked.getIndex();
+            ActiveChar acSelf = pm[idxSelf].getActiveChars().getActChar(idx_board);
+            if (gs.getPhase().equals(Phase.ATTACK) && acSelf != null && acSelf.canAttack() && pm[idxEnemy].canBeDirectAttacked()) {
+                double atk = acSelf.getAttack();
+                pm[idxEnemy].minusHealth(atk);
+                acSelf.cannotAttack();
+                // if lawan mati, win
+//                if(pm[idxEnemy].getHealth()<=0) {
+//                    ;
+//                }
+            }
+        }
     }
 
     public void hover(Hoverable h) {

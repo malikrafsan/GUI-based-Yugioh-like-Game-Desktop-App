@@ -144,7 +144,7 @@ public class PlayerManager {
         GameManager.getInstance().hover(p.getActiveChars().getActChar(idx_board));
     }
 
-//    public void minusHealth(Double x) {
-//        p.minusHealth(x);
-//    }
+    public void minusHealth(Double x) {
+        p.minusHealth(x);
+    }
 }

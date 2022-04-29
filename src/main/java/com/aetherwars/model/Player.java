@@ -86,4 +86,8 @@ public class Player extends Observable{
     public double getHealth() {
         return this.health;
     }
+
+    public void minusHealth(double x) {
+        this.health = this.health - x;
+    }
 }
