@@ -94,7 +94,7 @@ public class ActiveChar implements IActiveCharGetter, Hoverable {
         if (this.level < 10) {
             this.exp = this.exp + exp;
 
-            if (this.exp > this.expUp) {
+            if (this.exp >= this.expUp) {
                 this.levelUp();
             }
         }
