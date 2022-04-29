@@ -143,6 +143,7 @@ public class SelectCardController implements Observer, ISubscriber {
 
     public void onEvent(IEvent event) {
         if (event instanceof PickCardEvent) {
+            System.out.println("PICK CARD EVENT ON SELECT CARD");
             PickCardEvent pickCardEvent = (PickCardEvent) event;
             updateSelectCards(pickCardEvent.getData());
             drawPhaseSelectCard();
@@ -155,6 +156,7 @@ public class SelectCardController implements Observer, ISubscriber {
                 System.out.println("HERE");
                 // drawPhaseSelectCard();
             } else {
+                System.out.println("THERE");
                 nonDrawPhaseSelectCard();
             }
         }

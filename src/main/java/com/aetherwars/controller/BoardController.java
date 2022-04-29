@@ -110,6 +110,7 @@ public class BoardController implements Observer, ISubscriber {
     
     public void onEvent(IEvent event) {
         if (event instanceof PickCardEvent) {
+            System.out.println("PICK CARD EVENT ON BOARD");
             PickCardEvent pickCardEvent = (PickCardEvent) event;
             drawPhaseBoard();
         }
