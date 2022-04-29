@@ -76,22 +76,22 @@ public class Player extends Observable{
 
     public void onClick() {
         this.clicked = true;
-        this.notifyObservers();
+        this.sync();
     }
 
     public void offClick() {
         this.clicked = false;
-        this.notifyObservers();
+        this.sync();
     }
 
     public void onHover() {
         this.hovered = true;
-        this.notifyObservers();
+        this.sync();
     }
 
     public void offHover() {
         this.hovered = false;
-        this.notifyObservers();
+        this.sync();
     }
 
     public double getHealth() {
