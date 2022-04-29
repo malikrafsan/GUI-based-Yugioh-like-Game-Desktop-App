@@ -112,7 +112,6 @@ public class BoardController implements Observer {
     public void update(Observable obs, Object obj) {
         if (obs instanceof IPhaseGetter) {
             IPhaseGetter gs = (IPhaseGetter) obs;
-            System.out.println("PHASE: " + gs.getPhase());
             if (gs.getPhase() == DRAW && !gs.getHasPickCard()) {
                 drawPhaseBoard();
             } else {
@@ -130,7 +129,6 @@ class MockGameStateBoard extends Observable implements IPhaseGetter {
 
     public void setPhase(Phase newPhase) {
         this.phase = newPhase;
-        System.out.println("CHANGING TO " + newPhase);
         setChanged();
         notifyObservers();
     }

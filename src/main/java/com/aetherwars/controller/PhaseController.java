@@ -68,7 +68,6 @@ public class PhaseController implements Observer {
     public void update(Observable obs, Object obj) {
         if (obs instanceof IPhaseGetter) {
             IPhaseGetter pg = (IPhaseGetter) obs;
-            System.out.println("Getting phase");
             Phase ps = pg.getPhase();
             this.setPhase(ps);
         }
@@ -86,7 +85,6 @@ public class PhaseController implements Observer {
 
         public void setPhase(Phase phase){
             currentPhase = phase;
-            System.out.println("CHANGING PHASE TO :" + currentPhase);
             setChanged();
             notifyObservers();
         }
