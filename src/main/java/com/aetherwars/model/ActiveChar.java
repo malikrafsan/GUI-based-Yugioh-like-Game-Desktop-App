@@ -144,7 +144,7 @@ public class ActiveChar implements IActiveCharGetter, Hoverable {
             this.exp = 0;
         }
         else if (card.getLevelUp() < 0) {
-            for (int i = 0; i < card.getLevelUp(); i++) {
+            for (int i = 0; i > card.getLevelUp(); i--) {
                 this.levelDown();
             }
             this.exp = 0;
@@ -162,7 +162,6 @@ public class ActiveChar implements IActiveCharGetter, Hoverable {
     public void swap() {
         double temp;
         int i = 0;
-
         temp = this.attack;
         this.attack = this.health;
         this.health = temp;
@@ -181,6 +180,7 @@ public class ActiveChar implements IActiveCharGetter, Hoverable {
             if (this.spellsPotionList.get(i).getHealthPotion() > 0) {
                 if (this.spellsPotionList.get(i).getHealthPotion() >= damageLeft) {
                     this.spellsPotionList.get(i).receiveDamage(damageLeft);
+                    damageLeft = 0;
                 }
                 else {
                     this.spellsPotionList.get(i).receiveDamage(this.spellsPotionList.get(i).getHealthPotion());
@@ -222,7 +222,7 @@ public class ActiveChar implements IActiveCharGetter, Hoverable {
         int i = 0;
         while (i < this.spellsPotionList.size()) {
             this.spellsPotionList.get(i).newRound();
-            if (this.spellsPotionList.get(i).getDuration() == 0) {
+            if (this.spellsPotionList.get(i).getDuration() < 0) {
                 this.spellsPotionList.remove(i);
             } else {
                 i++;
