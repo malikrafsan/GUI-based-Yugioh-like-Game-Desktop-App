@@ -39,7 +39,7 @@ public class CardInfoController implements Observer {
             attrLabel[i].setText("");
         }
         try {
-            InputStream inputStream = getClass().getResourceAsStream(hoverable.getImagePath());
+            InputStream inputStream = getClass().getResourceAsStream(prefixImagePath + hoverable.getImagePath());
             Image cardImage  = new Image(inputStream);
             this.card_img.setImage(cardImage);
         }

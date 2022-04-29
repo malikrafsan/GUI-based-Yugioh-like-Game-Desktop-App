@@ -62,7 +62,7 @@ public class SelectCardController implements Observer, ISubscriber {
                     public void handle(MouseEvent mouseEvent) {
                         System.out.println("CARD " + finalI + " IS CLICKED");
                         // TODO : CALL GAME MANAGER FOR PICKING CARD
-                        GameManager.getInstance().clickPickCard(finalI);
+                        GameManager.getInstance().clickPickCard(finalI - 1);
                     }
                 });
             }

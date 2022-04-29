@@ -201,12 +201,14 @@ public class GameManager {
     }
 
     public void addExpFromMana(ClickObject prevClicked) {
-        int idxSelf = gs.getTurn().ordinal();
-        int idxDst = prevClicked.getPlayer()-1;
-        ActiveChar ac = pm[idxDst].getActiveChars().getActChar(prevClicked.getIndex());
-        if(gs.getPhase().equals(Phase.PLANNING) && ac!=null) {
-            ac.addExp(pm[idxSelf].getMana());
-            pm[idxSelf].useMana(pm[idxSelf].getMana());
+        if(prevClicked.getName().equals("ACTIVECHAR")){
+            int idxSelf = gs.getTurn().ordinal();
+            int idxDst = prevClicked.getPlayer()-1;
+            ActiveChar ac = pm[idxDst].getActiveChars().getActChar(prevClicked.getIndex());
+            if(gs.getPhase().equals(Phase.PLANNING) && ac!=null) {
+                ac.addExp(pm[idxSelf].getMana());
+                pm[idxSelf].useMana(pm[idxSelf].getMana());
+            }
         }
     }
 
