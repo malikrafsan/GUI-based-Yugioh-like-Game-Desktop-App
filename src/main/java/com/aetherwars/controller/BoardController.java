@@ -19,10 +19,12 @@ import javafx.scene.effect.Lighting;
 import java.util.*;
 
 import com.aetherwars.model.*;
+import com.aetherwars.interfaces.*;
+import com.aetherwars.event.*;
 import static com.aetherwars.model.Phase.*;
 import static com.aetherwars.model.Phase.END;
 
-public class BoardController implements Observer {
+public class BoardController implements Observer, ISubscriber {
 
     public Label manaValueLabel;
     @FXML private Label deckValueLabel;
@@ -48,12 +50,14 @@ public class BoardController implements Observer {
     @FXML private Pane boardPane;
 
     @FXML
-    private void initialize() throws Exception{
+    private void initialize() throws Exception {
         GameManager.getInstance().addObserver("GAMESTATE", this);
         GameManager.getInstance().addObserver("DECK1", this);
         GameManager.getInstance().addObserver("DECK2", this);
         GameManager.getInstance().addObserver("PLAYER1", this);
         GameManager.getInstance().addObserver("PLAYER2", this);
+
+        GameManager.getInstance().getEventBroker().addSubscriber("PICKCARD", this);
 
         FXMLLoader loaderCardInfo = new FXMLLoader(getClass().getResource("/view/CardInfo.fxml"));
         Pane cardInfo = loaderCardInfo.load();
@@ -103,6 +107,14 @@ public class BoardController implements Observer {
             }
         });
     }
+    
+    public void onEvent(IEvent event) {
+        if (event instanceof PickCardEvent) {
+            System.out.println("PICK CARD EVENT ON BOARD");
+            PickCardEvent pickCardEvent = (PickCardEvent) event;
+            drawPhaseBoard();
+        }
+    }
 
     /**
      * Mengeset pane-pane menjadi draw phase
@@ -124,7 +136,7 @@ public class BoardController implements Observer {
         if (obs instanceof IPhaseGetter) {
             IPhaseGetter gs = (IPhaseGetter) obs;
             if (gs.getPhase() == DRAW && !gs.getHasPickCard()) {
-                drawPhaseBoard();
+                // drawPhaseBoard();
             } else {
                 nonDrawPhaseBoard();
             }
@@ -134,8 +146,7 @@ public class BoardController implements Observer {
         } else if (obs instanceof Player) {
             Player player = (Player) obs;
 
-            // TODO: CHANGE LATER MAX MANA
-            this.manaValueLabel.setText(player.getMana() + "/" + player.getMana());
+            this.manaValueLabel.setText(player.getMana() + "/" + player.getMaxMana());
         }
     }
 }

@@ -38,6 +38,7 @@ public class BattleManager {
 
         enemy.receiveDamage(self.getAttack() * selfMult);
         self.receiveDamage(enemy.getAttack() * enemyMult);
+        self.cannotAttack();
         if(enemy.getHealth()<=0 && self.getHealth()>0) {
             self.addExp(enemy.getLevel());
         }

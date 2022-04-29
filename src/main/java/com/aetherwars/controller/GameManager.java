@@ -152,7 +152,7 @@ public class GameManager {
 
     public void clickedPlayer(ClickObject prevClicked) {
         ClickObject curPlayerClicked = gs.getClickObject();
-        int id = curPlayerClicked.getPlayer()-1;
+        int id = curPlayerClicked.getPlayer();
         int idxSelf = gs.getTurn().ordinal();
         int idxEnemy = 1- idxSelf;
         if(prevClicked.getName().equals("ACTIVECHAR") && prevClicked.getPlayer()-1==idxSelf && id-1==idxEnemy) {
@@ -195,9 +195,12 @@ public class GameManager {
             int idx_hand = prevClicked.getIndex();
             pm[idxSelf].removeCard(idx_hand);
             // draw dan pick kalo belom
-            if(gs.getHasPickCard()==false) {
+            if (gs.getHasPickCard() == false) {
+                System.out.println("KARTU DIHAPUS TAPI BELUM AMBIL");
                 pm[idxSelf].drawCard();
-                gs.setHasPickCard(true);
+                // gs.setHasPickCard(true);
+            } else {
+                System.out.println("KARTU DIHAPUS TAPI UDAH AMBIL");
             }
         } else if(prevClicked.getName().equals("ACTIVECHAR") && prevClicked.getPlayer()-1==idxSelf) {
             int idx_board = prevClicked.getIndex();

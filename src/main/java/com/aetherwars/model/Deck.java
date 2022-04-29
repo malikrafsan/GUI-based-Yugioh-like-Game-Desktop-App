@@ -69,6 +69,7 @@ public class Deck extends Observable implements IPublisher {
     }
 
     public void draw() {
+        this.threeCard = new ArrayList<>();
         Collections.shuffle(this.deck);
         if (this.size < 3) {
             this.threeCard = this.deck;
