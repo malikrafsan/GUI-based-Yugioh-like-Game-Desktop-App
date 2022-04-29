@@ -14,15 +14,16 @@ import java.util.Observable;
 import java.util.Observer;
 
 public class CardInfoController implements Observer {
-    public Label card_name;
-    public Label card_desc;
-    public ImageView card_img;
-    public Label attr1Label;
-    public Label attr2Label;
-    public Label attr3Label;
-    public Label attr4Label;
-    public Label attr5Label;
-    private Label attrLabel[];
+    @FXML private Label card_name;
+    @FXML private Label card_desc;
+    @FXML private ImageView card_img;
+    @FXML private Label attr1Label;
+    @FXML private Label attr2Label;
+    @FXML private Label attr3Label;
+    @FXML private Label attr4Label;
+    @FXML private Label attr5Label;
+    private Label[] attrLabel = new Label[5];
+    private final String prefixImagePath = "/com/aetherwars/";
 
     public void setCardInfo(Hoverable hoverable){
         List<Pair<String,String>> cardInfo = hoverable.displayInfo();
