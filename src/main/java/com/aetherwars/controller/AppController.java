@@ -44,35 +44,4 @@ public class AppController {
 //        this.boardController.handCardsContainerController.setAppController(this);
 //        drawPhase();
     }
-
-//    public void drawPhase() {
-//        this.boardPane.setEffect(new GaussianBlur());
-//        this.boardPane.setDisable(true);
-//        this.selectCardPane.setVisible(true);
-//        this.selectCardPane.setDisable(false);
-//        this.selectCardPane.setMouseTransparent(false);
-//        this.selectCardContainer.setMouseTransparent(false);
-//    }
-
-//    public void nonDrawPhase(){
-//        this.boardPane.setDisable(false);
-//        this.selectCardPane.setDisable(true);
-//        this.selectCardPane.setVisible(false);
-//        this.boardPane.setEffect(null);
-//        this.selectCardPane.setMouseTransparent(true);
-//        this.selectCardContainer.setMouseTransparent(true);
-//    }
-
-//    public void setPhase(Phase phase){
-//        this.nonDrawPhase();
-//        this.boardController.phaseController.setPhase(phase);
-//    }
-//
-//    public void setCardInfo(Card card){
-//        this.boardController.cardInfoController.setCardInfo(card);
-//    }
-//
-//    public void unsetCardInfo(){
-//        this.boardController.cardInfoController.unsetCardInfo();
-//    }
 }

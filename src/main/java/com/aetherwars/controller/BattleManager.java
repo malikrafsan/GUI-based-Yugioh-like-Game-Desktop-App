@@ -6,6 +6,9 @@ public class BattleManager {
     private ActiveChar self;
     private ActiveChar enemy;
 
+    /**
+     * Constructor for BattleManager class
+     */
     public BattleManager() {
         self = null;
         enemy = null;

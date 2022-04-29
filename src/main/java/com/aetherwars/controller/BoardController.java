@@ -49,6 +49,10 @@ public class BoardController implements Observer, ISubscriber {
     @FXML private Button deleteBtn;
     @FXML private Pane boardPane;
 
+    /**
+     * Initializer for Board View
+     * @throws Exception when file not found
+     */
     @FXML
     private void initialize() throws Exception {
         GameManager.getInstance().addObserver("GAMESTATE", this);
@@ -107,7 +111,11 @@ public class BoardController implements Observer, ISubscriber {
             }
         });
     }
-    
+
+    /**
+     * Method that being called when there is event on topic that BoardController subscribe
+     * @param event event that we get
+     */
     public void onEvent(IEvent event) {
         if (event instanceof PickCardEvent) {
             System.out.println("PICK CARD EVENT ON BOARD");
@@ -132,6 +140,11 @@ public class BoardController implements Observer, ISubscriber {
         this.boardPane.setEffect(null);
     }
 
+    /**
+     * Method that being called when object that we observe change
+     * @param obs object that we observe
+     * @param obj object that we get
+     */
     public void update(Observable obs, Object obj) {
         if (obs instanceof IPhaseGetter) {
             IPhaseGetter gs = (IPhaseGetter) obs;
