@@ -178,9 +178,7 @@ public class PlayerBoardController implements Observer {
                 public void handle(MouseEvent event) {
                     System.out.println("CARD " + (finalI + 1) + " FROM PLAYER " + boardId + " IS CLICKED");
 
-                    if (cardImg.getImage() != null) {
-                        GameManager.getInstance().click(boardId, "ACTIVECHAR", finalI);
-                    }
+                    GameManager.getInstance().click(boardId, "ACTIVECHAR", finalI);
                 }
             });
 

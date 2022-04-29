@@ -34,6 +34,7 @@ public class HandCardsContainerController implements Observer {
     private void initialize() {
         GameManager.getInstance().addObserver("HANDCARD1", this);
         GameManager.getInstance().addObserver("HANDCARD2", this);
+        GameManager.getInstance().addObserver("CLICKOBJECT", this);
 
         try {
             for (int i=0; i<5; i++){
@@ -72,15 +73,6 @@ public class HandCardsContainerController implements Observer {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 GameManager.getInstance().click(-1, "HANDCARD", idx);
-
-                // TODO: DELETE LATER
-                for (int j = 0; j < 5; j++) {
-                    if (idx == j) {
-                        setCardClickEffect(j);
-                    } else {
-                        unsetCardClickEffect(j);
-                    }
-                }
             }
         });
     }
