@@ -13,11 +13,6 @@ public class HandCard extends Observable {
         for (int i = 0; i < this.capacity; i++) {
             this.handCard[i] = null;
         }
-        // this.handCard[4] = new SpellMorphCard(2, "Sugondese", "...",
-        //         "card/image/spell/morph/Sugondese.png", 7, 2);
-        // this.handCard[2] = new SpellPotionCard(1, "Sadikin Elixir", "The best elixir in the world",
-        // "card/image/spell/potion/Sadikin Elixir.png", 3, 5, 1, 5);
-        // randomizeHandCard();
     }
 
     public void randomizeHandCard() {
@@ -40,11 +35,11 @@ public class HandCard extends Observable {
         }
     }
 
+    /**
+     * @brief Method untuk menambahkan sebuah kartu ke handcard
+     * @param card Kartu yang akan ditambahkan pada handcard
+     */
     public void addCard(Card card) {
-        if (this.size == 5) {
-            // throw exception untuk lanjut ke pembuangan
-        }
-
         for (int i=0; i<5; i++) {
             if (this.handCard[i] == null) {
                 this.handCard[i] = card;
@@ -56,6 +51,11 @@ public class HandCard extends Observable {
         }
     }
 
+    /**
+     * @brief Method untuk menambahkan sebuah kartu ke handcard pada suatu posisi tertentu
+     * @param card Kartu yang akan ditambahkan pada handcard
+     * @param idx index yang akan diisi
+     */
     public void addCard(Card card, int idx) {
         this.handCard[idx] = card;
         this.size++;
@@ -63,10 +63,18 @@ public class HandCard extends Observable {
         this.notifyObservers();
     }
 
+    /**
+     * @param idx index kartu
+     * @return Mengembalikan kartu pada handcard dengan index yang bersesuaian
+     */
     public Card getCard(int idx) {
         return this.handCard[idx];
     }
 
+    /**
+     * @param idx index kartu
+     * @return Mengembalikan kartu pada handcard dengan mengambilnya
+     */
     public Card takeCard(int idx) {
         Card res = this.handCard[idx];
         this.handCard[idx] = null;
@@ -76,27 +84,25 @@ public class HandCard extends Observable {
         return res;
     }
 
+    /**
+     * @return Mengembalikan ukuran handcard
+     */
     public int getSize() {
         return this.size;
     }
 
-    // Just for debugging, deprecated soon
-    public void getInfo() {
-        for (int i=0; i<5; i++){
-            if (this.handCard[i] == null){
-                System.out.println(i + " Empty");
-            } else {
-                System.out.println(i + " " + this.handCard[i].getName());
-            }
-        }
-    }
-
+    /**
+     * @brief Method untuk melakukan sinkronisasi
+     */
     public void sync() {
         System.out.println("\n\nSYNCRONIZED\n\n");
         this.setChanged();
         this.notifyObservers();
     }
 
+    /**
+     * @return Mengembalikan kartu-kartu yang ada di hand
+     */
     public Card[] getCards() {
         return this.handCard;
     }

@@ -18,6 +18,16 @@ public class SpellHealPlayerCard extends SpellCard {
         this.heal = heal;
     }
 
+    /**
+     * @return Mengembalikan heal dari spell heal player
+     */
+    public int getHeal() {
+        return this.heal;
+    }
+
+    /**
+     * @return Preview untuk kartu spell heal player
+     */
     @Override
     public String preview() {
         return "HP +" + heal;
@@ -33,6 +43,10 @@ public class SpellHealPlayerCard extends SpellCard {
                 "\nHealing:" + this.heal;
     }
 
+    /**
+     * @brief Method untuk display info yang dibutuhkan
+     * @return Mengembalikan list of pair untuk setiap key dan value yang ditampilkan
+     */
     @Override
     public List<Pair<String, String>> displayInfo() {
         List<Pair<String, String>> res = new ArrayList<>();

@@ -18,10 +18,16 @@ public class SpellLevelCard extends SpellCard {
         this.levelUp = levelUp;
     }
 
+    /**
+     * @return Mengembalikan penambahan level dari spell level
+     */
     public int getLevelUp() {
         return (this.levelUp);
     }
 
+    /**
+     * @return Preview untuk kartu spell level
+     */
     @Override
     public String preview() {
         if (this.levelUp >= 0) {
@@ -41,6 +47,10 @@ public class SpellLevelCard extends SpellCard {
                 "\nLevel:" + this.levelUp;
     }
 
+    /**
+     * @brief Method untuk display info yang dibutuhkan
+     * @return Mengembalikan list of pair untuk setiap key dan value yang ditampilkan
+     */
     @Override
     public List<Pair<String,String>> displayInfo() {
         List<Pair<String,String>> res = new ArrayList<>();
