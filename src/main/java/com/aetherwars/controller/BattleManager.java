@@ -36,9 +36,8 @@ public class BattleManager {
             enemyMult = 2.0;
         }
 
-//        enemy.addHealth(-1*self.getAttack() * selfMult);
-//        self.addHealth(-1*enemy.getAttack() * enemyMult);
-        // janlup +exp buat penyerang kl menang
+        enemy.receiveDamage(self.getAttack() * selfMult);
+        self.receiveDamage(enemy.getAttack() * enemyMult);
         if(enemy.getHealth()<=0 && self.getHealth()>0) {
             self.addExp(enemy.getLevel());
         }

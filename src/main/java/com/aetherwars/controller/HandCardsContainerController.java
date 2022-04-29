@@ -11,10 +11,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
+import java.util.*;
 
 public class HandCardsContainerController implements Observer {
 
@@ -144,8 +141,14 @@ public class HandCardsContainerController implements Observer {
                 this.handCardControllers[i].setLabelAttr(listCards[i].preview());
                 this.handCardControllers[i].setCardImageView(listCards[i].getImagePath());
 
+                System.out.println("NOT NULL");
                 this.enableMouseEvent(i);
             } else {
+                System.out.println("NULL");
+                this.handCardControllers[i].unsetLabelMana();
+                this.handCardControllers[i].unsetLabelAttr();
+                this.handCardControllers[i].unsetCardImageView();
+
                 this.disableMouseEvent(i);
             }
         }
@@ -161,6 +164,13 @@ public class HandCardsContainerController implements Observer {
             }
         } else if (obs instanceof HandCard) {
             HandCard hc = (HandCard) obs;
+
+            System.out.println("\n\nHAND CARD IS UPDATED");
+            for (int i = 0; i < hc.getCards().length; i++) {
+                System.out.println(hc.getCards()[i]);
+                System.out.println("--------------------");
+            }
+            System.out.println("======================\n\n");
             updateHandCards(hc.getCards());
         }
     }

@@ -111,7 +111,6 @@ public class PlayerBoardController implements Observer {
     @FXML
     private void initialize() {
         this.ID_BOARD = Integer.parseInt(this.playerBoardContainer.getId());
-        System.out.println("ID_BOARD: " + this.ID_BOARD);
 
         GameManager.getInstance().addObserver("PLAYER" + this.ID_BOARD, this);
         GameManager.getInstance().addObserver("CLICKOBJECT", this);

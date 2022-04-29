@@ -107,15 +107,12 @@ public class SelectCardController implements Observer, ISubscriber {
     public void onEvent(IEvent event) {
         if (event instanceof PickCardEvent) {
             PickCardEvent pickCardEvent = (PickCardEvent) event;
-            System.out.println("ON EVENT PICK CARD");
             updateSelectCards(pickCardEvent.getData());
         }
     }
     public void update(Observable obs, Object obj) {
         if (obs instanceof IPhaseGetter) {
             IPhaseGetter gs = (IPhaseGetter) obs;
-            System.out.println("PHASE: " + gs.getPhase());
-            System.out.println("HAS PICK CARD: " + (gs.getHasPickCard() ? " YES" : "NO"));
             if (gs.getPhase() == DRAW && !gs.getHasPickCard()) {
                 System.out.println("HERE");
                 drawPhaseSelectCard();
@@ -149,7 +146,6 @@ class MockGameStateSelectCard extends Observable implements IPhaseGetter {
 
     public void setPhase(Phase newPhase) {
         this.phase = newPhase;
-        System.out.println("CHANGING TO " + newPhase);
         setChanged();
         notifyObservers();
     }

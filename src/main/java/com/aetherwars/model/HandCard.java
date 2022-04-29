@@ -1,5 +1,5 @@
 package com.aetherwars.model;
-import java.util.Observable;
+import java.util.*;
 
 public class HandCard extends Observable {
     private Card[] handCard;
@@ -12,6 +12,31 @@ public class HandCard extends Observable {
         this.handCard = new Card[this.capacity];
         for (int i = 0; i < this.capacity; i++) {
             this.handCard[i] = null;
+        }
+        // this.handCard[4] = new SpellMorphCard(2, "Sugondese", "...",
+        //         "card/image/spell/morph/Sugondese.png", 7, 2);
+        // this.handCard[2] = new SpellPotionCard(1, "Sadikin Elixir", "The best elixir in the world",
+        // "card/image/spell/potion/Sadikin Elixir.png", 3, 5, 1, 5);
+        randomizeHandCard();
+    }
+
+    public void randomizeHandCard() {
+        Random rand = new Random();
+        CharType[] types = new CharType[] {CharType.END, CharType.OVERWORLD, CharType.NETHER};
+        String[] imgPaths = new String[]{"card/image/spell/morph/Sugondese.png", "card/image/spell/potion/Sadikin Elixir.png", "card/image/character/Shulker.png", "card/image/character/Zombie.png", "card/data/image/character/Shulker.png"};
+
+        for (int i = 0; i < this.handCard.length; i++) {
+            if (rand.nextDouble() > 0.5) {
+                if (rand.nextDouble() > 0.5) {
+                    this.handCard[i] = (new CharacterCard(rand.nextInt(10), "INI NAMA" + rand.nextInt(10), types[rand.nextInt(types.length)], "...", imgPaths[rand.nextInt(imgPaths.length)], rand.nextInt(10), rand.nextInt(10), rand.nextInt(10), rand.nextInt(10), rand.nextInt(10)));
+                } else {
+                    if (rand.nextDouble() > 0.5) {
+                        this.handCard[i] = (new SpellMorphCard(2, "Sugondese", "...", "card/image/spell/morph/Sugondese.png", 7, 2));
+                    }else {
+                        this.handCard[i] = (new SpellPotionCard(1, "Sadikin Elixir", "...", "card/image/spell/potion/Sadikin Elixir.png", 3, 5, 1, 5));
+                    }
+                } 
+            }
         }
     }
 
@@ -67,6 +92,7 @@ public class HandCard extends Observable {
     }
 
     public void sync() {
+        System.out.println("\n\nSYNCRONIZED\n\n");
         this.setChanged();
         this.notifyObservers();
     }
