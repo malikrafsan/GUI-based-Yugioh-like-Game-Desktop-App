@@ -71,6 +71,20 @@ public class ActiveCharObserver extends Observable implements IActiveCharObserve
         }
     }
 
+    public void addSpell(int index, SpellCard card) {
+        switch (card.getType()) {
+            case POTION:
+                this.chars[index].addSpellPotion((SpellPotionCard) card);
+                break;
+            case LEVEL:
+                this.chars[index].levelUpSpell((SpellLevelCard) card);
+                break;
+            case SWAP:
+                this.chars[index].swapSpell((SpellSwapCard) card);
+                break;
+        }
+    }
+
     public void cannotAttack(int index) {this.chars[index].cannotAttack();}
 
     public boolean canAttack(int index) { return (this.chars[index].canAttack()); }

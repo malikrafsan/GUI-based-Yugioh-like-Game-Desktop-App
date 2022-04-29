@@ -18,6 +18,10 @@ public class SpellSwapCard extends SpellCard {
         this.duration = duration;
     }
 
+    public int getDuration() {
+        return (this.duration);
+    }
+
     @Override
     public String preview() {
         return "ATK <-> HP";

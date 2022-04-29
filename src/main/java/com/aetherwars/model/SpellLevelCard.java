@@ -18,6 +18,10 @@ public class SpellLevelCard extends SpellCard {
         this.levelUp = levelUp;
     }
 
+    public int getLevelUp() {
+        return (this.levelUp);
+    }
+
     @Override
     public String preview() {
         if (this.levelUp >= 0) {
