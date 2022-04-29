@@ -22,6 +22,10 @@ public class GameManager {
         bm = new BattleManager();
     }
 
+    /**
+     * getter
+     * @return event broker
+     */
     public EventBroker getEventBroker() { return this.eb; }
 
     public static GameManager getInstance() {
@@ -31,6 +35,11 @@ public class GameManager {
         return instance;
     }
 
+    /**
+     * add observer to specific object
+     * @param str
+     * @param obs
+     */
     public void addObserver(String str, Observer obs) {
         switch (str) {
             case "GAMESTATE":
@@ -66,6 +75,9 @@ public class GameManager {
         }
     }
 
+    /**
+     * sync initial state
+     */
     public void syncAll() {
         gs.sync();
         gs.getClickObject().sync();
@@ -76,6 +88,12 @@ public class GameManager {
         gs.getPlayer1().getDeck().pickCard();
     }
 
+    /**
+     * action when user click clickable object
+     * @param player
+     * @param name
+     * @param index
+     */
     public void click(int player, String name, int index) {
         ClickObject prevClicked = new ClickObject();
         prevClicked.setClickObject(gs.getClickObject().getPlayer(), gs.getClickObject().getName(),
@@ -90,9 +108,15 @@ public class GameManager {
             delete(prevClicked);
         } else if(gs.getClickObject().getName().equals("ADDEXP")) {
             addExpFromMana(prevClicked);
+        } else if(gs.getClickObject().getName().equals("HANDCARD")) {
+
         }
     }
-    
+
+    /**
+     * method when user pick card
+     * @param idx
+     */
     public void clickPickCard(int idx) {
         int idxSelf = gs.getTurn().ordinal();
         pm[idxSelf].chooseCard(idx);
@@ -101,6 +125,10 @@ public class GameManager {
         System.out.println("PICK CARD WITH IDX " + idx);
     }
 
+    /**
+     * method helper when user clicked active char
+     * @param prevClicked
+     */
     public void clickedActChar(ClickObject prevClicked) {
         ClickObject curActCharClicked = gs.getClickObject();
 
@@ -150,6 +178,10 @@ public class GameManager {
         }
     }
 
+    /**
+     * method helper when user clicked player
+     * @param prevClicked
+     */
     public void clickedPlayer(ClickObject prevClicked) {
         ClickObject curPlayerClicked = gs.getClickObject();
         int id = curPlayerClicked.getPlayer();
@@ -179,16 +211,27 @@ public class GameManager {
         gs.setHoveredObject(null);
     }
 
+    /**
+     * method when user hover hand
+     * @param idx_hand
+     */
     public void hoverHand(int idx_hand) {
         int idxSelf = gs.getTurn().ordinal();
         pm[idxSelf].hoverHand(idx_hand);
     }
 
+    /**
+     * method when user hover board
+     * @param idx_board
+     */
     public void hoverBoard(int idx_board, int id) {
         pm[id-1].hoverBoard(idx_board);
     }
 
-    // delete kartu
+    /**
+     * method for delete previous selected object
+     * @param prevClicked
+     */
     public void delete(ClickObject prevClicked) {
         int idxSelf = gs.getTurn().ordinal();
         if(prevClicked.getName().equals("HANDCARD")) {
@@ -208,6 +251,9 @@ public class GameManager {
         }
     }
 
+    /**
+     * method for add exp from mana
+     */
     public void addExpFromMana(ClickObject prevClicked) {
         if(prevClicked.getName().equals("ACTIVECHAR")){
             int idxSelf = gs.getTurn().ordinal();
@@ -220,6 +266,9 @@ public class GameManager {
         }
     }
 
+    /**
+     * method when user next phase
+     */
     public void nextPhase() {
         if(gs.getPhase().equals(Phase.DRAW) && gs.getHasPickCard()==false) {
             System.out.println("DELETE/DRAW DULU");
