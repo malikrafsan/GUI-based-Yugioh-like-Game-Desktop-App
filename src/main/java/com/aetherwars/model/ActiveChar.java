@@ -20,6 +20,9 @@ public class ActiveChar implements IActiveCharGetter, Hoverable {
     private int level;
     private int swap;
 
+    /**
+     * Constructor
+     */
     public ActiveChar() {
         this.card = new CharacterCard();
         this.attack = 1;
@@ -35,6 +38,10 @@ public class ActiveChar implements IActiveCharGetter, Hoverable {
         this.swap = 0;
     }
 
+    /**
+     * Constructor with parameter
+     * @param card CharacterCard that will be used
+     */
     public ActiveChar(CharacterCard card) {
         this.card = card;
         this.attack = this.card.getAttack();
@@ -50,19 +57,31 @@ public class ActiveChar implements IActiveCharGetter, Hoverable {
         this.swap = 0;
     }
 
+    /**
+     * Method to add attack when leveling up
+     */
     public void addAttackLvl() {
         this.attack = this.attack + this.card.getAttackUp();
     }
 
+    /**
+     * Method to add health when leveling up
+     */
     public void addHealthLvl() {
         this.maxHealth = this.maxHealth + this.card.getHealthUp();
         this.healAll();
     }
 
+    /**
+     * Method to decrease attack when leveling down
+     */
     public void minusAttackLvl() {
         this.attack = this.attack - this.card.getAttackUp();
     }
 
+    /**
+     * Method to decrease health when leveling down
+     */
     public void minusHealthLvl() {
         this.maxHealth = this.maxHealth - this.card.getHealthUp();
         if (this.health > this.maxHealth) {
@@ -70,26 +89,46 @@ public class ActiveChar implements IActiveCharGetter, Hoverable {
         }
     }
 
+    /**
+     * Method to add spellPotionCard
+     * @param card SpellPotionCard to use
+     */
     public void addSpellPotion(SpellPotionCard card) {
         this.spellsPotionList.add(new ActiveSpellsPotion(card));
     }
 
+    /**
+     * Method to set clicked
+     */
     public void onClick() {
         this.clicked = true;
     }
 
+    /**
+     * Method to set clicked
+     */
     public void offClick() {
         this.clicked = false;
     }
 
+    /**
+     * Method to set hovered
+     */
     public void onHover() {
         this.hovered = true;
     }
 
+    /**
+     * Method to set hovered
+     */
     public void offHover() {
         this.hovered = false;
     }
 
+    /**
+     * Method to add exp
+     * @param exp how many exp that will be added
+     */
     public void addExp(int exp) {
         if (this.level < 10) {
             this.exp = this.exp + exp;
@@ -100,6 +139,9 @@ public class ActiveChar implements IActiveCharGetter, Hoverable {
         }
     }
 
+    /**
+     * Method to heal fully when leveling up
+     */
     public void healAll() {
         int i = 0;
         this.health = this.maxHealth;
@@ -109,6 +151,9 @@ public class ActiveChar implements IActiveCharGetter, Hoverable {
         }
     }
 
+    /**
+     * Method to level Up
+     */
     public void levelUp() {
         if (this.level < 10) {
             this.level = this.level + 1;
@@ -127,6 +172,9 @@ public class ActiveChar implements IActiveCharGetter, Hoverable {
         }
     }
 
+    /**
+     * Method to level down
+     */
     public void levelDown() {
         if (this.level > 1) {
             this.level = this.level - 1;
@@ -136,6 +184,10 @@ public class ActiveChar implements IActiveCharGetter, Hoverable {
         }
     }
 
+    /**
+     * Method to use SpellLevelCard
+     * @param card SpellLevelCard that will be used
+     */
     public void levelUpSpell(SpellLevelCard card) {
         if (card.getLevelUp() > 0) {
             for (int i = 0; i < card.getLevelUp(); i++) {
@@ -151,6 +203,10 @@ public class ActiveChar implements IActiveCharGetter, Hoverable {
         }
     }
 
+    /**
+     * Method to use SpellSwapCard
+     * @param card SpellSwapCard
+     */
     public void swapSpell (SpellSwapCard card) {
         int before = this.swap;
         this.swap = this.swap + card.getDuration();
@@ -159,6 +215,9 @@ public class ActiveChar implements IActiveCharGetter, Hoverable {
         }
     }
 
+    /**
+     * Method to Swap
+     */
     public void swap() {
         double temp;
         int i = 0;
@@ -172,6 +231,10 @@ public class ActiveChar implements IActiveCharGetter, Hoverable {
         }
     }
 
+    /**
+     * Method when taken damage
+     * @param damage damage taken
+     */
     public void receiveDamage(double damage) {
         double damageLeft = damage;
         int i = this.spellsPotionList.size() - 1;
@@ -201,6 +264,10 @@ public class ActiveChar implements IActiveCharGetter, Hoverable {
         }
     }
 
+    /**
+     * Method to add spells
+     * @param card SpellCard that will be used
+     */
     public void addSpell(SpellCard card) {
         switch (card.getType()) {
             case POTION:
@@ -216,6 +283,9 @@ public class ActiveChar implements IActiveCharGetter, Hoverable {
     }
 
 
+    /**
+     * Method for a new round
+     */
     public void newRound() {
         int before = this.swap;
         this.isCanAttack = true;
@@ -234,10 +304,17 @@ public class ActiveChar implements IActiveCharGetter, Hoverable {
         }
     }
 
+    /**
+     * Method to ser isCanAttack to false
+     */
     public void cannotAttack() {
         this.isCanAttack = false;
     }
 
+    /**
+     * Method to get healthPotion
+     * @return double
+     */
     public double getHealthPotion() {
         double total = 0.0;
         int i = 0;
@@ -248,6 +325,10 @@ public class ActiveChar implements IActiveCharGetter, Hoverable {
         return total;
     }
 
+    /**
+     * Method to get attackPotion
+     * @return double
+     */
     public double getAttackPotion() {
         double total = 0.0;
         int i = 0;
@@ -258,6 +339,9 @@ public class ActiveChar implements IActiveCharGetter, Hoverable {
         return total;
     }
 
+    /**
+     * Method to show spells that is active
+     */
     public void displayActiveSpells() {
         if (this.spellsPotionList.size() == 0) {
             System.out.println("Kosong");
@@ -267,46 +351,98 @@ public class ActiveChar implements IActiveCharGetter, Hoverable {
         }
     }
 
+    /**
+     * getter
+     * @return double
+     */
     public double getBaseHealth() { return (this.card.getHealth());}
 
+    /**
+     * getter
+     * @return double
+     */
     public double getBaseAttack() { return (this.card.getAttack());}
 
+    /**
+     * getter
+     * @return boolean
+     */
     public boolean canAttack() { return (this.isCanAttack); }
 
+    /**
+     * getter
+     * @return double
+     */
     public double getAttack() {
         return (this.attack + this.getAttackPotion());
     }
 
+    /**
+     * getter
+     * @return double
+     */
     public double getHealth() {
         return (this.health + this.getHealthPotion());
     }
 
+    /**
+     * getter
+     * @return int
+     */
     public int getExp() {
         return (this.exp);
     }
 
+    /**
+     * getter
+     * @return int
+     */
     public int getExpUp() {
         return (this.expUp);
     }
 
+    /**
+     * getter
+     * @return int
+     */
     public int getLevel() { return (this.level); }
 
+    /**
+     * getter
+     * @return string
+     */
     public String getImagePath() {
         return (this.card.getImagePath());
     }
 
+    /**
+     * getter
+     * @return CharType
+     */
     public CharType getType() {
         return (this.card.getType());
     }
 
+    /**
+     * getter
+     * @return String
+     */
     public String getName() {
         return (this.card).getName();
     }
 
+    /**
+     * getter
+     * @return String
+     */
     public String getDesc() {
         return (this.card).getDesc();
     }
 
+    /**
+     * Method to get information about ActiveChar
+     * @return list of pair of string
+     */
     @Override
     public List<Pair<String,String>> displayInfo() {
         List<Pair<String,String>> res = new ArrayList<>();
