@@ -17,7 +17,7 @@ public class HandCard extends Observable {
         //         "card/image/spell/morph/Sugondese.png", 7, 2);
         // this.handCard[2] = new SpellPotionCard(1, "Sadikin Elixir", "The best elixir in the world",
         // "card/image/spell/potion/Sadikin Elixir.png", 3, 5, 1, 5);
-        randomizeHandCard();
+        // randomizeHandCard();
     }
 
     public void randomizeHandCard() {
