@@ -13,14 +13,24 @@ public class HandCardController {
     @FXML private Label labelMana;
     @FXML private Label labelAttr;
 
-
+    public void unsetLabelMana() {
+        this.labelMana.setText("");
+    }
 
     public void setLabelMana(Integer value){
         this.labelMana.setText("MANA " + value.toString());
     }
 
+    public void unsetLabelAttr() {
+        this.labelAttr.setText("");
+    }
+
     public void setLabelAttr(String value){
         this.labelAttr.setText(value);
+    }
+
+    public void unsetCardImageView() {
+        this.cardImageView.setImage(null);
     }
 
     public void setCardImageView(String imagePath){

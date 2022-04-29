@@ -76,15 +76,20 @@ public class GameState extends Observable implements IRoundGetter, IPhaseGetter 
     }
 
     public void nextTurn() {
+        System.out.println("NEXT TURN");
         switch (this.turn) {
             case PLAYER1:
                 this.turn = PLAYER2;
                 this.player2.newRound();
+                System.out.println("SYNC Player 2's turn");
+                this.player2.getHand().sync();
                 break;
             case PLAYER2:
                 this.turn = PLAYER1;
                 this.round = this.round + 1;
                 this.player1.newRound();
+                System.out.println("SYNC Player 1's turn");
+                this.player1.getHand().sync();
                 break;
         }
     }
