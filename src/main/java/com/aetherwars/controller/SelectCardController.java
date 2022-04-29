@@ -122,7 +122,7 @@ public class SelectCardController implements Observer, ISubscriber {
      * Mengeset nomor player
      */
     public void setPlayer(Integer playerNo){
-        this.playerLabel.setText("PLAYER " + playerNo.toString());
+        this.playerLabel.setText("PLAYER");
     }
 
     private void testUpdateHandCards(){
