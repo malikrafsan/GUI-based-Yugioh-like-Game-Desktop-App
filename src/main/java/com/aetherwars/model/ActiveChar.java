@@ -11,6 +11,7 @@ public class ActiveChar implements IActiveCharGetter, Hoverable {
     private List<ActiveSpellsPotion> spellsPotionList;
     private double attack;
     private double health;
+    private double maxHealth;
     private boolean clicked;
     private boolean hovered;
     private boolean isCanAttack;
@@ -23,6 +24,7 @@ public class ActiveChar implements IActiveCharGetter, Hoverable {
         this.card = new CharacterCard();
         this.attack = 1;
         this.health = 1;
+        this.maxHealth = 1;
         this.clicked = false;
         this.hovered = false;
         this.isCanAttack = true;
@@ -37,6 +39,7 @@ public class ActiveChar implements IActiveCharGetter, Hoverable {
         this.card = card;
         this.attack = this.card.getAttack();
         this.health = this.card.getHealth();
+        this.maxHealth = this.card.getHealth();
         this.clicked = false;
         this.hovered = false;
         this.isCanAttack = true;
@@ -52,7 +55,19 @@ public class ActiveChar implements IActiveCharGetter, Hoverable {
     }
 
     public void addHealthLvl() {
-        this.health = this.health + this.card.getHealthUp();
+        this.maxHealth = this.maxHealth + this.card.getHealthUp();
+        this.healAll();
+    }
+
+    public void minusAttackLvl() {
+        this.attack = this.attack - this.card.getAttackUp();
+    }
+
+    public void minusHealthLvl() {
+        this.maxHealth = this.maxHealth - this.card.getHealthUp();
+        if (this.health > this.maxHealth) {
+            this.health = this.maxHealth;
+        }
     }
 
     public void addSpellPotion(SpellPotionCard card) {
@@ -85,6 +100,15 @@ public class ActiveChar implements IActiveCharGetter, Hoverable {
         }
     }
 
+    public void healAll() {
+        int i = 0;
+        this.health = this.maxHealth;
+        while (i < this.spellsPotionList.size()) {
+            this.spellsPotionList.get(i).healAll();
+            i++;
+        }
+    }
+
     public void levelUp() {
         if (this.level < 10) {
             this.level = this.level + 1;
@@ -98,26 +122,32 @@ public class ActiveChar implements IActiveCharGetter, Hoverable {
                 this.expUp = 0;
             }
         }
+        else {
+            this.exp = this.exp + 19;
+        }
+    }
+
+    public void levelDown() {
+        if (this.level > 1) {
+            this.level = this.level - 1;
+            this.expUp = this.expUp - 2;
+            this.minusAttackLvl();
+            this.minusHealthLvl();
+        }
     }
 
     public void levelUpSpell(SpellLevelCard card) {
         if (card.getLevelUp() > 0) {
-            if (this.level + card.getLevelUp() < 10) {
-                this.level = this.level + card.getLevelUp();
+            for (int i = 0; i < card.getLevelUp(); i++) {
+                this.levelUp();
             }
-            else {
-                this.level = 10;
-                this.exp = 0;
-                this.expUp = 0;
-            }
+            this.exp = 0;
         }
         else if (card.getLevelUp() < 0) {
-            if (this.level + card.getLevelUp() > 1) {
-                this.level = this.level + card.getLevelUp();
+            for (int i = 0; i < card.getLevelUp(); i++) {
+                this.levelDown();
             }
-            else {
-                this.level = 1;
-            }
+            this.exp = 0;
         }
     }
 

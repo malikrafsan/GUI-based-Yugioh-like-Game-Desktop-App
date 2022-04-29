@@ -6,6 +6,7 @@ public class Player extends Observable{
     private String name;
     private double health;
     private int mana;
+    private int maxMana;
     private Deck deck;
     private HandCard handCard;
     private ActiveCharObserver activeChars;
@@ -18,6 +19,7 @@ public class Player extends Observable{
         this.name = "Player " + no;
         this.health = 80;
         this.mana = 0;
+        this.maxMana = 10;
         this.deck = new Deck();
         this.handCard = new HandCard();
         this.activeChars = new ActiveCharObserver();
@@ -38,6 +40,10 @@ public class Player extends Observable{
             this.deck.draw();
             this.deck.pickCard();
         }
+    }
+
+    public int getMaxMana() {
+        return (this.maxMana);
     }
 
     public Deck getDeck() {

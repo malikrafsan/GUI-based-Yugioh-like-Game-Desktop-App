@@ -5,12 +5,14 @@ public class ActiveSpellsPotion {
     private double healthPotion;
     private double attackPotion;
     private int duration;
+    private int maxHealthPotion;
 
     public ActiveSpellsPotion(SpellPotionCard card) {
         this.card = card;
         this.healthPotion = card.getHp();
         this.attackPotion = card.getAttack();
         this.duration = card.getDuration();
+        this.maxHealthPotion = card.getHp();
     }
 
     public void swap() {
@@ -19,6 +21,10 @@ public class ActiveSpellsPotion {
         temp = this.healthPotion;
         this.healthPotion = this.attackPotion;
         this.attackPotion = temp;
+    }
+
+    public void healAll() {
+        this.healthPotion = this.maxHealthPotion;
     }
 
     public double getAttackPotion() {

@@ -88,6 +88,11 @@ public class ActiveCharObserver extends Observable implements IActiveCharObserve
         this.sync();
     }
 
+    public void healAll(int index) {
+        this.chars[index].healAll();
+        this.sync();
+    }
+
     public void receiveDamage(int index, double damage) {
         this.chars[index].receiveDamage(damage);
         this.sync();
