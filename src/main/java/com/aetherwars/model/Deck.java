@@ -12,11 +12,13 @@ import java.util.Observable;
 
 public class Deck extends Observable implements IPublisher {
     private List<Card> deck;
+    private List<Card> threeCard;
     private int capacity;
     private int size;
     
     public Deck() {
-        this.deck = new ArrayList<Card>();
+        this.deck = new ArrayList<>();
+        this.threeCard = new ArrayList<>();
         this.capacity = 60;
         this.size = 0;
     }
@@ -37,6 +39,20 @@ public class Deck extends Observable implements IPublisher {
         return this.size;
     }
 
+    public List<Card> getThreeCard() {
+        return this.threeCard;
+    }
+
+    public Card select(int idx) {
+        // idx pasti 0, 1, atau 2
+        Card temp = this.threeCard.remove(idx);
+        for (Card card: this.threeCard) {
+            addCard(card);
+        }
+        sync();
+        return temp;
+    }
+
     public void addCard(Card card) {
         if (this.size < this.capacity) {
             this.deck.add(0, card);
@@ -52,24 +68,18 @@ public class Deck extends Observable implements IPublisher {
         }
     }
 
-    public List<Card> getThreeCard() {
+    public void draw() {
         Collections.shuffle(this.deck);
-        List<Card> threeCard = new ArrayList<Card>();
-
         if (this.size < 3) {
-            threeCard = this.deck;
+            this.threeCard = this.deck;
             this.size= 0;
-            this.setChanged();
-            this.notifyObservers();
         } else {
             for (int i = 0; i < 3; i++) {
-                threeCard.add(this.deck.remove(0));
+                this.threeCard.add(this.deck.remove(0));
                 this.size--;
             }
-            this.setChanged();
-            this.notifyObservers();
         }
-        return threeCard;
+        sync();
     }
 
     // Just for debugging, deprecated soon

@@ -72,6 +72,7 @@ public class GameManager {
         pm[1].syncAll();
         pm[0].syncAll();
 
+        gs.getPlayer1().getDeck().draw();
         gs.getPlayer1().getDeck().pickCard();
     }
 
@@ -93,11 +94,8 @@ public class GameManager {
     }
     
     public void clickPickCard(int idx) {
-        // TODO: recheck lagi yaa, kalau semisal butuh data parameter tambahan
-
-        // TODO: tambah fungsionalitas add card into handcard
         int idxSelf = gs.getTurn().ordinal();
-//        pm[idxSelf].chooseCard(idx);
+        pm[idxSelf].chooseCard(idx);
 
         this.gs.setHasPickCard(true);
         System.out.println("PICK CARD WITH IDX " + idx);

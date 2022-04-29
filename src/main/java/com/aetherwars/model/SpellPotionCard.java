@@ -38,7 +38,17 @@ public class SpellPotionCard extends SpellCard {
 
     @Override
     public String preview() {
-        return "ATK " + this.attack + "/HP " + this.hp + "(" + this.duration + ")";
+//        ini diganti jadi ada tandanya
+        StringBuilder res = new StringBuilder("ATK ");
+        if (this.attack >= 0) {
+            res.append("+");
+        }
+        res.append(this.attack + "/HP ");
+        if (this.hp >= 0) {
+            res.append("+");
+        }
+        res.append(this.hp + " (" + this.duration + ")");
+        return res.toString();
     }
 
     @Override
