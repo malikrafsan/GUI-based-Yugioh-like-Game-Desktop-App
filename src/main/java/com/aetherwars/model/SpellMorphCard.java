@@ -18,10 +18,16 @@ public class SpellMorphCard extends SpellCard {
         this.targetid = targetid;
     }
 
+    /**
+     * @return Mengembalikan target id card pada kartu spell morph
+     */
     public int getTargetId() {
         return targetid;
     }
 
+    /**
+     * @return Preview untuk kartu spell morph
+     */
     @Override
     public String preview() {
         return "MORPH";
@@ -37,6 +43,10 @@ public class SpellMorphCard extends SpellCard {
                 "\nTarget:" + this.targetid;
     }
 
+    /**
+     * @brief Method untuk display info yang dibutuhkan
+     * @return Mengembalikan list of pair untuk setiap key dan value yang ditampilkan
+     */
     @Override
     public List<Pair<String,String>> displayInfo() {
         List<Pair<String, String>> res = new ArrayList<>();

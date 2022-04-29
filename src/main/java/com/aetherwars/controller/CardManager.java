@@ -24,6 +24,9 @@ public class CardManager {
     private int ctSM;
     private int ctSL;
 
+    /**
+     * Constructor, loads the cards from the CSV files
+     */
     public CardManager() {
         try {
             this.loadCards();
@@ -32,6 +35,12 @@ public class CardManager {
         }
     }
 
+    /**
+     * Loads the cards from the CSV files
+     *
+     * @throws IOException
+     * @throws URISyntaxException
+     */
     public void loadCards() throws IOException, URISyntaxException {
         File characterFile = new File(getClass().getResource(CHARACTER_PATH).toURI());
         File spellPtnFile = new File(getClass().getResource(SPELL_PTN_PATH).toURI());
@@ -81,10 +90,19 @@ public class CardManager {
         ctSL = spellLvlRows.size();
     }
 
+    /**
+     * Returns character cards with id id
+     * @param id
+     * @return
+     */
     public CharacterCard getCharacterCard(int id) {
         return (CharacterCard) this.cards.get(id-1);
     }
 
+    /**
+     * setup Deck 40-60 cards
+     * @param deck
+     */
     public void setupDeck(Deck deck) {
         // 16:10:8:4:2
         List<Card> res = new ArrayList<Card>();

@@ -12,6 +12,11 @@ public class PlayerManager {
     private Player p;
     private List<Card> threeCards;
 
+    /**
+     * setup deck, hand p
+     * @param p
+     * @param cm
+     */
     public PlayerManager(Player p, CardManager cm) {
         this.p = p;
         this.cm = cm;
@@ -39,6 +44,10 @@ public class PlayerManager {
         p.getActiveChars().delChar(idx_board);
     }
 
+    /**
+     * choose card to draw
+     * @param idx
+     */
     public void chooseCard(int idx) {
         Card c = p.getDeck().select(idx);
         p.getHand().addCard(c);
@@ -49,13 +58,22 @@ public class PlayerManager {
         p.getDeck().pickCard();
     }
 
-    // idx_board kosong && mana cukup, melakukan summon
+    /**
+     * summon from hand to board
+     * @param idx_hand
+     * @param idx_board
+     */
     public void summon(int idx_hand, int idx_board) {
         Card c = p.getHand().takeCard(idx_hand);
         p.getActiveChars().addChar((CharacterCard) c , idx_board);
         p.useMana(c.getMana());
     }
 
+    /**
+     * apply spell or summon
+     * @param idx_hand
+     * @param idx_board
+     */
     public void handToBoard(int idx_hand, int idx_board) {
         Card c = p.getHand().getCard(idx_hand);
         ActiveChar ac = p.getActiveChars().getActChar(idx_board);
@@ -85,15 +103,32 @@ public class PlayerManager {
         }
     }
 
+    /**
+     * validasi receive spell
+     * @param idx_board
+     * @return
+     */
     public boolean canReceiveSpellAt(int idx_board) {
         return p.getActiveChars().getActChar(idx_board) != null;
     }
 
+    /**
+     * validasi give spell
+     * @param idx_hand
+     * @param levelActChar
+     * @return
+     */
     public boolean canGiveSpellAt(int idx_hand, int levelActChar) {
         Card c = p.getHand().getCard(idx_hand);
         return c instanceof SpellCard && canGiveSpell((SpellCard) c, levelActChar);
     }
 
+    /**
+     * validasi give spell
+     * @param sc
+     * @param levelActChar
+     * @return
+     */
     public boolean canGiveSpell(SpellCard sc, int levelActChar) {
         if(sc instanceof SpellLevelCard) {
             return p.getMana()>= (levelActChar+1)/2;
@@ -102,6 +137,12 @@ public class PlayerManager {
         }
     }
 
+    /**
+     * wrapper get mana spell level dan lainnya
+     * @param sc
+     * @param levelActChar
+     * @return
+     */
     public int getManaFromSpell(SpellCard sc, int levelActChar) {
         if(sc instanceof SpellLevelCard) {
             return (levelActChar+1)/2;
@@ -110,21 +151,30 @@ public class PlayerManager {
         }
     }
 
+    /**
+     * ambil spell
+     * @param idx_hand
+     * @return
+     */
     public SpellCard takeSpellAt(int idx_hand) {
         return (SpellCard) p.getHand().takeCard(idx_hand);
     }
 
-    public void receiveSpell(SpellCard sc, int idx_board) {
-//        p.getActiveChars().getActChar(idx_board).addSpell(new ActiveSpell(sc));
-        ;
-    }
-
+    /**
+     * give non morph spell
+     * @param sc
+     * @param ac
+     */
     public void giveSpell(SpellCard sc, ActiveChar ac) {
-//        ac.addSpell(new ActiveSpell(sc));
         p.useMana(getManaFromSpell(sc, ac.getLevel()));
         ac.addSpell(sc);
     }
 
+    /**
+     * give morph spell
+     * @param spellMorphCard
+     * @param idx_board
+     */
     public void morph(SpellMorphCard spellMorphCard, int idx_board) {
         CharacterCard cc = this.cm.getCharacterCard(spellMorphCard.getTargetId());
         p.getActiveChars().addChar(cc, idx_board);
@@ -147,18 +197,29 @@ public class PlayerManager {
         return p.getActiveChars().empty();
     }
 
+    /**
+     * set hover obj
+     * @param idx_hand
+     */
     public void hoverHand(int idx_hand) {
         Card c = p.getHand().getCard(idx_hand);
-        // panggil hover kali
         GameManager.getInstance().hover(p.getHand().getCard(idx_hand));
     }
 
+    /**
+     * set hover obj
+     * @param idx_board
+     */
     public void hoverBoard(int idx_board) {
         ActiveChar ac = p.getActiveChars().getActChar(idx_board);
         ac.onHover();
         GameManager.getInstance().hover(p.getActiveChars().getActChar(idx_board));
     }
 
+    /**
+     * minus health
+     * @param x
+     */
     public void minusHealth(Double x) {
         p.minusHealth(x);
     }

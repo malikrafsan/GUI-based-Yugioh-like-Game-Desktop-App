@@ -25,6 +25,10 @@ public class CardInfoController implements Observer {
     private Label[] attrLabel = new Label[5];
     private final String prefixImagePath = "/com/aetherwars/";
 
+    /**
+     * @param hoverable objek yang sedang dihover
+     * Menampilkan info objek yang sedang dihover
+     */
     public void setCardInfo(Hoverable hoverable){
         List<Pair<String,String>> cardInfo = hoverable.displayInfo();
 
@@ -49,6 +53,9 @@ public class CardInfoController implements Observer {
         }
     }
 
+    /**
+     * Menghapus informasi objek jika sudah tidak dihover
+     */
     public void unsetCardInfo(){
         this.card_desc.setText("");
         this.card_name.setText("");
@@ -64,6 +71,11 @@ public class CardInfoController implements Observer {
         }
     }
 
+    /**
+     * Method that being called when object that we observe change
+     * @param obs object that we observe
+     * @param obj object that we get
+     */
     public void update(Observable obs, Object obj){
         if (obs instanceof GameState) {
             GameState gs = (GameState) obs;
@@ -79,6 +91,9 @@ public class CardInfoController implements Observer {
     }
 
 
+    /**
+     * Method to initialize CardInfo view
+     */
     @FXML public void initialize(){
         this.attrLabel = new Label[] { attr1Label, attr2Label, attr3Label, attr4Label, attr5Label };
         GameManager.getInstance().addObserver("GAMESTATE", this);

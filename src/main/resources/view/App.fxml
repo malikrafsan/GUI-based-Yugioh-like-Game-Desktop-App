@@ -3,9 +3,10 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.TilePane?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="587.0" prefWidth="1173.0" xmlns="http://javafx.com/javafx/8.0.51" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aetherwars.controller.AppController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="587.0" prefWidth="1173.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aetherwars.controller.AppController">
    <children>
       <Pane fx:id="boardContainer" prefHeight="587.0" prefWidth="1173.0" />
       <TilePane fx:id="selectCardContainer" alignment="CENTER" layoutX="188.0" layoutY="85.0" prefHeight="438.0" prefWidth="800.0" />
+      <TilePane fx:id="gameOverContainer" alignment="CENTER" layoutX="198.0" layoutY="95.0" prefHeight="438.0" prefWidth="800.0" />
    </children>
 </Pane>

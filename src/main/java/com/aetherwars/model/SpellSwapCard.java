@@ -18,10 +18,16 @@ public class SpellSwapCard extends SpellCard {
         this.duration = duration;
     }
 
+    /**
+     * @return Mengembalikan durasi dari spell swap
+     */
     public int getDuration() {
         return (this.duration);
     }
 
+    /**
+     * @return Preview untuk kartu spell swap
+     */
     @Override
     public String preview() {
         return "ATK <-> HP";
@@ -37,6 +43,10 @@ public class SpellSwapCard extends SpellCard {
                 "\nDuration:" + this.duration;
     }
 
+    /**
+     * @brief Method untuk display info yang dibutuhkan
+     * @return Mengembalikan list of pair untuk setiap key dan value yang ditampilkan
+     */
     @Override
     public List<Pair<String,String>> displayInfo() {
         List<Pair<String, String>> res = new ArrayList<>();

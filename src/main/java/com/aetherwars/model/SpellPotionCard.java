@@ -24,18 +24,30 @@ public class SpellPotionCard extends SpellCard {
         this.duration = duration;
     }
 
+    /**
+     * @return Mengembalikan attack point pada kartu spell potion
+     */
     public int getAttack() {
         return (this.attack);
     }
 
+    /**
+     * @return Mengembalikan health point pada kartu spell potion
+     */
     public int getHp() {
         return (this.hp);
     }
 
+    /**
+     * @return Mengembalikan durasi spell potion
+     */
     public int getDuration() {
         return (this.duration);
     }
 
+    /**
+     * @return Preview untuk kartu spell potion
+     */
     @Override
     public String preview() {
 //        ini diganti jadi ada tandanya
@@ -51,6 +63,9 @@ public class SpellPotionCard extends SpellCard {
         return res.toString();
     }
 
+    /**
+     * @return Preview untuk kartu spell potion
+     */
     @Override
     public String toString() {
         return  "Spell Potion" +
@@ -63,6 +78,10 @@ public class SpellPotionCard extends SpellCard {
                 "\nDuration:" + this.duration;
     }
 
+    /**
+     * @brief Method untuk display info yang dibutuhkan
+     * @return Mengembalikan list of pair untuk setiap key dan value yang ditampilkan
+     */
     @Override
     public List<Pair<String,String>> displayInfo() {
         List<Pair<String, String>> res = new ArrayList<>();
