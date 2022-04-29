@@ -140,8 +140,7 @@ public class BoardController implements Observer, ISubscriber {
         } else if (obs instanceof Player) {
             Player player = (Player) obs;
 
-            // TODO: CHANGE LATER MAX MANA
-            this.manaValueLabel.setText(player.getMana() + "/" + player.getMana());
+            this.manaValueLabel.setText(player.getMana() + "/" + player.getMaxMana());
         }
     }
 }
