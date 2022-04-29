@@ -85,6 +85,10 @@ public class ActiveCharObserver extends Observable implements IActiveCharObserve
         }
     }
 
+    public void receiveDamage(int index, double damage) {
+        this.chars[index].receiveDamage(damage);
+    }
+
     public void cannotAttack(int index) {this.chars[index].cannotAttack();}
 
     public boolean canAttack(int index) { return (this.chars[index].canAttack()); }

@@ -17,6 +17,14 @@ public class ActiveSpellsPotion {
         }
     }
 
+    public void swap() {
+        double temp;
+
+        temp = this.healthPotion;
+        this.healthPotion = this.attackPotion;
+        this.attackPotion = temp;
+    }
+
     public double getAttackPotion() {
         return (this.attackPotion);
     }
@@ -29,11 +37,7 @@ public class ActiveSpellsPotion {
         return (this.duration);
     }
 
-    public void getDamage(int damage) {
-        this.healthPotion = this.healthPotion - damage;
-    }
-
-    public void setHealthPotion(double damage) { this.healthPotion = this.healthPotion - damage ;}
+    public void receiveDamage(double damage) { this.healthPotion = this.healthPotion - damage ;}
 
     public void newRound() {
         this.duration = this.duration - 1;

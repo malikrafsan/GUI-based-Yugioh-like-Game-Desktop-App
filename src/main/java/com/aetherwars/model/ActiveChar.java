@@ -131,7 +131,36 @@ public class ActiveChar implements IActiveCharGetter, Hoverable {
     }
 
     public void swap() {
+        double temp;
+        int i = 0;
 
+        temp = this.attack;
+        this.attack = this.health;
+        this.health = temp;
+
+        while (i < this.spellsPotionList.size()) {
+            this.spellsPotionList.get(i).swap();
+            i++;
+        }
+    }
+
+    public void receiveDamage(double damage) {
+        double damageLeft = damage;
+        int i = this.spellsPotionList.size();
+
+        while (i > 0 && damageLeft > 0) {
+            if (this.spellsPotionList.get(i).getHealthPotion() > 0) {
+                if (this.spellsPotionList.get(i).getHealthPotion() >= damageLeft) {
+                    this.spellsPotionList.get(i).receiveDamage(damageLeft);
+                }
+                else {
+                    this.spellsPotionList.get(i).receiveDamage(this.spellsPotionList.get(i).getHealthPotion());
+                    damageLeft = damageLeft - this.spellsPotionList.get(i).getHealthPotion();
+                }
+            }
+
+            i--;
+        }
     }
 
     public void addSpell(SpellCard card) {
@@ -161,7 +190,7 @@ public class ActiveChar implements IActiveCharGetter, Hoverable {
                 i++;
             }
         }
-        this.swap--;
+        this.swap = this.swap - 1;
         if (this.swap == 0 && before > 0) {
             this.swap();
         }
