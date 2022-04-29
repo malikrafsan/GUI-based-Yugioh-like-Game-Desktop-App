@@ -18,6 +18,7 @@ import com.aetherwars.interfaces.*;
 import com.aetherwars.model.*;
 
 public class PlayerBoardController implements Observer {
+    public BorderPane playerBorderPane;
     @FXML
     private Label playerLabel;
     @FXML

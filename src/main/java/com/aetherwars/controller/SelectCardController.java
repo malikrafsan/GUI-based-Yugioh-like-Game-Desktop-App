@@ -2,6 +2,8 @@ package com.aetherwars.controller;
 
 import com.aetherwars.interfaces.IPhaseGetter;
 import com.aetherwars.model.*;
+import javafx.animation.FadeTransition;
+import javafx.animation.ScaleTransition;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,6 +19,7 @@ import java.util.*;
 
 import com.aetherwars.interfaces.*;
 import com.aetherwars.event.PickCardEvent;
+import javafx.util.Duration;
 
 import static com.aetherwars.model.Phase.*;
 
@@ -29,6 +32,11 @@ public class SelectCardController implements Observer, ISubscriber {
     private Integer currentSelectCardCount;
     private final Background hoverBackground = new Background(new BackgroundFill(Color.LIGHTCORAL, null, null));
     private final Background normalBackground = new Background(new BackgroundFill(null, null, null));
+    private FadeTransition fadeIn;
+    private FadeTransition fadeOut;
+    private ScaleTransition scaleIn;
+    private ScaleTransition scaleOut;
+
 
     @FXML
     public void initialize() {
@@ -71,6 +79,36 @@ public class SelectCardController implements Observer, ISubscriber {
         }
         // testUpdateHandCards();
         setPlayer(1);
+        initializeTransition();
+
+
+    }
+
+    private void initializeTransition(){
+        fadeIn = new FadeTransition();
+        fadeIn.setNode(pane);
+        fadeIn.setFromValue(0);
+        fadeIn.setToValue(1);
+        fadeIn.setDuration(Duration.millis(500));
+        fadeOut = new FadeTransition();
+        fadeOut.setNode(pane);
+        fadeOut.setFromValue(1);
+        fadeOut.setToValue(0);
+        fadeOut.setDuration(Duration.millis(500));
+        scaleIn = new ScaleTransition();
+        scaleIn.setNode(pane);
+        scaleIn.setByX(0.8);
+        scaleIn.setByY(0.8);
+        scaleIn.setToX(1);
+        scaleIn.setToY(1);
+        scaleIn.setDuration(Duration.millis(300));
+        scaleOut = new ScaleTransition();
+        scaleOut.setNode(pane);
+        scaleOut.setByX(1);
+        scaleOut.setByY(1);
+        scaleOut.setToX(0.8);
+        scaleOut.setToY(0.8);
+        scaleOut.setDuration(Duration.millis(300));
     }
 
     public void setPlayer(Integer playerNo){
@@ -99,6 +137,7 @@ public class SelectCardController implements Observer, ISubscriber {
             this.cardController[i].setLabelMana(listCards.get(i).getMana());
             this.cardController[i].setLabelAttr(listCards.get(i).preview());
             this.cardController[i].setCardImageView(listCards.get(i).getImagePath());
+            this.cardController[i].fadeIn();
         }
     }
 
@@ -125,9 +164,13 @@ public class SelectCardController implements Observer, ISubscriber {
         this.pane.setDisable(false);
         this.pane.setMouseTransparent(false);
         this.pane.getParent().setMouseTransparent(false);
+        fadeIn.play();
+        scaleIn.play();
     }
 
     private void nonDrawPhaseSelectCard() {
+        scaleOut.play();
+        fadeOut.play();
         this.pane.setDisable(true);
         this.pane.setVisible(false);
 //        this.boardPane.setEffect(null);

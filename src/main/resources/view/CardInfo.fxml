@@ -1,26 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.text.Font?>
 
-<Pane prefHeight="256.0" prefWidth="552.0" xmlns="http://javafx.com/javafx/8.0.51" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aetherwars.controller.CardInfoController">
+<Pane prefHeight="256.0" prefWidth="552.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aetherwars.controller.CardInfoController">
    <children>
       <HBox layoutX="171.0" layoutY="37.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="182.0" prefWidth="381.0" style="-fx-background-color: rgb(240,236,236);">
          <children>
             <Pane prefHeight="287.0" prefWidth="186.0" style="-fx-border-color: grey;">
                <children>
-                  <Label fx:id="card_name" layoutX="22.0" layoutY="21.0" prefHeight="38.0" prefWidth="158.0" text="Sheep">
+                  <Label fx:id="card_name" graphicTextGap="0.0" layoutX="18.0" layoutY="9.0" prefHeight="70.0" prefWidth="158.0" text="SNMPTN Acceptance Letter" wrapText="true">
                      <font>
-                        <Font name="System Bold" size="23.0" />
+                        <Font name="System Bold" size="18.0" />
                      </font>
                   </Label>
-                  <Label fx:id="attr1Label" layoutX="22.0" layoutY="60.0" prefHeight="17.0" prefWidth="140.0" text="???" />
-                  <Label fx:id="attr2Label" layoutX="22.0" layoutY="78.0" prefHeight="17.0" prefWidth="140.0" text="???" />
-                  <Label fx:id="attr3Label" layoutX="22.0" layoutY="96.0" prefHeight="17.0" prefWidth="140.0" text="???" />
-                  <Label fx:id="attr4Label" layoutX="22.0" layoutY="114.0" prefHeight="17.0" prefWidth="140.0" text="???" />
-                  <Label fx:id="attr5Label" layoutX="22.0" layoutY="132.0" prefHeight="17.0" prefWidth="140.0" text="???" />
+                  <Label fx:id="attr1Label" layoutX="18.0" layoutY="70.0" prefHeight="17.0" prefWidth="140.0" text="???" />
+                  <Label fx:id="attr2Label" layoutX="18.0" layoutY="88.0" prefHeight="17.0" prefWidth="140.0" text="???" />
+                  <Label fx:id="attr3Label" layoutX="18.0" layoutY="106.0" prefHeight="17.0" prefWidth="140.0" text="???" />
+                  <Label fx:id="attr4Label" layoutX="18.0" layoutY="124.0" prefHeight="17.0" prefWidth="140.0" text="???" />
+                  <Label fx:id="attr5Label" layoutX="18.0" layoutY="142.0" prefHeight="17.0" prefWidth="140.0" text="???" />
                </children>
             </Pane>
             <Pane prefHeight="287.0" prefWidth="196.0" style="-fx-border-color: grey;">

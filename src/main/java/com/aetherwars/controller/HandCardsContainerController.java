@@ -122,6 +122,10 @@ public class HandCardsContainerController implements Observer {
             this.cardContainer.getChildren().remove(0);
         }
 
+        for (int i = 0; i < 5; i++){
+            this.handCardControllers[i].fadeOut();
+        }
+
         this.currentActiveCardCount = Math.min(listCards.length, 5);
         for (int i = 0; i < this.currentActiveCardCount; i++){
             this.cardContainer.getChildren().add(this.handCards[i]);
@@ -141,6 +145,7 @@ public class HandCardsContainerController implements Observer {
 
                 this.disableMouseEvent(i);
             }
+            this.handCardControllers[i].fadeIn();
         }
     }
 
