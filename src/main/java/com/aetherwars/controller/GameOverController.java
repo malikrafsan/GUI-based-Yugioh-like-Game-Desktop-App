@@ -5,8 +5,10 @@ import javafx.animation.ScaleTransition;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
+import java.util.*;
+import com.aetherwars.model.*;
 
-public class GameOverController {
+public class GameOverController implements Observer {
     @FXML private Pane pane;
     private FadeTransition fadeIn;
     private FadeTransition fadeOut;
@@ -16,6 +18,9 @@ public class GameOverController {
 
     @FXML
     public void initialize() {
+        GameManager.getInstance().addObserver("PLAYER1", this);
+        GameManager.getInstance().addObserver("PLAYER2", this);
+
         fadeIn = new FadeTransition();
         fadeIn.setNode(pane);
         fadeIn.setFromValue(0);
@@ -33,7 +38,14 @@ public class GameOverController {
         this.pane.setMouseTransparent(true);
     }
 
-
+    public void update(Observable obs, Object obj) {
+        if (obs instanceof Player) {
+            Player p = (Player) obs;
+            if (p.getHealth() <= 0) {
+                this.showGameOverPane();
+            }
+        }
+    }
 
 
     /**
