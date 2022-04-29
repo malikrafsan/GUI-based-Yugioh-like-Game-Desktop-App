@@ -41,6 +41,7 @@ public class Player extends Observable{
             this.deck.draw();
             this.deck.pickCard();
         }
+        this.sync();
     }
 
     public int getMaxMana() {
@@ -65,10 +66,12 @@ public class Player extends Observable{
 
     public void useMana(int x) {
         this.mana = this.mana - x;
+        this.sync();
     }
 
     public void receiveDamage(double damage) {
         this.health = this.health - damage;
+        this.sync();
     }
 
     public void onClick() {
@@ -97,5 +100,6 @@ public class Player extends Observable{
 
     public void minusHealth(double x) {
         this.health = this.health - x;
+        this.sync();
     }
 }
