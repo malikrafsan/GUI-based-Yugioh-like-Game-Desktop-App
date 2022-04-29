@@ -175,9 +175,9 @@ public class ActiveChar implements IActiveCharGetter, Hoverable {
 
     public void receiveDamage(double damage) {
         double damageLeft = damage;
-        int i = this.spellsPotionList.size();
+        int i = this.spellsPotionList.size() - 1;
 
-        while (i > 0 && damageLeft > 0) {
+        while (i > -1 && damageLeft > 0) {
             if (this.spellsPotionList.get(i).getHealthPotion() > 0) {
                 if (this.spellsPotionList.get(i).getHealthPotion() >= damageLeft) {
                     this.spellsPotionList.get(i).receiveDamage(damageLeft);
